@@ -1,15 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:brother_store/common/widgets/custom_shapes/containers/circuler_container.dart';
 import 'package:brother_store/common/widgets/images/rounded_image.dart';
 import 'package:brother_store/features/shop/controllers/home_controller.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class TPromoSlider extends StatelessWidget {
-  const TPromoSlider({super.key, required this.banners});
+  const TPromoSlider({
+    Key? key,
+    required this.banners,
+    this.autoPlay = true,
+  }) : super(key: key);
   final List<String> banners;
+  final bool autoPlay;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
@@ -17,6 +24,8 @@ class TPromoSlider extends StatelessWidget {
       children: [
         CarouselSlider(
           options: CarouselOptions(
+              autoPlay: autoPlay,
+              autoPlayCurve: Curves.linear,
               viewportFraction: 0.8,
               onPageChanged: (index, _) =>
                   controller.updatePageIndicator(index)),

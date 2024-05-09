@@ -12,7 +12,7 @@ class TSearchContainer extends StatelessWidget {
       this.icon,
       this.padding =
           const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
-      this.showBorder = true,
+      this.showBorder = false,
       this.showBackground = true,
       this.onTap})
       : super(key: key);

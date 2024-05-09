@@ -13,7 +13,7 @@ class THomeCategories extends StatelessWidget {
         height: 100,
         child: ListView.builder(
             shrinkWrap: true,
-            itemCount: 16,
+            itemCount: null,
             scrollDirection: Axis.horizontal,
             itemBuilder: (_, index) {
               return TVerticalImageText(

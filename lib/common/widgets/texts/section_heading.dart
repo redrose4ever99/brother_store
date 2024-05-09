@@ -29,7 +29,12 @@ class TSectionHeading extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         if (showActionButton)
-          TextButton(onPressed: onPress, child: Text(buttonTitle))
+          TextButton(
+              onPressed: onPress,
+              child: Text(
+                buttonTitle,
+                style: Theme.of(context).textTheme.bodySmall,
+              ))
       ],
     );
   }

@@ -26,6 +26,5 @@ class TTabbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(0);
+  Size get preferredSize => const Size.fromHeight(0.1);
 }

@@ -6,6 +6,7 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import 'features/personlization/screens/settings/settings.dart';
 import 'features/shop/screens/home/home.dart';
 
 class NavigationMenu extends StatelessWidget {
@@ -16,6 +17,7 @@ class NavigationMenu extends StatelessWidget {
     final controller = Get.put(NavigationController());
     final darkMode = THelperFunctions.isDarkMode(context);
     return Scaffold(
+      //  floatingActionButton: const TCircularFabWidget(),
       body: Obx(() => controller.screens[controller.selectedIndex.value]),
       bottomNavigationBar: Obx(
         () => NavigationBar(
@@ -56,6 +58,13 @@ class NavigationMenu extends StatelessWidget {
                   ),
                   icon: Icon(Iconsax.gallery),
                   label: 'المعرض'),
+              // NavigationDestination(
+              //     selectedIcon: Icon(
+              //       Iconsax.user,
+              //       color: TColors.primary,
+              //     ),
+              //     icon: Icon(Iconsax.heart),
+              //     label: 'المفضلة'),
               NavigationDestination(
                   selectedIcon: Icon(
                     Iconsax.user,
@@ -71,10 +80,16 @@ class NavigationMenu extends StatelessWidget {
 
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
+
+  void updateSelectedIndex(int index) {
+    selectedIndex.value = index;
+  }
+
   final screens = [
     const HomeScreen(),
     const StoreScreen(),
     const TGalleryScreen(),
-    Container(color: Colors.green)
+    //  const TGalleryScreen(),
+    const SettingsScreen()
   ];
 }

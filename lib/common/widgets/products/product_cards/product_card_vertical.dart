@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:brother_store/common/widgets/texts/brand_title_with_verified_icon.dart';
 import 'package:brother_store/common/widgets/texts/product_price_text.dart';
+import 'package:brother_store/features/shop/screens/product_details/product_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:brother_store/common/styles/shadows.dart';
@@ -21,7 +23,7 @@ class TProductCardVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetailsScreen()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
