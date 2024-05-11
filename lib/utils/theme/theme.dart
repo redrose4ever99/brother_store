@@ -1,4 +1,3 @@
-import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/theme/custom_themes/bottom_sheet_theme.dart';
 import 'package:brother_store/utils/theme/custom_themes/elevated_button.theme.dart';
 import 'package:brother_store/utils/theme/custom_themes/text_field_theme.dart';
@@ -13,7 +12,8 @@ class TAppTheme {
       useMaterial3: true,
       fontFamily: 'AvenirArabic',
       brightness: Brightness.light,
-      primaryColor: TColors.primary,
+      primaryColor: const Color.fromARGB(190, 191, 0, 255),
+      // primaryColor: TColors.primary,
       scaffoldBackgroundColor: Colors.white,
       textTheme: TTextTheme.lightTextTheme,
       appBarTheme: TAppBarTheme.lightAppBarTheme,
@@ -24,7 +24,8 @@ class TAppTheme {
       useMaterial3: true,
       fontFamily: 'AvenirArabic',
       brightness: Brightness.dark,
-      primaryColor: TColors.primary,
+      primaryColor: const Color.fromARGB(190, 191, 0, 255),
+      // primaryColor: TColors.primary,
       scaffoldBackgroundColor: Colors.black,
       textTheme: TTextTheme.darkTextTheme,
       appBarTheme: TAppBarTheme.darkAppBarTheme,

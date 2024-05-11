@@ -3,7 +3,9 @@ import 'package:brother_store/common/widgets/custom_shapes/containers/primary_he
 import 'package:brother_store/common/widgets/list_tiles/setting_menu_tile.dart';
 import 'package:brother_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
+import 'package:brother_store/features/project/screens/projects/projects.dart';
 import 'package:brother_store/features/shop/screens/cart/cart.dart';
+import 'package:brother_store/features/shop/screens/orders/widgets/order.dart';
 import 'package:brother_store/features/shop/screens/wishlist/wishlist.dart';
 import 'package:brother_store/navigation_menu.dart';
 import 'package:brother_store/utils/constants/color.dart';
@@ -64,7 +66,8 @@ class SettingsScreen extends StatelessWidget {
                     title: 'My Cart',
                     subTitle: 'add , remove product and move to chickout',
                   ),
-                  const TSettingMenuTile(
+                  TSettingMenuTile(
+                    onTap: () => Get.to(() => const OrderScreen()),
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subTitle:
@@ -80,16 +83,17 @@ class SettingsScreen extends StatelessWidget {
                     title: 'Wish List',
                     subTitle: 'Ea do nisi esse esse occaecat.',
                   ),
-                  const TSettingMenuTile(
+                  TSettingMenuTile(
+                    onTap: () => Get.to(() => const ProjectsScreen()),
                     icon: Iconsax.component,
                     title: 'My Projects',
                     subTitle: 'track processing projects ',
                   ),
-                  const TSettingMenuTile(
-                    icon: Iconsax.bank,
-                    title: 'Bank Account',
-                    subTitle: 'Ea do nisi esse esse occaecat.',
-                  ),
+                  // const TSettingMenuTile(
+                  //   icon: Iconsax.bank,
+                  //   title: 'Bank Account',
+                  //   subTitle: 'Ea do nisi esse esse occaecat.',
+                  // ),
                   const TSettingMenuTile(
                     icon: Iconsax.notification,
                     title: 'Notification',
