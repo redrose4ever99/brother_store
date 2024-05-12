@@ -4,6 +4,9 @@ import 'package:brother_store/common/widgets/layout/grid_layout.dart';
 import 'package:brother_store/common/widgets/list_tiles/setting_menu_tile.dart';
 import 'package:brother_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:brother_store/features/personlization/screens/blog/blog.dart';
+import 'package:brother_store/features/project/screens/projects/add_new_project.dart';
+import 'package:brother_store/features/project/screens/projects/interview_request.dart';
+import 'package:brother_store/features/project/screens/projects/price_request.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +20,7 @@ import 'package:iconsax/iconsax.dart';
 import 'widgets/home_appbar.dart';
 import 'widgets/home_categories.dart';
 import 'widgets/promo_slider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,27 +32,30 @@ class HomeScreen extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.all(TSizes.defaultSpace),
         child: Column(children: [
-          const TSettingMenuTile(
+          TSettingMenuTile(
+              onTap: () => Get.to(() => const AddNewProjectScreen()),
               icon: Iconsax.paperclip,
-              title: 'Add Project',
-              subTitle: 'you can Request for new Project ordecoration'),
-          const TSettingMenuTile(
+              title: AppLocalizations.of(context)!.addProject,
+              subTitle: 'you can Request for new Project or decoration'),
+          TSettingMenuTile(
+              onTap: () => Get.to(() => const PriceRequestScreen()),
               icon: Icons.price_change,
-              title: 'Request for Price',
+              title: AppLocalizations.of(context)!.priceRequest,
               subTitle: 'sunt laboris commodo in.'),
-          const TSettingMenuTile(
+          TSettingMenuTile(
+              onTap: () => Get.to(() => const InterviewRequestScreen()),
               icon: Iconsax.video,
-              title: 'Request for interview',
+              title: AppLocalizations.of(context)!.interviewRequest,
               subTitle:
                   'Officia adipisicing culpa nulla magna incididunt velit consectetur irure.'),
           TSettingMenuTile(
               onTap: () => Get.to(() => const BlogScreen()),
               icon: Icons.newspaper,
-              title: 'look at our news',
+              title: AppLocalizations.of(context)!.lookNews,
               subTitle: 'sunt laboris commodo in.'),
-          const TSettingMenuTile(
+          TSettingMenuTile(
               icon: Icons.offline_pin_rounded,
-              title: 'check out our offers',
+              title: AppLocalizations.of(context)!.offersChick,
               subTitle:
                   'Officia adipisicing culpa nulla magna incididunt velit consectetur irure.'),
         ]),
@@ -57,15 +64,15 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
           child: Column(
         children: [
-          const TPrimaryHeaderContainer(
+          TPrimaryHeaderContainer(
               child: Column(
             children: [
-              THomeAppbar(),
-              SizedBox(
+              const THomeAppbar(),
+              const SizedBox(
                 height: TSizes.spaceBtWsections,
               ),
 
-              TPromoSlider(
+              const TPromoSlider(
                 banners: [
                   TImages.onBoarding1,
                   TImages.onBoarding2,
@@ -77,34 +84,36 @@ class HomeScreen extends StatelessWidget {
               //   icon: Iconsax.information,
               //   onTap: () {},
               // ),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtWsections,
               ),
               Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                     left: TSizes.defaultSpace, right: TSizes.defaultSpace),
                 child: TSectionHeading(
                   textColor: TColors.white,
-                  title: 'Popular Categories',
+                  //popularCategory
+                  title: AppLocalizations.of(context)!.popularCategory,
                   showActionButton: false,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: TSizes.spaceBtWItems,
               ),
-              THomeCategories(),
-              SizedBox(
+              const THomeCategories(),
+              const SizedBox(
                 height: TSizes.spaceBtWsections,
               )
             ],
           ))
           //body from here
           ,
-          const Padding(
-            padding: EdgeInsets.only(
+          Padding(
+            padding: const EdgeInsets.only(
                 left: TSizes.defaultSpace, right: TSizes.defaultSpace),
             child: TSectionHeading(
-              title: 'Gallery',
+              title: AppLocalizations.of(context)!.gallery,
+              buttonTitle: AppLocalizations.of(context)!.viewAll,
               showActionButton: true,
             ),
           ),
@@ -124,9 +133,10 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 TSectionHeading(
-                  title: 'Popular Product',
+                  title: AppLocalizations.of(context)!.popularProduct,
                   onPress: () {},
                   showActionButton: true,
+                  buttonTitle: AppLocalizations.of(context)!.viewAll,
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtWItems,

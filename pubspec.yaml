@@ -35,10 +35,12 @@ dependencies:
   get: null
   http: any
   iconsax: ^0.0.8
-  intl: ^0.19.0
+  intl: any
   logger: ^2.2.0
   smooth_page_indicator: ^1.1.0
   readmore: ^2.2.0 
+  flutter_localizations:
+    sdk: flutter
 # Icons
 cupertino_icons: ^1.0.2
 
@@ -54,6 +56,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -68,6 +71,7 @@ flutter:
     - assets/images/products/
     - assets/images/brands/
     - assets/images/users/
+    - assets/images/language/
     - assets/logos/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -3,6 +3,7 @@ import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TOrderListItem extends StatelessWidget {
@@ -45,9 +46,11 @@ class TOrderListItem extends StatelessWidget {
                 )),
                 IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Iconsax.arrow_right_34,
-                      size: TSizes.iconSm,
+                    icon: Icon(
+                      Get.locale?.languageCode == 'en'
+                          ? Icons.keyboard_arrow_right
+                          : Icons.keyboard_arrow_left,
+                      size: TSizes.iconMd,
                     ))
               ],
             ),

@@ -1,11 +1,11 @@
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
-import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/bottom_add_to_cart_widget.dart';
 import 'widgets/product_image_slider.dart';
 import 'widgets/rating_share_widget.dart';
@@ -38,30 +38,31 @@ class ProductDetailsScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () {}, child: const Text('checkout')),
+                      onPressed: () {},
+                      child: Text(AppLocalizations.of(context)!.checkout)),
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtWsections,
                 ),
 
                 ///Descriptions
-                const TSectionHeading(
-                  title: 'Descriptions',
+                TSectionHeading(
+                  title: AppLocalizations.of(context)!.descriptions,
                   showActionButton: false,
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtWItems,
                 ),
-                const ReadMoreText(
+                ReadMoreText(
                   'Ullamco sit non nisi exercitation quis incididunt minim duis sint do ipsum. Voluptate eiusmod labore duis Laborum cupidatat dolore eiusmod deserunt anim aute ex.ullamco ex consequat proident deserunt consectetur nisi quis amet.Do in ipsum ea laborum esse nulla sunt ullamco.',
                   trimLines: 2,
                   trimMode: TrimMode.Line,
-                  trimCollapsedText: 'show more',
-                  trimExpandedText: 'less',
-                  moreStyle:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-                  lessStyle:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                  trimCollapsedText: AppLocalizations.of(context)!.showMore,
+                  trimExpandedText: AppLocalizations.of(context)!.less,
+                  moreStyle: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w800),
+                  lessStyle: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w800),
                 ),
 
                 ///Reviews
@@ -80,7 +81,11 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     IconButton(
                         onPressed: () {},
-                        icon: const Icon(Iconsax.arrow_right_3))
+                        icon: Icon(
+                          Get.locale?.languageCode == 'en'
+                              ? Icons.keyboard_arrow_right
+                              : Icons.keyboard_arrow_left,
+                        ))
                   ],
                 ),
 

@@ -1,6 +1,5 @@
 import 'package:brother_store/features/authontication/controllers.onboarding/onboarding_controller.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
-import 'package:brother_store/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +7,7 @@ import 'widgets/onboarding_dot_navigation.dart';
 import 'widgets/onboarding_next_button.dart';
 import 'widgets/onboarding_page.dart';
 import 'widgets/onboarding_skip.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -21,21 +21,21 @@ class OnBoardingScreen extends StatelessWidget {
         PageView(
           controller: controller.pageController,
           onPageChanged: controller.updatePageIndicator,
-          children: const [
+          children: [
             OnBoardingPage(
               image: TImages.onBoarding1,
-              title: TTexts.onBoardingTitle1,
-              subTitle: TTexts.onBoardingSubTitle1,
+              title: AppLocalizations.of(context)!.onboardingTitle1,
+              subTitle: AppLocalizations.of(context)!.onboardingSubtitle1,
             ),
             OnBoardingPage(
               image: TImages.onBoarding2,
-              title: TTexts.onBoardingTitle2,
-              subTitle: TTexts.onBoardingSubTitle1,
+              title: AppLocalizations.of(context)!.onboardingTitle2,
+              subTitle: AppLocalizations.of(context)!.onboardingSubtitle2,
             ),
             OnBoardingPage(
               image: TImages.onBoarding3,
-              title: TTexts.onBoardingTitle3,
-              subTitle: TTexts.onBoardingSubTitle1,
+              title: AppLocalizations.of(context)!.onboardingTitle3,
+              subTitle: AppLocalizations.of(context)!.onboardingSubtitle3,
             )
           ],
         ),

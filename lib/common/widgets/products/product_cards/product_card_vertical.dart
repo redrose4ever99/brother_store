@@ -15,6 +15,7 @@ import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TProductCardVertical extends StatelessWidget {
   const TProductCardVertical({super.key});
@@ -75,16 +76,19 @@ class TProductCardVertical extends StatelessWidget {
             //details section
             const SizedBox(height: TSizes.spaceBtWItems / 2),
 
-            const Padding(
-              padding: EdgeInsets.only(left: TSizes.sm, right: TSizes.sm),
+            Padding(
+              padding: const EdgeInsets.only(left: TSizes.sm, right: TSizes.sm),
               child: Column(
                 children: [
                   TProductTitleText(
-                    title: 'modern sofa multi colors',
+                    title: AppLocalizations.of(context)!.woodChair,
+                    txtAlign: Get.locale?.languageCode == 'en'
+                        ? TextAlign.left
+                        : TextAlign.right,
                     smalSize: true,
                   ),
-                  SizedBox(height: TSizes.spaceBtWItems / 2),
-                  TBrandTitleWithVerifiedIcon(
+                  const SizedBox(height: TSizes.spaceBtWItems / 2),
+                  const TBrandTitleWithVerifiedIcon(
                     title: 'Amazone',
                   ),
 

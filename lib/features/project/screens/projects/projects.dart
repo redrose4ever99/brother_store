@@ -1,7 +1,7 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/projects_list.dart';
 
 class ProjectsScreen extends StatelessWidget {
@@ -11,8 +11,8 @@ class ProjectsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        title:
-            Text('My Orders', style: Theme.of(context).textTheme.headlineSmall),
+        title: Text(AppLocalizations.of(context)!.myProjects,
+            style: Theme.of(context).textTheme.headlineSmall),
         showBackArrow: true,
       ),
       body: const Padding(

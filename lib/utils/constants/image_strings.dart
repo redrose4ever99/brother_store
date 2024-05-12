@@ -30,4 +30,7 @@ class TImages {
 
   static const String truePaymentblack = "assets/images/true.gif";
   static const String truePaymentwhite = "assets/images/white.gif";
+  //flags
+  static const String arabicFlag = "assets/images/language/arabic.png";
+  static const String englishFlag = "assets/images/language/american.png";
 }

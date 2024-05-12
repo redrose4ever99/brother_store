@@ -1,0 +1,74 @@
+{
+    "language":"English",
+    "@language": {
+        "description": "The current language"
+        
+      },
+    "choose": "Qui mollit aliquip enim ex elit eu nulla nisi aliquip anim nisi.",
+    "skip":"Skip",
+    "onboardingTitle1":"Ipsum cillum labore anim exercitation.",
+    "onboardingTitle2":"Select elegant decoration",
+    "onboardingTitle3":"sunt occaecat cillum anim.",
+    "onboardingSubtitle1":"Nulla laborum nostrud aliqua ex enim aliqua esse nisi ex pariatur labore culpa sit est.",
+    "onboardingSubtitle2":"Pariatur idNulla exercitation aliqua velit do eiusmod do ipsum ut nostrud dolor anim consequat excepteur. id sint non Lorem.",
+    "onboardingSubtitle3":"Aliqua irure voluptate consequat mollit id irure est consectetur aute duis qui velit occaecat.",
+    "mainpage":"Main Page",
+    "store":"Store",
+    "gallery":"Gallery",
+    "account":"My Account",
+    "priceRequest":"Request for Price",
+    "interviewRequest":"Request for interview",
+    "lookNews":"look at our news",
+    "offersChick":"check out our offers",
+    "goodDay":"Good day for shopping",
+    "addProject":"Add Project",
+    "popularCategory":"Popular Categories",
+    "viewAll":"View all",
+    "popularProduct":"Popular Product",
+    "woodChair":"Salon chair with wood legs",
+    "addToCart":"Add To Cart",
+    "accountSettings":"Account Settings",
+    "myAddresses":"My Addresses",
+    "myCart":"My Cart",
+    "myOrders":"My Orders",
+    "wishList":"Wish List",
+    "myProjects":"My Projects",
+    "notifications":"Notifications",
+    "accountPrivacy":"Account Privacy",
+    "loadDate":"Load Data",
+    "languageSetting":"Language Setting",
+    "chooseLanguage":"Choose Language",
+    "appSettings":"App Setting",
+    "darkMode":"Dark Mood",
+    "storeSearch":"Search in Store",
+    "featureBrands":"Feature Brands",
+    "youMightLike":"You might like",
+    "searchinGallery":"Search in Gallery",
+    "artPaces":"Pieces of Art",
+    "checkoutWithPrice":"Checkout {price}",
+   "@checkoutWithPrice":{
+    "placeholders":{
+        "price":{"type":"String"
+      }
+       }    },
+    "checkout":"Checkout",
+    "changeProfilePicture":"change profile picture",
+    "profileInformation":"Profile Information",
+    "name":"Name",
+    "userName":"User Name",
+    "personalInformation":"Personal Information",
+    "userId":"User ID",
+    "email":"E-mail",
+    "phoneNumber":"Phone Number",
+    "closeAccount":"Close Account",
+    "showMore":"Show More",
+    "less":"Less",
+    "descriptions":"Descriptions"
+
+
+
+    
+    
+
+     
+}

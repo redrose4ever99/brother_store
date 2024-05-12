@@ -13,6 +13,8 @@ import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -24,7 +26,7 @@ class StoreScreen extends StatelessWidget {
       child: Scaffold(
         appBar: TAppBar(
           title: Text(
-            "Store",
+            AppLocalizations.of(context)!.store,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           actions: [
@@ -54,8 +56,8 @@ class StoreScreen extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       const SizedBox(height: TSizes.spaceBtWItems),
-                      const TSearchContainer(
-                        text: 'Search in Store',
+                      TSearchContainer(
+                        text: AppLocalizations.of(context)!.storeSearch,
                         showBorder: true,
                         padding: EdgeInsets.zero,
                         icon: Iconsax.search_normal,
@@ -63,8 +65,9 @@ class StoreScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: TSizes.spaceBtWsections),
                       TSectionHeading(
-                        title: 'Features Brands',
+                        title: AppLocalizations.of(context)!.featureBrands,
                         showActionButton: true,
+                        buttonTitle: AppLocalizations.of(context)!.viewAll,
                         onPress: () {},
                       ),
                       const SizedBox(height: TSizes.spaceBtWItems / 1.5),
@@ -146,8 +149,9 @@ class TTabView extends StatelessWidget {
               ),
 
               TSectionHeading(
-                title: 'You might like ',
+                title: AppLocalizations.of(context)!.youMightLike,
                 showActionButton: true,
+                buttonTitle: AppLocalizations.of(context)!.viewAll,
                 onPress: () {},
               ),
               const SizedBox(

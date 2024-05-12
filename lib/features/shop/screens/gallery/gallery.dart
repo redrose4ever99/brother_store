@@ -11,6 +11,7 @@ import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TGalleryScreen extends StatelessWidget {
   const TGalleryScreen({super.key});
@@ -22,7 +23,7 @@ class TGalleryScreen extends StatelessWidget {
       child: Scaffold(
         appBar: TAppBar(
           title: Text(
-            "Gallery",
+            AppLocalizations.of(context)!.gallery,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           actions: [
@@ -50,10 +51,10 @@ class TGalleryScreen extends StatelessWidget {
                   child: ListView(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    children: const [
-                      SizedBox(height: TSizes.spaceBtWItems),
+                    children: [
+                      const SizedBox(height: TSizes.spaceBtWItems),
                       TSearchContainer(
-                        text: 'Search in Gallery',
+                        text: AppLocalizations.of(context)!.searchinGallery,
                         showBorder: true,
                         padding: EdgeInsets.zero,
                         icon: Iconsax.search_normal,
@@ -144,7 +145,8 @@ class TTabGalleryView extends StatelessWidget {
               // ),
 
               TSectionHeading(
-                title: 'Paces of Art',
+                title: AppLocalizations.of(context)!.artPaces,
+                buttonTitle: AppLocalizations.of(context)!.viewAll,
                 showActionButton: true,
                 onPress: () {},
               ),

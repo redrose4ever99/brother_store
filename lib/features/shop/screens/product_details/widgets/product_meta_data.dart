@@ -7,6 +7,7 @@ import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TProductMetaData extends StatelessWidget {
   const TProductMetaData({super.key});
@@ -53,7 +54,7 @@ class TProductMetaData extends StatelessWidget {
         ),
 
         ///title
-        const TProductTitleText(title: 'Salon chair with wood legs'),
+        TProductTitleText(title: AppLocalizations.of(context)!.woodChair),
         const SizedBox(
           height: TSizes.spaceBtWItems / 1.5,
         ),

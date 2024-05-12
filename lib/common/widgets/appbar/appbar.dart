@@ -30,7 +30,12 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: showBackArrow
             ? IconButton(
                 onPressed: () => Get.back(),
-                icon: const Icon(Iconsax.arrow_left))
+                icon: Icon(
+                  Get.locale?.languageCode == 'en'
+                      ? Icons.keyboard_arrow_left
+                      : Icons.keyboard_arrow_right,
+                  size: 30,
+                ))
             : leadingIcon != null
                 ? IconButton(onPressed: leadingOnPress, icon: Icon(leadingIcon))
                 : null,

@@ -6,6 +6,7 @@ import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TCartItem extends StatelessWidget {
   const TCartItem({
@@ -34,9 +35,9 @@ class TCartItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TBrandTitleWithVerifiedIcon(title: 'Amazone'),
-              const Flexible(
+              Flexible(
                 child: TProductTitleText(
-                  title: 'Salone chair wood legs',
+                  title: AppLocalizations.of(context)!.woodChair,
                   maxLines: 1,
                 ),
               ),

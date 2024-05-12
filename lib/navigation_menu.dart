@@ -8,6 +8,7 @@ import 'package:iconsax/iconsax.dart';
 
 import 'features/personlization/screens/settings/settings.dart';
 import 'features/shop/screens/home/home.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -30,34 +31,34 @@ class NavigationMenu extends StatelessWidget {
             selectedIndex: controller.selectedIndex.value,
             onDestinationSelected: (index) =>
                 controller.selectedIndex.value = index,
-            destinations: const [
+            destinations: [
               NavigationDestination(
-                selectedIcon: Icon(
+                selectedIcon: const Icon(
                   Iconsax.home,
                   color: TColors.primary,
                 ),
-                icon: Icon(
+                icon: const Icon(
                   Iconsax.home,
                 ),
-                label: 'الرئيسية',
+                label: AppLocalizations.of(context)!.mainpage,
               ),
               NavigationDestination(
-                selectedIcon: Icon(
+                selectedIcon: const Icon(
                   Iconsax.shop,
                   color: TColors.primary,
                 ),
-                icon: Icon(
+                icon: const Icon(
                   Iconsax.shop,
                 ),
-                label: 'المتجر',
+                label: AppLocalizations.of(context)!.store,
               ),
               NavigationDestination(
-                  selectedIcon: Icon(
+                  selectedIcon: const Icon(
                     Iconsax.heart,
                     color: TColors.primary,
                   ),
-                  icon: Icon(Iconsax.gallery),
-                  label: 'المعرض'),
+                  icon: const Icon(Iconsax.gallery),
+                  label: AppLocalizations.of(context)!.gallery),
               // NavigationDestination(
               //     selectedIcon: Icon(
               //       Iconsax.user,
@@ -66,12 +67,12 @@ class NavigationMenu extends StatelessWidget {
               //     icon: Icon(Iconsax.heart),
               //     label: 'المفضلة'),
               NavigationDestination(
-                  selectedIcon: Icon(
+                  selectedIcon: const Icon(
                     Iconsax.user,
                     color: TColors.primary,
                   ),
-                  icon: Icon(Iconsax.user),
-                  label: 'حسابي'),
+                  icon: const Icon(Iconsax.user),
+                  label: AppLocalizations.of(context)!.account),
             ]),
       ),
     );

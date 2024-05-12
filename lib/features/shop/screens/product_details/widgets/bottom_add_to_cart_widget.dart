@@ -4,6 +4,7 @@ import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TBottomAddToCart extends StatelessWidget {
   const TBottomAddToCart({super.key});
@@ -54,7 +55,13 @@ class TBottomAddToCart extends StatelessWidget {
                 backgroundColor: TColors.black,
                 side: const BorderSide(color: TColors.black),
                 padding: const EdgeInsets.all(TSizes.md)),
-            child: const Text('Add To Cart'))
+            child: Text(
+              AppLocalizations.of(context)!.addToCart,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .apply(color: TColors.white),
+            ))
       ]),
     );
   }

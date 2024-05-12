@@ -16,6 +16,8 @@ class OnBoardingController extends GetxController {
   }
 
   void nextPage() {
+    Get.updateLocale(const Locale('en'));
+
     if (currentPageIndex.value == 2) {
       Get.to(const NavigationMenu());
     } else {

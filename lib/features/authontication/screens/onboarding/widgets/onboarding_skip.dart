@@ -2,6 +2,7 @@ import 'package:brother_store/features/authontication/controllers.onboarding/onb
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/devices/device_utility.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnBoardingSkip extends StatelessWidget {
   const OnBoardingSkip({
@@ -14,7 +15,9 @@ class OnBoardingSkip extends StatelessWidget {
         top: TDeviceUtils.getAppbarHeight(),
         right: TSizes.defaultSpace,
         child: TextButton(
-            onPressed: () => OnBoardingController.instance.skipPage(),
-            child: const Text('skip')));
+            onPressed: () {
+              OnBoardingController.instance.skipPage();
+            },
+            child: Text(AppLocalizations.of(context)!.skip)));
   }
 }

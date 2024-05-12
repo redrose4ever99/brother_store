@@ -5,7 +5,7 @@ import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/profile_menu.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -14,9 +14,9 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TAppBar(
+      appBar: TAppBar(
         showBackArrow: true,
-        title: Text('Profile'),
+        title: Text(AppLocalizations.of(context)!.account),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -35,7 +35,8 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     TextButton(
                         onPressed: () {},
-                        child: const Text('change profile picture'))
+                        child: Text(
+                            AppLocalizations.of(context)!.changeProfilePicture))
                   ],
                 ),
               ),
@@ -50,8 +51,8 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               /// profile info
-              const TSectionHeading(
-                title: 'Profile Information',
+              TSectionHeading(
+                title: AppLocalizations.of(context)!.profileInformation,
                 showActionButton: false,
               ),
 
@@ -60,12 +61,12 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               TProfileMenu(
-                title: 'Name',
+                title: AppLocalizations.of(context)!.name,
                 value: 'Nuwar Saeed',
                 onPress: () {},
               ),
               TProfileMenu(
-                title: 'User Name',
+                title: AppLocalizations.of(context)!.userName,
                 value: 'Nuwar@Saeed',
                 onPress: () {},
               ),
@@ -78,8 +79,8 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               // personal info
-              const TSectionHeading(
-                title: 'Personal Information',
+              TSectionHeading(
+                title: AppLocalizations.of(context)!.personalInformation,
                 showActionButton: false,
               ),
 
@@ -87,20 +88,20 @@ class ProfileScreen extends StatelessWidget {
                 height: TSizes.spaceBtWItems,
               ),
               TProfileMenu(
-                title: 'User TD',
+                title: AppLocalizations.of(context)!.userId,
                 value: '419244',
                 icon: Iconsax.copy,
                 onPress: () {},
               ),
 
               TProfileMenu(
-                title: 'E-mail',
+                title: AppLocalizations.of(context)!.email,
                 value: 'nuwar.m.saeed@gmail.com',
                 onPress: () {},
               ),
 
               TProfileMenu(
-                title: 'phone number',
+                title: AppLocalizations.of(context)!.phoneNumber,
                 value: '+963941141460',
                 onPress: () {},
               ),
@@ -111,9 +112,9 @@ class ProfileScreen extends StatelessWidget {
               Center(
                 child: TextButton(
                     onPressed: () {},
-                    child: const Text(
-                      'Close Account',
-                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    child: Text(
+                      AppLocalizations.of(context)!.closeAccount,
+                      style: const TextStyle(color: Colors.red, fontSize: 15),
                     )),
               )
             ],

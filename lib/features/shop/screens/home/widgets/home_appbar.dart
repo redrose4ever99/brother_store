@@ -6,6 +6,7 @@ import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class THomeAppbar extends StatelessWidget {
   const THomeAppbar({
@@ -28,7 +29,7 @@ class THomeAppbar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Good day for shopping',
+                AppLocalizations.of(context)!.goodDay,
                 style: Theme.of(context)
                     .textTheme
                     .labelMedium!

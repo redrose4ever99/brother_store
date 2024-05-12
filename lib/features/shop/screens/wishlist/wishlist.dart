@@ -7,6 +7,7 @@ import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
@@ -16,7 +17,7 @@ class FavoriteScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
         title: Text(
-          'WishList',
+          AppLocalizations.of(context)!.wishList,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         actions: [
