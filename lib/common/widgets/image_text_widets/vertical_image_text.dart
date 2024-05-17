@@ -23,13 +23,16 @@ class TVerticalImageText extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(
-            right: TSizes.spaceBtWItems / 2, left: TSizes.spaceBtWItems / 2),
+            right: TSizes.spaceBtWItems / 1.5,
+            left: TSizes.spaceBtWItems / 1.5),
         child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 56,
-              height: 56,
-              padding: const EdgeInsets.all(TSizes.sm),
+              width: 80,
+              height: 80,
+              padding: const EdgeInsets.all(TSizes.md),
               decoration: BoxDecoration(
                   color:
                       backgroundColor ?? (dark ? TColors.white : TColors.white),
@@ -37,21 +40,28 @@ class TVerticalImageText extends StatelessWidget {
               child: Center(
                 child: Image(
                   image: AssetImage(image),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
             const SizedBox(
               height: TSizes.spaceBtWItems / 2,
             ),
-            SizedBox(
-              width: 55,
-              child: Text(
-                title,
-                style: Theme.of(context).textTheme.labelMedium!.apply(
-                    color: textColor ?? (dark ? TColors.white : TColors.white)),
+            Wrap(children: [
+              SizedBox(
+                width: 90,
+                child: Text(
+                  title,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .apply(color: TColors.white),
+                ),
               ),
-            )
+            ])
           ],
         ),
       ),

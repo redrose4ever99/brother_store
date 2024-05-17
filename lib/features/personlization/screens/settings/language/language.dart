@@ -7,6 +7,7 @@ import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LanguageScreen extends StatelessWidget {
   const LanguageScreen({super.key});
@@ -29,7 +30,9 @@ class LanguageScreen extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
+                  GetStorage().write('en', false);
                   Get.updateLocale(const Locale('ar'));
+                  Get.reload();
                 },
                 child: TRoundedContainer(
                   padding: const EdgeInsets.all(TSizes.md),
@@ -68,6 +71,7 @@ class LanguageScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
+                  GetStorage().write('en', true);
                   Get.updateLocale(const Locale('en'));
                   Get.reload();
                 },

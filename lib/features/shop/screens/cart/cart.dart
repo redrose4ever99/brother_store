@@ -12,23 +12,28 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // bool dark = THelperFunctions.isDarkMode(context);
-    return Scaffold(
-      appBar: TAppBar(
-        title: Text(
-          AppLocalizations.of(context)!.myCart,
-          style: Theme.of(context).textTheme.headlineSmall,
+    return Directionality(
+      textDirection: Get.locale?.languageCode == 'en'
+          ? TextDirection.ltr
+          : TextDirection.rtl,
+      child: Scaffold(
+        appBar: TAppBar(
+          title: Text(
+            AppLocalizations.of(context)!.myCart,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          showBackArrow: true,
         ),
-        showBackArrow: true,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          child: ElevatedButton(
+              onPressed: () => Get.to(() => const CheckoutScreen()),
+              child: Text(
+                  AppLocalizations.of(context)!.checkoutWithPrice('232445'))),
+        ),
+        body: const Padding(
+            padding: EdgeInsets.all(TSizes.defaultSpace), child: TCartItems()),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(TSizes.defaultSpace),
-        child: ElevatedButton(
-            onPressed: () => Get.to(() => const CheckoutScreen()),
-            child: Text(
-                AppLocalizations.of(context)!.checkoutWithPrice('232445'))),
-      ),
-      body: const Padding(
-          padding: EdgeInsets.all(TSizes.defaultSpace), child: TCartItems()),
     );
   }
 }

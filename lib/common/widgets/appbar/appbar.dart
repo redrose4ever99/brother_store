@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TAppBar({
@@ -37,7 +36,12 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
                   size: 30,
                 ))
             : leadingIcon != null
-                ? IconButton(onPressed: leadingOnPress, icon: Icon(leadingIcon))
+                ? IconButton(
+                    onPressed: leadingOnPress,
+                    icon: Icon(
+                      leadingIcon,
+                      color: Colors.white,
+                    ))
                 : null,
         title: title,
         actions: actions,

@@ -21,7 +21,7 @@ class TProductPriceText extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       maxLines: maxLines,
       style: isLarg
-          ? Theme.of(context).textTheme.headlineMedium!.apply(
+          ? Theme.of(context).textTheme.headlineSmall!.apply(
               decoration: linethrough ? TextDecoration.lineThrough : null)
           : Theme.of(context).textTheme.titleLarge!.apply(
               decoration: linethrough ? TextDecoration.lineThrough : null),

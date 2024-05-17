@@ -15,41 +15,46 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(OnBoardingController());
-    return Scaffold(
-      body: Stack(children: [
-        ///Horizontal scrolle pages
-        PageView(
-          controller: controller.pageController,
-          onPageChanged: controller.updatePageIndicator,
-          children: [
-            OnBoardingPage(
-              image: TImages.onBoarding1,
-              title: AppLocalizations.of(context)!.onboardingTitle1,
-              subTitle: AppLocalizations.of(context)!.onboardingSubtitle1,
-            ),
-            OnBoardingPage(
-              image: TImages.onBoarding2,
-              title: AppLocalizations.of(context)!.onboardingTitle2,
-              subTitle: AppLocalizations.of(context)!.onboardingSubtitle2,
-            ),
-            OnBoardingPage(
-              image: TImages.onBoarding3,
-              title: AppLocalizations.of(context)!.onboardingTitle3,
-              subTitle: AppLocalizations.of(context)!.onboardingSubtitle3,
-            )
-          ],
-        ),
+    return Directionality(
+      textDirection: Get.locale?.languageCode == 'en'
+          ? TextDirection.ltr
+          : TextDirection.rtl,
+      child: Scaffold(
+        body: Stack(children: [
+          ///Horizontal scrolle pages
+          PageView(
+            controller: controller.pageController,
+            onPageChanged: controller.updatePageIndicator,
+            children: [
+              OnBoardingPage(
+                image: TImages.bBlack,
+                title: AppLocalizations.of(context)!.onboardingTitle1,
+                subTitle: AppLocalizations.of(context)!.onboardingSubtitle1,
+              ),
+              OnBoardingPage(
+                image: TImages.bBlack,
+                title: AppLocalizations.of(context)!.onboardingTitle2,
+                subTitle: AppLocalizations.of(context)!.onboardingSubtitle2,
+              ),
+              OnBoardingPage(
+                image: TImages.bBlack,
+                title: AppLocalizations.of(context)!.onboardingTitle3,
+                subTitle: AppLocalizations.of(context)!.onboardingSubtitle3,
+              )
+            ],
+          ),
 
-        ///skip button
-        const OnBoardingSkip(),
+          ///skip button
+          const OnBoardingSkip(),
 
-        ///dot navigation indicator
-        const OnBoardingDotNavigation(),
+          ///dot navigation indicator
+          const OnBoardingDotNavigation(),
 
-        /// button circuler
+          /// button circuler
 
-        const OnBoardingNextButton()
-      ]),
+          const OnBoardingNextButton()
+        ]),
+      ),
     );
   }
 }

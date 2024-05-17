@@ -12,7 +12,8 @@ class TAppTheme {
       useMaterial3: true,
       fontFamily: 'AvenirArabic',
       brightness: Brightness.light,
-      primaryColor: const Color.fromARGB(190, 191, 0, 255),
+      primaryColor: const Color(0xFF0055ff),
+
       // primaryColor: TColors.primary,
       scaffoldBackgroundColor: Colors.white,
       textTheme: TTextTheme.lightTextTheme,
@@ -24,7 +25,7 @@ class TAppTheme {
       useMaterial3: true,
       fontFamily: 'AvenirArabic',
       brightness: Brightness.dark,
-      primaryColor: const Color.fromARGB(190, 191, 0, 255),
+      primaryColor: const Color(0xFF0055ff),
       // primaryColor: TColors.primary,
       scaffoldBackgroundColor: Colors.black,
       textTheme: TTextTheme.darkTextTheme,

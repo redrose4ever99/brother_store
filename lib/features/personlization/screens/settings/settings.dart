@@ -3,6 +3,7 @@ import 'package:brother_store/common/widgets/custom_shapes/containers/primary_he
 import 'package:brother_store/common/widgets/list_tiles/setting_menu_tile.dart';
 import 'package:brother_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
+import 'package:brother_store/features/authontication/screens/login/signup.dart';
 import 'package:brother_store/features/personlization/screens/settings/language/language.dart';
 import 'package:brother_store/features/project/screens/projects/projects.dart';
 import 'package:brother_store/features/shop/screens/cart/cart.dart';
@@ -100,6 +101,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     // ),
                     TSettingMenuTile(
+                      onTap: () => Get.to(() => const SignupScreen()),
                       icon: Iconsax.notification,
                       title: AppLocalizations.of(context)!.notifications,
                       subTitle: 'Do culpa reprehenderit ullamco fugiat.',

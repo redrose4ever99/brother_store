@@ -1,6 +1,7 @@
-import 'package:brother_store/navigation_menu.dart';
+import 'package:brother_store/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class OnBoardingController extends GetxController {
   static OnBoardingController get instance => Get.find();
@@ -16,10 +17,12 @@ class OnBoardingController extends GetxController {
   }
 
   void nextPage() {
-    Get.updateLocale(const Locale('en'));
-
+    // Get.updateLocale(const Locale('en'));
+// deviceStorage.writeIfNull('isTheFirstTime', true);
     if (currentPageIndex.value == 2) {
-      Get.to(const NavigationMenu());
+      GetStorage().write('isTheFirstTime', false);
+
+      Get.to(const App());
     } else {
       int page = currentPageIndex.value + 1;
       pageController.jumpToPage(page);
@@ -27,6 +30,7 @@ class OnBoardingController extends GetxController {
   }
 
   void skipPage() {
-    Get.to(const NavigationMenu());
+    GetStorage().write('isTheFirstTime', false);
+    Get.to(const App());
   }
 }

@@ -11,28 +11,33 @@ class BlogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: TAppBar(
-        showBackArrow: true,
-        title: Text(
-          'Blog',
-          style: Theme.of(context).textTheme.headlineSmall,
+    return Directionality(
+      textDirection: Get.locale?.languageCode == 'en'
+          ? TextDirection.ltr
+          : TextDirection.rtl,
+      child: Scaffold(
+        appBar: TAppBar(
+          showBackArrow: true,
+          title: Text(
+            'Blog',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: Column(
-            children: [
-              TBlogItem(
-                onTap: () => Get.to(() => const TSingleBlog()),
-                selectedAddress: false,
-              ),
-              TBlogItem(
-                onTap: () => Get.to(() => const TSingleBlog()),
-                selectedAddress: true,
-              )
-            ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(TSizes.defaultSpace),
+            child: Column(
+              children: [
+                TBlogItem(
+                  onTap: () => Get.to(() => const TSingleBlog()),
+                  selectedAddress: false,
+                ),
+                TBlogItem(
+                  onTap: () => Get.to(() => const TSingleBlog()),
+                  selectedAddress: true,
+                )
+              ],
+            ),
           ),
         ),
       ),

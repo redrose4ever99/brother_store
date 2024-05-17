@@ -3,6 +3,7 @@ import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen(
@@ -16,42 +17,47 @@ class SuccessScreen extends StatelessWidget {
   final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(
-              top: THelperFunctions.screenHeight() / 5,
-              left: TSizes.defaultSpace,
-              right: TSizes.defaultSpace),
-          child: Column(
-            children: [
-              Image(
-                image: AssetImage(
-                  image,
+    return Directionality(
+      textDirection: Get.locale?.languageCode == 'en'
+          ? TextDirection.ltr
+          : TextDirection.rtl,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+                top: THelperFunctions.screenHeight() / 5,
+                left: TSizes.defaultSpace,
+                right: TSizes.defaultSpace),
+            child: Column(
+              children: [
+                Image(
+                  image: AssetImage(
+                    image,
+                  ),
+                  width: THelperFunctions.screenwidth() * 0.6,
                 ),
-                width: THelperFunctions.screenwidth() * 0.6,
-              ),
-              const SizedBox(
-                height: TSizes.spaceBtWsections,
-              ),
-              Text(title,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                  textAlign: TextAlign.center),
-              const SizedBox(
-                height: TSizes.spaceBtWItems,
-              ),
-              Text(title,
-                  style: Theme.of(context).textTheme.labelMedium,
-                  textAlign: TextAlign.center),
-              const SizedBox(
-                height: TSizes.spaceBtWsections,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                    onPressed: onPressed, child: const Text('Continue')),
-              )
-            ],
+                const SizedBox(
+                  height: TSizes.spaceBtWsections,
+                ),
+                Text(title,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                    textAlign: TextAlign.center),
+                const SizedBox(
+                  height: TSizes.spaceBtWItems,
+                ),
+                Text(title,
+                    style: Theme.of(context).textTheme.labelMedium,
+                    textAlign: TextAlign.center),
+                const SizedBox(
+                  height: TSizes.spaceBtWsections,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      onPressed: onPressed, child: const Text('Continue')),
+                )
+              ],
+            ),
           ),
         ),
       ),

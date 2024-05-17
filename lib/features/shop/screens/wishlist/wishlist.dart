@@ -14,25 +14,30 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: TAppBar(
-        title: Text(
-          AppLocalizations.of(context)!.wishList,
-          style: Theme.of(context).textTheme.headlineMedium,
+    return Directionality(
+      textDirection: Get.locale?.languageCode == 'en'
+          ? TextDirection.ltr
+          : TextDirection.rtl,
+      child: Scaffold(
+        appBar: TAppBar(
+          title: Text(
+            AppLocalizations.of(context)!.wishList,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          actions: [
+            TCircularIcon(
+              icon: Iconsax.add,
+              onPressed: () => Get.to(const NavigationMenu()),
+            )
+          ],
         ),
-        actions: [
-          TCircularIcon(
-            icon: Iconsax.add,
-            onPressed: () => Get.to(const NavigationMenu()),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: TGridLayout(
-              itemCount: 6,
-              itemBuilder: (_, index) => const TProductCardVertical()),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(TSizes.defaultSpace),
+            child: TGridLayout(
+                itemCount: 6,
+                itemBuilder: (_, index) => const TProductCardVertical()),
+          ),
         ),
       ),
     );

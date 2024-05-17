@@ -33,4 +33,10 @@ class TImages {
   //flags
   static const String arabicFlag = "assets/images/language/arabic.png";
   static const String englishFlag = "assets/images/language/american.png";
+  //logo
+  static const String bBlack = "assets/logos/1.png";
+  static const String bwhite = "assets/logos/2.png";
+  static const String wordBlack = "assets/logos/4.png";
+  static const String wordWhite = "assets/logos/3.png";
+  static const String arWord = "assets/logos/ar1.png";
 }

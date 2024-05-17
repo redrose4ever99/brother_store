@@ -5,6 +5,7 @@ import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TSingleAddress extends StatelessWidget {
@@ -32,8 +33,8 @@ class TSingleAddress extends StatelessWidget {
         children: [
           Positioned(
             top: 0,
-            right: 5,
-            left: 5,
+            right: Get.locale?.languageCode == 'en' ? 5 : null,
+            left: Get.locale?.languageCode == 'en' ? null : 5,
             child: Icon(
               selectedAddress ? Iconsax.tick_circle5 : null,
               color: selectedAddress

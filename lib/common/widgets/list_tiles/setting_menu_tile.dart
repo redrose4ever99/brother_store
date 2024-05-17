@@ -9,10 +9,12 @@ class TSettingMenuTile extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.subTitle,
+    this.iconColor = TColors.primary,
     this.onTap,
     this.trailing,
   }) : super(key: key);
   final IconData icon;
+  final Color iconColor;
   final String title, subTitle;
   final VoidCallback? onTap;
   final Widget? trailing;
@@ -23,7 +25,7 @@ class TSettingMenuTile extends StatelessWidget {
         leading: Icon(
           icon,
           size: 28,
-          color: TColors.primary,
+          color: iconColor,
         ),
         title: Text(
           title,

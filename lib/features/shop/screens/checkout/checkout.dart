@@ -22,71 +22,76 @@ class CheckoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
 
-    return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(TSizes.defaultSpace),
-        child: ElevatedButton(
-            onPressed: () => Get.to(() => SuccessScreen(
-                  image: dark
-                      ? TImages.truePaymentblack
-                      : TImages.truePaymentwhite,
-                  title: 'Payment Successfull',
-                  subTitle: 'Your Item will be shipping soon!',
-                  onPressed: () => Get.offAll(() => const NavigationMenu()),
-                )),
-            child: const Text('Checkout \$23245')),
-      ),
-      appBar: TAppBar(
-        showBackArrow: true,
-        title: Text(
-          'Order Review',
-          style: Theme.of(context).textTheme.headlineSmall,
+    return Directionality(
+      textDirection: Get.locale?.languageCode == 'en'
+          ? TextDirection.ltr
+          : TextDirection.rtl,
+      child: Scaffold(
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          child: ElevatedButton(
+              onPressed: () => Get.to(() => SuccessScreen(
+                    image: dark
+                        ? TImages.truePaymentblack
+                        : TImages.truePaymentwhite,
+                    title: 'Payment Successfull',
+                    subTitle: 'Your Item will be shipping soon!',
+                    onPressed: () => Get.offAll(() => const NavigationMenu()),
+                  )),
+              child: const Text('Checkout \$23245')),
         ),
-      ),
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.all(TSizes.defaultSpace),
-        child: Column(
-          children: [
-            const TCartItems(
-              showAddRemoveButtons: false,
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtWsections,
-            ),
+        appBar: TAppBar(
+          showBackArrow: true,
+          title: Text(
+            'Order Review',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ),
+        body: SingleChildScrollView(
+            child: Padding(
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          child: Column(
+            children: [
+              const TCartItems(
+                showAddRemoveButtons: false,
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtWsections,
+              ),
 
-            ///Copoun code
-            const TCouponCode(),
-            const SizedBox(
-              height: TSizes.spaceBtWsections,
-            ),
-            TRoundedContainer(
-                showBorder: true,
-                backgroundColor: dark ? TColors.black : TColors.white,
-                padding: const EdgeInsets.all(TSizes.md),
-                child: const Column(
-                  children: [
-                    TBillingAmountSection(),
-                    SizedBox(
-                      height: TSizes.spaceBtWItems,
-                    ),
-                    Divider(),
-                    SizedBox(
-                      height: TSizes.spaceBtWItems,
-                    ),
-                    TbillingPaymentSection(),
-                    SizedBox(
-                      height: TSizes.spaceBtWItems,
-                    ),
-                    TBillingAddressSection(),
-                    SizedBox(
-                      height: TSizes.spaceBtWItems,
-                    ),
-                  ],
-                )),
-          ],
-        ),
-      )),
+              ///Copoun code
+              const TCouponCode(),
+              const SizedBox(
+                height: TSizes.spaceBtWsections,
+              ),
+              TRoundedContainer(
+                  showBorder: true,
+                  backgroundColor: dark ? TColors.black : TColors.white,
+                  padding: const EdgeInsets.all(TSizes.md),
+                  child: const Column(
+                    children: [
+                      TBillingAmountSection(),
+                      SizedBox(
+                        height: TSizes.spaceBtWItems,
+                      ),
+                      Divider(),
+                      SizedBox(
+                        height: TSizes.spaceBtWItems,
+                      ),
+                      TbillingPaymentSection(),
+                      SizedBox(
+                        height: TSizes.spaceBtWItems,
+                      ),
+                      TBillingAddressSection(),
+                      SizedBox(
+                        height: TSizes.spaceBtWItems,
+                      ),
+                    ],
+                  )),
+            ],
+          ),
+        )),
+      ),
     );
   }
 }

@@ -12,8 +12,16 @@ class TCartItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
-      separatorBuilder: (_, __) => const SizedBox(
-        height: TSizes.spaceBtWsections,
+      separatorBuilder: (_, __) => const Column(
+        children: [
+          SizedBox(
+            height: TSizes.spaceBtWsections / 2,
+          ),
+          Divider(),
+          SizedBox(
+            height: TSizes.spaceBtWsections / 2,
+          ),
+        ],
       ),
       itemCount: 3,
       itemBuilder: (_, index) => Column(
@@ -30,13 +38,12 @@ class TCartItems extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SizedBox(
-                      width: 70,
-                    ),
+                    //
+                    // // ),
                     TProductQuantityWithAddRemoveButtons(),
                   ],
                 ),
-                TProductPriceText(price: '239')
+                TProductPriceText(isLarg: true, price: '239')
               ],
             ),
         ],
