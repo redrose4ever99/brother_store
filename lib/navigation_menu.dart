@@ -1,10 +1,11 @@
-import 'package:brother_store/features/shop/screens/gallery/gallery.dart';
+import 'package:brother_store/features/Gallery/screen/gallery.dart';
 import 'package:brother_store/features/shop/screens/store/store.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'features/personlization/screens/settings/settings.dart';
@@ -21,6 +22,7 @@ class NavigationMenu extends StatelessWidget {
       print('=======lang=============');
       print(Get.locale?.languageCode);
     }
+
     final controller = Get.put(NavigationController());
     final darkMode = THelperFunctions.isDarkMode(context);
     return Directionality(
@@ -98,7 +100,24 @@ class NavigationMenu extends StatelessWidget {
 }
 
 class NavigationController extends GetxController {
+  static NavigationController get instance => Get.find();
   final Rx<int> selectedIndex = 0.obs;
+
+  @override
+  void onInit() {
+    if (Get.locale?.languageCode == null && GetStorage().read('en')) {
+      Get.updateLocale(const Locale('en'));
+    } else {
+      Get.updateLocale(const Locale('ar'));
+    }
+
+    if (kDebugMode) {
+      print('=======lang=============');
+      print(Get.locale?.languageCode);
+    }
+
+    super.onInit();
+  }
 
   void updateSelectedIndex(int index) {
     selectedIndex.value = index;

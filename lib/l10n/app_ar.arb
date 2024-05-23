@@ -43,6 +43,8 @@
     "artPaces":"قطع فنية",
     "checkoutWithPrice":"الدفع {price}",
     "checkout":"الدفع",
+    "reviewsWithNum":"المراجعات {num}",
+    "reviews":"المراجعات",
     "changeProfilePicture":"تغيير الصورة الشخصبة",
     "profileInformation":"معلومات الملف الشخصي",
     "name":"الاسم",
@@ -54,7 +56,12 @@
     "closeAccount":"اغلاق الحساب",
     "showMore":"عرض اكثر",
     "less":"أقل",
-    "descriptions":"الوصف"
+    "descriptions":"الوصف",
+    "noData":"لايوجد بيانات",
+    "brands":"العلامات التجارية",
+    "brand":"العلامة التجارية",
+    "somethingWentWrong":"هناك خطأ ما. ",
+    "close":"إغلاق"
     
     
      

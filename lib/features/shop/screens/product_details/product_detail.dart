@@ -1,4 +1,5 @@
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
+import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,8 @@ import 'widgets/product_image_slider.dart';
 import 'widgets/rating_share_widget.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({super.key});
-
+  const ProductDetailsScreen({super.key, required this.product});
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     //final dark = THelperFunctions.isDarkMode(context);
@@ -25,7 +26,9 @@ class ProductDetailsScreen extends StatelessWidget {
           child: Column(
             children: [
               ///1- product image slider
-              const TProductImageSlider(),
+              TProductImageSlider(
+                product: product,
+              ),
 
               //-- product Details
               Padding(
@@ -35,7 +38,9 @@ class ProductDetailsScreen extends StatelessWidget {
                   const TRatingAndShare(),
 
                   ///price Title,Stack, & brand
-                  const TProductMetaData(),
+                  TProductMetaData(
+                    product: product,
+                  ),
 
                   ///Attributes
                   SizedBox(
@@ -57,7 +62,9 @@ class ProductDetailsScreen extends StatelessWidget {
                     height: TSizes.spaceBtWItems,
                   ),
                   ReadMoreText(
-                    'Ullamco sit non nisi exercitation quis incididunt minim duis sint do ipsum. Voluptate eiusmod labore duis Laborum cupidatat dolore eiusmod deserunt anim aute ex.ullamco ex consequat proident deserunt consectetur nisi quis amet.Do in ipsum ea laborum esse nulla sunt ullamco.',
+                    Get.locale?.languageCode == 'en'
+                        ? product.description ?? ''
+                        : product.arabicDescription ?? '',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: AppLocalizations.of(context)!.showMore,

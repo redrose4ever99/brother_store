@@ -1,6 +1,8 @@
 import 'package:brother_store/data/repositoies/categories/category_repository.dart';
+import 'package:brother_store/data/repositoies/product/product_repository.dart';
 import 'package:brother_store/features/authontication/controllers/network_manager.dart';
 import 'package:brother_store/features/shop/models/category_model.dart';
+import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -46,5 +48,22 @@ class CategoryController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+    try {
+      final subCategories =
+          await _categoryRepository.getSubCategories(categoryId);
+      return subCategories;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<List<ProductModel>> getCategoryProduct(
+      {required String categoryId, int limit = 4}) async {
+    final product = await ProductRepository.instance
+        .getProductsForCategory(categoryId: categoryId, limit: limit);
+    return product;
   }
 }

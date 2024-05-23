@@ -3,49 +3,63 @@ import 'package:brother_store/common/widgets/images/circular_image.dart';
 import 'package:brother_store/common/widgets/texts/brand_title_with_verified_icon.dart';
 import 'package:brother_store/common/widgets/texts/product_price_text.dart';
 import 'package:brother_store/common/widgets/texts/product_title_text.dart';
+import 'package:brother_store/features/shop/controllers/product/productController.dart';
+import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class TProductMetaData extends StatelessWidget {
-  const TProductMetaData({super.key});
-
+  const TProductMetaData({super.key, required this.product});
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePrecentage =
+        controller.calculateSalePresentage(product.price, product.salePrice);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ///Price and sale price
         Row(
           children: [
-            TRoundedContainer(
-              radius: TSizes.sm,
-              backgroundColor: TColors.secondary,
-              padding: const EdgeInsets.symmetric(
-                  horizontal: TSizes.sm, vertical: TSizes.xs),
-              child: Text(
-                '25%',
-                style: Theme.of(context)
-                    .textTheme
-                    .labelLarge!
-                    .apply(color: TColors.black),
+            if (salePrecentage != null)
+              TRoundedContainer(
+                radius: TSizes.sm,
+                backgroundColor: TColors.secondary,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: TSizes.sm, vertical: TSizes.xs),
+                child: Text(
+                  '$salePrecentage%',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge!
+                      .apply(color: TColors.black),
+                ),
               ),
-            ),
 
-            const SizedBox(
-              width: TSizes.spaceBtWItems,
-            ),
+            if (salePrecentage != null)
+              const SizedBox(
+                width: TSizes.spaceBtWItems,
+              ),
 
             ///price
-            Text(
-              '\$250',
-              style: Theme.of(context).textTheme.titleSmall!.apply(
-                  decoration: TextDecoration.lineThrough, color: Colors.red),
-            ),
+            if (product.price > 0)
+              TProductPriceText(
+                  price: '${product.price}',
+                  isLarg: false,
+                  linethrough: true,
+                  color: Colors.red),
+            // Text(
+            //   'SAR ${product.price}',
+            //   style: Theme.of(context).textTheme.titleSmall!.apply(
+            //       decoration: TextDecoration.lineThrough, color: Colors.red),
+            // ),
             const SizedBox(width: TSizes.spaceBtWItems),
-            const TProductPriceText(price: '190', isLarg: true),
+            if (product.salePrice > 0)
+              TProductPriceText(price: '${product.salePrice}', isLarg: true),
           ],
         ),
 
@@ -54,7 +68,11 @@ class TProductMetaData extends StatelessWidget {
         ),
 
         ///title
-        TProductTitleText(title: AppLocalizations.of(context)!.woodChair),
+        TProductTitleText(
+          title: Get.locale?.languageCode == 'en'
+              ? product.title
+              : product.arabicTitle,
+        ),
         const SizedBox(
           height: TSizes.spaceBtWItems / 1.5,
         ),
@@ -66,7 +84,7 @@ class TProductMetaData extends StatelessWidget {
               width: TSizes.spaceBtWItems,
             ),
             Text(
-              'In Stack',
+              controller.getProductStockStatus(product.stock),
               style: Theme.of(context).textTheme.titleMedium,
             )
           ],
@@ -77,14 +95,18 @@ class TProductMetaData extends StatelessWidget {
 
         ///Brand
 
-        const Row(
+        Row(
           children: [
             TCircularImage(
-              image: TImages.brandImage1,
+              image: product.brand!.image != ''
+                  ? product.brand!.image
+                  : TImages.brandImage1,
+              isNetworkImage: product.brand!.image != '' ? true : false,
               width: 32,
               height: 32,
             ),
-            TBrandTitleWithVerifiedIcon(title: 'Amazone'),
+            TBrandTitleWithVerifiedIcon(
+                title: product.brand != null ? product.brand!.name : ''),
           ],
         ),
       ],

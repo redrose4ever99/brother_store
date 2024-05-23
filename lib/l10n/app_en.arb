@@ -51,7 +51,14 @@
         "price":{"type":"String"
       }
        }    },
-    "checkout":"Checkout",
+
+    "reviewsWithNum":"Reviews {num}",
+    "@reviewsWithNum":{
+    "placeholders":{
+         "num":{"type":"String"
+       }
+       }    },
+    "reviews":"Reviews",
     "changeProfilePicture":"change profile picture",
     "profileInformation":"Profile Information",
     "name":"Name",
@@ -63,7 +70,12 @@
     "closeAccount":"Close Account",
     "showMore":"Show More",
     "less":"Less",
-    "descriptions":"Descriptions"
+    "descriptions":"Descriptions",
+    "noData":"No data found",
+    "brands":"Brands",
+    "brand":"Brand",
+    "somethingWentWrong":"Something Went Wrong.",
+    "close":"Close"
 
 
 

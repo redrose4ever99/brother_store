@@ -8,12 +8,15 @@ class TVerticalImageText extends StatelessWidget {
     super.key,
     required this.image,
     required this.title,
+    this.isNetworkImage = false,
     this.textColor,
     this.backgroundColor,
     this.onTap,
   });
   final String image, title;
   final Color? textColor;
+  final bool isNetworkImage;
+
   final Color? backgroundColor;
   final void Function()? onTap;
   @override
@@ -23,8 +26,8 @@ class TVerticalImageText extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(
-            right: TSizes.spaceBtWItems / 1.5,
-            left: TSizes.spaceBtWItems / 1.5),
+            right: TSizes.spaceBtWItems / 2.5,
+            left: TSizes.spaceBtWItems / 2.5),
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.center,
           // mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +42,9 @@ class TVerticalImageText extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100)),
               child: Center(
                 child: Image(
-                  image: AssetImage(image),
+                  image: isNetworkImage
+                      ? NetworkImage(image)
+                      : AssetImage(image) as ImageProvider,
                   fit: BoxFit.contain,
                 ),
               ),

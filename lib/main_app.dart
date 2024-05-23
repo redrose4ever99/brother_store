@@ -1,13 +1,9 @@
 import 'package:brother_store/app.dart';
-import 'package:brother_store/l10n/l10n.dart';
 import 'package:brother_store/utils/theme/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'utils/constants/color.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({
@@ -17,9 +13,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (kDebugMode) {
-      print('=======lang=============');
+      print('=======lang===========');
       print(Get.locale?.languageCode);
     }
+
     //Get.updateLocale(const Locale('en'));
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,

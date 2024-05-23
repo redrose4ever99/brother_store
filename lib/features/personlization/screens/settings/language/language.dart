@@ -21,7 +21,10 @@ class LanguageScreen extends StatelessWidget {
           : TextDirection.rtl,
       child: Scaffold(
         appBar: TAppBar(
-          title: Text(AppLocalizations.of(context)!.chooseLanguage),
+          title: Text(
+            AppLocalizations.of(context)!.chooseLanguage,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
           showBackArrow: true,
         ),
         body: Padding(

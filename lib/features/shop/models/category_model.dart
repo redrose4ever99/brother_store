@@ -28,6 +28,8 @@ class CategoryModel {
     };
   }
 
+
+
   factory CategoryModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {

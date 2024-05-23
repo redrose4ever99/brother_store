@@ -2,6 +2,7 @@ import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/icons/circuler_icon.dart';
 import 'package:brother_store/common/widgets/layout/grid_layout.dart';
 import 'package:brother_store/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/navigation_menu.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,9 @@ class FavoriteScreen extends StatelessWidget {
             padding: const EdgeInsets.all(TSizes.defaultSpace),
             child: TGridLayout(
                 itemCount: 6,
-                itemBuilder: (_, index) => const TProductCardVertical()),
+                itemBuilder: (_, index) => TProductCardVertical(
+                      product: ProductModel.empty(),
+                    )),
           ),
         ),
       ),

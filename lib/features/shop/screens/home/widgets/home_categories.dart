@@ -1,6 +1,7 @@
 import 'package:brother_store/common/widgets/image_text_widets/vertical_image_text.dart';
 import 'package:brother_store/common/widgets/shimmers/catrgory_shimmer.dart';
 import 'package:brother_store/features/shop/controllers/category_controller.dart';
+import 'package:brother_store/features/shop/screens/all_products/all_products.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,10 +31,21 @@ class THomeCategories extends StatelessWidget {
                 final category = categoryController.featureCategories[index];
                 return TVerticalImageText(
                   image: category.image == "" ? TImages.bBlack : category.image,
+                  isNetworkImage: category.image == "" ? false : true,
                   title: Get.locale?.languageCode == 'en'
                       ? category.name
                       : category.arabicName,
-                  onTap: () {},
+                  onTap: () => Get.to(() => AllProducts(
+                        title: Get.locale?.languageCode == 'en'
+                            ? category.name
+                            : category.arabicName,
+                        futureMethode: categoryController.getCategoryProduct(
+                            categoryId: category.id, limit: -1),
+                      )),
+
+                  // SubCategoriesScreen(
+                  //   category: category,
+                  // )),
                 );
               }));
     });

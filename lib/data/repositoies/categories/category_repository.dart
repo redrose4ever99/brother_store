@@ -32,4 +32,27 @@ class CategoryRepository extends GetxController {
       throw e.code;
     }
   }
+
+  Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+    if (kDebugMode) {
+      print("=======category id=========");
+      print(categoryId);
+    }
+
+    try {
+      final snapshot = await _db
+          .collection("Categories")
+          .where('ParentId', isEqualTo: categoryId)
+          .get();
+      final result =
+          snapshot.docs.map((e) => CategoryModel.fromSnapshot(e)).toList();
+      if (kDebugMode) {
+        print("=======data= subcategory=============");
+        print(result);
+      }
+      return result;
+    } on FirebaseException catch (e) {
+      throw e.code;
+    }
+  }
 }

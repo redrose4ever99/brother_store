@@ -10,7 +10,7 @@ import 'package:brother_store/utils/constants/sizes.dart';
 class TBrandTitleWithVerifiedIcon extends StatelessWidget {
   const TBrandTitleWithVerifiedIcon(
       {Key? key,
-      required this.title,
+      this.title = " ",
       this.textColor,
       this.maxLines = 1,
       this.iconColor = TColors.primary,

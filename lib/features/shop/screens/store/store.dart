@@ -3,25 +3,32 @@ import 'package:brother_store/common/widgets/appbar/tabbar.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:brother_store/common/widgets/layout/grid_layout.dart';
 import 'package:brother_store/common/widgets/product.cart/cart_menu_icon.dart';
-import 'package:brother_store/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:brother_store/common/widgets/shimmers/brand_shimmer.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
-import 'package:brother_store/features/shop/screens/store/brand_card.dart';
-import 'package:brother_store/features/shop/screens/store/brand_show_case.dart';
+import 'package:brother_store/features/shop/controllers/brand_controller.dart';
+import 'package:brother_store/features/shop/controllers/category_controller.dart';
+import 'package:brother_store/features/shop/screens/store/category/category_tab.dart';
 import 'package:brother_store/utils/constants/color.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'brand/all_brand.dart';
+import 'brand/brand_card.dart';
+import 'brand/brand_product.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final brandController = Get.put(BrandController());
+    final isEg = Get.locale?.languageCode == 'en';
+    final categories = CategoryController.instance.featureCategories;
     return DefaultTabController(
-      length: 7,
+      length: categories.length,
       child: Scaffold(
         appBar: TAppBar(
           title: Text(
@@ -67,105 +74,60 @@ class StoreScreen extends StatelessWidget {
                         title: AppLocalizations.of(context)!.featureBrands,
                         showActionButton: true,
                         buttonTitle: AppLocalizations.of(context)!.viewAll,
-                        onPress: () {},
+                        onPress: () => Get.to(() => const AllBrandScreen()),
                       ),
                       const SizedBox(height: TSizes.spaceBtWItems / 1.5),
-                      TGridLayout(
-                          itemCount: 4,
-                          maxAxisExtent: 80,
-                          itemBuilder: (_, index) {
-                            return const TBrandCard(
-                              showBorder: false,
-                            );
-                          })
+                      Obx(() {
+                        if (brandController.isLoading.value) {
+                          return TBrandShummer(
+                            itemCount: brandController.featureBrands.length,
+                          );
+                        }
+                        if (brandController.featureBrands.isEmpty) {
+                          return Center(
+                            child: Text(
+                              AppLocalizations.of(context)!.noData,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          );
+                        }
+                        return TGridLayout(
+                            itemCount: brandController.featureBrands.length,
+                            maxAxisExtent: 80,
+                            itemBuilder: (_, index) {
+                              return TBrandCard(
+                                showBorder: false,
+                                brand: brandController.featureBrands[index],
+                                onTap: () => Get.to(() => BrandProducts(
+                                      brand:
+                                          brandController.featureBrands[index],
+                                    )),
+                              );
+                            });
+                      })
                     ],
                   ),
                 ),
-                bottom: const TTabbar(tabs: [
-                  Tab(
-                    child: Text('Furniture'),
-                  ),
-                  Tab(
-                    child: Text('Garden Stuff'),
-                  ),
-                  Tab(
-                    child: Text('Kitchens'),
-                  ),
-                  Tab(
-                    child: Text('Salons'),
-                  ),
-                  Tab(
-                    child: Text('bed Rooms'),
-                  ),
-                  Tab(
-                    child: Text('Children Rooms'),
-                  ),
-                  Tab(
-                    child: Text('Accessories'),
-                  )
-                ]),
+                bottom: TTabbar(
+                    tabs: isEg
+                        ? categories
+                            .map((category) => Tab(child: Text(category.name)))
+                            .toList()
+                        : categories
+                            .map((category) =>
+                                Tab(child: Text(category.arabicName)))
+                            .toList()),
+                
               )
             ];
           },
           // ignore: prefer_const_constructors
-          body: TabBarView(children: const [
-            TTabView(),
-            TTabView(),
-            TTabView(),
-            TTabView(),
-            TTabView(),
-            TTabView(),
-            TTabView(),
-          ]),
+          body: TabBarView(
+              children: categories
+                  .map((category) => TCategoryTab(category: category))
+                  .toList()),
         ),
       ),
-    );
-  }
-}
-
-class TTabView extends StatelessWidget {
-  const TTabView({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: Column(
-            children: [
-              //-- Brands
-              const TBrandShowCase(
-                images: [
-                  TImages.brandImage1,
-                  TImages.brandImage2,
-                  TImages.productImg1
-                ],
-              ),
-
-              TSectionHeading(
-                title: AppLocalizations.of(context)!.youMightLike,
-                showActionButton: true,
-                buttonTitle: AppLocalizations.of(context)!.viewAll,
-                onPress: () {},
-              ),
-              const SizedBox(
-                height: TSizes.spaceBtWItems,
-              ),
-              TGridLayout(
-                  itemCount: 4,
-                  itemBuilder: (_, index) => const TProductCardVertical()),
-              const SizedBox(
-                height: TSizes.spaceBtWsections,
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

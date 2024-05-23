@@ -1,8 +1,6 @@
 import 'package:brother_store/navigation_menu.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,17 +8,6 @@ class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    if (Get.locale?.languageCode == null) {
-      Get.updateLocale(const Locale('en'));
-    }
-    if (!GetStorage().read('en')) {
-      Get.updateLocale(const Locale('ar'));
-    }
-
-    if (kDebugMode) {
-      print('=======lang=============');
-      print(Get.locale?.languageCode);
-    }
     return
         // ZoomDrawer(
         //     isRtl: AppLocalizations.of(context)!.language != 'English',

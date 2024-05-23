@@ -2,13 +2,19 @@
 
 import 'package:brother_store/common/widgets/layout/grid_layout.dart';
 import 'package:brother_store/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:brother_store/features/Gallery/screen/gallery.dart';
+import 'package:brother_store/features/shop/controllers/product/productController.dart';
+import 'package:brother_store/features/shop/screens/all_products/all_products.dart';
+import 'package:brother_store/features/shop/screens/home/widgets/gallery_slider%20.dart';
 import 'package:brother_store/utils/constants/color.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:brother_store/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 import 'widgets/home_appbar.dart';
 import 'widgets/home_categories.dart';
 import 'widgets/promo_slider.dart';
@@ -19,6 +25,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     //Get.updateLocale(const Locale('en'));
     return Scaffold(
       // floatingActionButton: const TCircularFabWidget(),
@@ -76,12 +83,13 @@ class HomeScreen extends StatelessWidget {
               title: AppLocalizations.of(context)!.gallery,
               buttonTitle: AppLocalizations.of(context)!.viewAll,
               showActionButton: true,
+              onPress: () => Get.to(() => const TGalleryScreen()),
             ),
           ),
           const SizedBox(
             height: TSizes.spaceBtWItems,
           ),
-          const TPromoSlider(
+          const TGallerySlider(
             autoPlay: false,
             banners: [TImages.bannerOne, TImages.bannerTow, TImages.bannerFour],
           ),
@@ -95,19 +103,41 @@ class HomeScreen extends StatelessWidget {
               children: [
                 TSectionHeading(
                   title: AppLocalizations.of(context)!.popularProduct,
-                  onPress: () {},
+                  onPress: () => Get.to(() => AllProducts(
+                        title: AppLocalizations.of(context)!.popularProduct,
+                        query: FirebaseFirestore.instance
+                            .collection('Products')
+                            .where('IsFeature', isEqualTo: true)
+                            .limit(6),
+                        futureMethode: controller.fetchAllFeatureProducts(),
+                      )),
                   showActionButton: true,
                   buttonTitle: AppLocalizations.of(context)!.viewAll,
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtWItems,
                 ),
-                TGridLayout(
-                  itemCount: 8,
-                  itemBuilder: (_, index) => const TProductCardVertical(),
-                ),
+                Obx(() {
+                  if (controller.featuredProducts.isEmpty) {
+                    return Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.noData,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    );
+                  }
+                  return TGridLayout(
+                    itemCount: controller.featuredProducts.length,
+                    itemBuilder: (_, index) => TProductCardVertical(
+                      product: controller.featuredProducts[index],
+                    ),
+                  );
+                }),
               ],
             ),
+          ),
+          const SizedBox(
+            height: TSizes.spaceBtWsections,
           ),
         ],
       )),

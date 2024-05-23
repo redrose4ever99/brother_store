@@ -3,8 +3,11 @@ import 'package:brother_store/utils/devices/device_utility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
 
 import 'package:get_storage/get_storage.dart';
+
+import 'data/repositoies/authentication/authentication_repository.dart';
 
 void main() async {
   // final WidgetsBinding widgetsBinding =
@@ -16,6 +19,8 @@ void main() async {
     print(GetStorage().read('en'));
   }
 
+
+
   WidgetsFlutterBinding.ensureInitialized();
 
   TDeviceUtils.isAndroid()
@@ -25,9 +30,9 @@ void main() async {
               appId: '1:9527223797:android:7ff0fec7a325c921996cbc',
               messagingSenderId: '9527223797',
               projectId: 'brothers-creative'),
-        )
-      : await Firebase.initializeApp();
-  //.then((FirebaseApp value) => Get.put(AuthenticationRepository()));
+        ).then((FirebaseApp value) => Get.put(AuthenticationRepository()))
+      : await Firebase.initializeApp()
+          .then((FirebaseApp value) => Get.put(AuthenticationRepository()));
 
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
