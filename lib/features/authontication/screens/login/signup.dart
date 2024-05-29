@@ -78,7 +78,6 @@ class SignupScreen extends StatelessWidget {
                                       .validate()) {
                                     controller.phoneAuthentication(
                                         controller.phoneNumber.text.trim());
-                                    Get.to(const PhoneVerificationScreen());
                                   }
                                 },
                                 child: const Text('Register'))),

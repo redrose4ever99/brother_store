@@ -24,10 +24,12 @@ class NetworkManager extends GetxController {
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     _connectivityStatus.value = result;
     if (_connectivityStatus.value == ConnectivityResult.none) {
-      Get.snackbar('look at this', 'no internet connection',
+      Get.snackbar(
+          snackPosition: SnackPosition.BOTTOM,
+          'look at this',
+          'no internet connection',
           backgroundColor: Colors.orange,
           colorText: TColors.white,
-          snackPosition: SnackPosition.BOTTOM,
           icon: const Icon(
             Iconsax.warning_2,
             color: TColors.white,

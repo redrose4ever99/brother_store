@@ -1,11 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:brother_store/common/widgets/image_text_widets/vertical_image_text.dart';
 import 'package:brother_store/common/widgets/layout/grid_layout.dart';
 import 'package:brother_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:brother_store/features/Gallery/screen/gallery.dart';
 import 'package:brother_store/features/shop/controllers/product/productController.dart';
 import 'package:brother_store/features/shop/screens/all_products/all_products.dart';
 import 'package:brother_store/features/shop/screens/home/widgets/gallery_slider%20.dart';
+import 'package:brother_store/features/shop/screens/store/brand/brand_card.dart';
+import 'package:brother_store/features/shop/screens/store/clients/all_clients.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +20,7 @@ import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'widgets/home_appbar.dart';
 import 'widgets/home_categories.dart';
+import 'widgets/home_clients.dart';
 import 'widgets/promo_slider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -139,6 +143,22 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: TSizes.spaceBtWsections,
           ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: TSizes.defaultSpace, right: TSizes.defaultSpace),
+            child: TSectionHeading(
+              title: AppLocalizations.of(context)!.clients,
+              showActionButton: true,
+              onPress: () => Get.to(() => const AllClientsScreen()),
+            ),
+          ),
+          const SizedBox(
+            height: TSizes.spaceBtWItems / 2,
+          ),
+          const THomeClient(),
+          const SizedBox(
+            height: TSizes.spaceBtWsections,
+          )
         ],
       )),
     );

@@ -1,4 +1,8 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
+import 'package:brother_store/common/widgets/images/circular_image.dart';
+import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
+import 'package:brother_store/features/personlization/controllers/user_controller.dart';
+import 'package:brother_store/features/personlization/screens/profile/profile.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
@@ -13,16 +17,25 @@ class THomeAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     return TAppBar(
-      // actions: [
-      //   IconButton(
-      //       onPressed: () => ZoomDrawer.of(context)!.toggle(),
-      //       icon: const Icon(
-      //         Icons.menu_outlined,
-      //         color: TColors.white,
-      //       )),
-      // ],
-      // leadingIcon: Icons.menu_outlined,
+      actions: [
+        GestureDetector(
+          onTap: () => Get.to(() => const ProfileScreen()),
+          child: Obx(() {
+            final networkImage = controller.user.value.profilePicture;
+            final image =
+                networkImage.isNotEmpty ? networkImage : TImages.userImage;
+            return TCircularImage(
+              image: image,
+              isNetworkImage: networkImage.isNotEmpty,
+              width: 60,
+              height: 60,
+            );
+          }),
+        )
+      ],
+      //leadingIcon: Icons.menu_outlined,
       //leadingOnPress: () => ZoomDrawer.of(context)!.toggle(),
       title: Row(
         children: [

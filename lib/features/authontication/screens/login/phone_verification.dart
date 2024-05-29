@@ -61,6 +61,8 @@ class PhoneVerificationScreen extends StatelessWidget {
                     OtpTextField(
                       mainAxisAlignment: MainAxisAlignment.center,
                       numberOfFields: 6,
+                      fillColor: TColors.black.withOpacity(0.1),
+                      filled: true,
                       onSubmit: (code) {
                         if (kDebugMode) {
                           print("========otp is $code ======");

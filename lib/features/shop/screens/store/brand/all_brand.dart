@@ -34,9 +34,9 @@ class AllBrandScreen extends StatelessWidget {
             padding: const EdgeInsets.all(TSizes.defaultSpace),
             child: Column(
               children: [
-                TSectionHeading(
-                    title: AppLocalizations.of(context)!.brand,
-                    showActionButton: false),
+                // TSectionHeading(
+                //     title: AppLocalizations.of(context)!.brand,
+                //     showActionButton: false),
                 const SizedBox(
                   height: TSizes.spaceBtWItems,
                 ),

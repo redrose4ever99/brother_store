@@ -31,7 +31,10 @@ class NavigationMenu extends StatelessWidget {
           : TextDirection.rtl,
       child: Scaffold(
         //  floatingActionButton: const TCircularFabWidget(),
-        body: Obx(() => controller.screens[controller.selectedIndex.value]),
+        body: WillPopScope(
+            onWillPop: showExitDialog,
+            child:
+                Obx(() => controller.screens[controller.selectedIndex.value])),
         bottomNavigationBar: Obx(
           () => NavigationBar(
               elevation: 0,
@@ -96,6 +99,35 @@ class NavigationMenu extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<bool> showExitDialog() async {
+    return await showDialog(
+        context: Get.context!,
+        builder: (context) => AlertDialog(
+              title: Text(
+                AppLocalizations.of(context)!.exitApp,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              content: Text(AppLocalizations.of(context)!.doYouWantToExit,
+                  style: Theme.of(context).textTheme.bodyMedium),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.no,
+                      style: Theme.of(context).textTheme.labelLarge,
+                    )),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: Text(AppLocalizations.of(context)!.yes,
+                        style: Theme.of(context).textTheme.bodyLarge))
+              ],
+            ));
   }
 }
 

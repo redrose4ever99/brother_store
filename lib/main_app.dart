@@ -1,4 +1,5 @@
 import 'package:brother_store/app.dart';
+import 'package:brother_store/utils/storage/storage_utility.dart';
 import 'package:brother_store/utils/theme/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MainApp extends StatelessWidget {
       print('=======lang===========');
       print(Get.locale?.languageCode);
     }
-
+    TLocalStorage.init('nuwar_packet');
     //Get.updateLocale(const Locale('en'));
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,

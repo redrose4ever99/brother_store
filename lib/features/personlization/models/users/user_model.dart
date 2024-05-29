@@ -7,7 +7,7 @@ class UserModel {
 
   String? id;
   String? phoneNumber;
-  String? profilePicture;
+  String profilePicture;
 
   UserModel(
       {this.firstName,
@@ -15,7 +15,7 @@ class UserModel {
       this.phoneNumber,
       this.email,
       this.id,
-      this.profilePicture});
+      this.profilePicture = ''});
 
   String get fullName => '$firstName $lastName';
   static UserModel empty() => UserModel(

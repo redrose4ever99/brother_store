@@ -41,7 +41,7 @@
     "appSettings":"App Setting",
     "darkMode":"Dark Mood",
     "storeSearch":"Search in Store",
-    "featureBrands":"Feature Brands",
+    "featureBrands":"Feature Partners",
     "youMightLike":"You might like",
     "searchinGallery":"Search in Gallery",
     "artPaces":"Pieces of Art",
@@ -51,7 +51,7 @@
         "price":{"type":"String"
       }
        }    },
-
+    "checkout":"Checkout",
     "reviewsWithNum":"Reviews {num}",
     "@reviewsWithNum":{
     "placeholders":{
@@ -72,10 +72,37 @@
     "less":"Less",
     "descriptions":"Descriptions",
     "noData":"No data found",
-    "brands":"Brands",
-    "brand":"Brand",
+    "brands":"Partners",
+    "brand":"Partner",
     "somethingWentWrong":"Something Went Wrong.",
-    "close":"Close"
+    "close":"Close",
+    "clients":"Clients",
+    "client":"Client",
+    "storingAddress":"Storing Address .....",
+    "addNewAddress":"Add New Address",
+    "required":"Required",
+    "phoneRequired":"phoneNumber is Required",
+    "street":"Street",
+    "postalCode":"Postal Code",
+    "city":"City",
+    "country":"Country",
+    "details":"Details",
+    "save":"Save",
+    "someOfOurWork":"Some of our works",
+    "letsFillIt":"Let's fill it",
+    "cartIsEmpty":"Whoops! cart is empty",
+    "exitApp":"Exit app",
+    "no":"No",
+    "yes":"Yes",
+    "doYouWantToExit":"Do you want to exit",
+    "changeName":"Change Name",
+    "weAreUpdating":"We are updateing your information ...",
+    "firstName":"First Name",
+    "lastName":"Last Name",
+    "congratulation":"Congratulation",
+    "nameChange":"Your name has been updated",
+    "saveAddressMessage":"Your address has been saved successfully",
+    "changeNameMessage":"Use real name for easy verification. this name will appear on several pages"
 
 
 

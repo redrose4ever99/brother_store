@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TProfileMenu extends StatelessWidget {
@@ -9,7 +10,7 @@ class TProfileMenu extends StatelessWidget {
     required this.onPress,
     required this.title,
     required this.value,
-    this.icon = Iconsax.arrow_right_34,
+    this.icon = Icons.keyboard_arrow_right,
   }) : super(key: key);
   final IconData icon;
   final VoidCallback onPress;
@@ -41,7 +42,7 @@ class TProfileMenu extends StatelessWidget {
             Expanded(
                 child: Icon(
               icon,
-              size: 18,
+              size: 25,
             ))
           ],
         ),

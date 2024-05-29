@@ -44,6 +44,20 @@ class ProductRepository extends GetxController {
     }
   }
 
+  // Future<List<ProductModel>> getFavoritesProducts(
+  //     List<String> productIds) async {
+  //   try {
+  //     final snapshot = _db
+  //         .collection('Products')
+  //         .where(FieldPath.documentId, whereIn: productIds)
+  //         .get();
+  //     final t = snapshot.//docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+  //     return t;
+  //   } on FirebaseException catch (e) {
+  //     throw e.code;
+  //   }
+  // }
+
   Future<List<ProductModel>> gstProductsForBrand(
       {required String brandId, int limit = -1}) async {
     try {
@@ -95,4 +109,18 @@ class ProductRepository extends GetxController {
       throw e.code;
     }
   }
+
+  // getFavoritesProducts(List<String> list) {
+
+  //       try {
+  //     final snapshot = _db
+  //         .collection('Products')
+  //         .where(FieldPath.documentId, whereIn: list)
+  //         .get();
+  //     final t = snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+  //     return t;
+  //   } on FirebaseException catch (e) {
+  //     throw e.code;
+  //   }
+  // }
 }

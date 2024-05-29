@@ -1,6 +1,10 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
+import 'package:brother_store/common/widgets/loaders/animation_loading.dart';
+import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
 import 'package:brother_store/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:brother_store/features/shop/screens/checkout/checkout.dart';
+import 'package:brother_store/navigation_menu.dart';
+import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +16,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // bool dark = THelperFunctions.isDarkMode(context);
+    final controller = CartController.instance;
     return Directionality(
       textDirection: Get.locale?.languageCode == 'en'
           ? TextDirection.ltr
@@ -31,8 +36,22 @@ class CartScreen extends StatelessWidget {
               child: Text(
                   AppLocalizations.of(context)!.checkoutWithPrice('232445'))),
         ),
-        body: const Padding(
-            padding: EdgeInsets.all(TSizes.defaultSpace), child: TCartItems()),
+        body: Obx(() {
+          final emptyWidget = TAnimationLoaderWidget(
+            text: AppLocalizations.of(context)!.cartIsEmpty,
+            animation: TImages.bBlack,
+            showAction: true,
+            actionText: AppLocalizations.of(context)!.letsFillIt,
+            onActionPressed: () => Get.off(() => const NavigationMenu()),
+          );
+          return controller.cartItems.isEmpty
+              ? emptyWidget
+              : const SingleChildScrollView(
+                  child: Padding(
+                      padding: EdgeInsets.all(TSizes.defaultSpace),
+                      child: TCartItems()),
+                );
+        }),
       ),
     );
   }

@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:brother_store/common/widgets/product.cart/favorite_icon.dart';
+import 'package:brother_store/common/widgets/products/product_cards/add_to_cart_button.dart';
 import 'package:brother_store/common/widgets/texts/brand_title_with_verified_icon.dart';
 import 'package:brother_store/common/widgets/texts/product_price_text.dart';
 import 'package:brother_store/features/shop/controllers/product/productController.dart';
@@ -7,11 +9,9 @@ import 'package:brother_store/features/shop/screens/product_details/product_deta
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 import 'package:brother_store/common/styles/shadows.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:brother_store/common/widgets/icons/circuler_icon.dart';
 import 'package:brother_store/common/widgets/images/rounded_image.dart';
 import 'package:brother_store/common/widgets/texts/product_title_text.dart';
 import 'package:brother_store/utils/constants/color.dart';
@@ -26,6 +26,9 @@ class TProductCardVertical extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
     final isEg = Get.locale?.languageCode == 'en';
     final controller = ProductController.instance;
+    final salePrecentage =
+        controller.calculateSalePresentage(product.price, product.salePrice);
+
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailsScreen(
             product: product,
@@ -60,7 +63,7 @@ class TProductCardVertical extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.sm, vertical: TSizes.xs),
                       child: Text(
-                        '25%',
+                        '$salePrecentage%',
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -70,13 +73,7 @@ class TProductCardVertical extends StatelessWidget {
                   ),
 
                   //favorite icon button
-                  const Positioned(
-                      top: 0,
-                      right: 0,
-                      child: TCircularIcon(
-                        icon: Iconsax.heart5,
-                        color: Colors.red,
-                      )),
+                  const Positioned(top: 0, right: 0, child: TFavoriteIcon()),
                 ],
               ),
             ),
@@ -123,32 +120,7 @@ class TProductCardVertical extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: TColors.dark,
-                      borderRadius: isEg
-                          ? const BorderRadius.only(
-                              topLeft:
-                                  Radius.circular(TSizes.productImageRadius),
-                              bottomRight:
-                                  Radius.circular(TSizes.productImageRadius),
-                            )
-                          : const BorderRadius.only(
-                              topRight:
-                                  Radius.circular(TSizes.productImageRadius),
-                              bottomLeft:
-                                  Radius.circular(TSizes.productImageRadius))),
-                  child: const SizedBox(
-                    width: TSizes.iconLg * 1.2,
-                    height: TSizes.iconLg * 1.2,
-                    child: Center(
-                      child: Icon(
-                        Iconsax.add,
-                        color: TColors.white,
-                      ),
-                    ),
-                  ),
-                )
+                ProductAddToCartButton(product: product)
               ],
             )
           ],

@@ -3,6 +3,7 @@ import 'package:brother_store/data/repositoies/authentication/authentication_rep
 import 'package:brother_store/navigation_menu.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtpController extends GetxController {
   static OtpController get instance => Get.find();
@@ -11,7 +12,7 @@ class OtpController extends GetxController {
     var isVerified = await AuthenticationRepository.instance.verifyOtp(otp);
     isVerified
         ? Get.offAll(SuccessScreen(
-            subTitle: "Congratulation",
+            subTitle: AppLocalizations.of(Get.context!)!.congratulation,
             title: "Your phone verified successfully",
             image: TImages.wordBlack,
             onPressed: () => Get.offAll(() => const NavigationMenu()),

@@ -21,7 +21,9 @@ class ProductDetailsScreen extends StatelessWidget {
           ? TextDirection.ltr
           : TextDirection.rtl,
       child: Scaffold(
-        bottomNavigationBar: const TBottomAddToCart(),
+        bottomNavigationBar: TBottomAddToCart(
+          product: product,
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [

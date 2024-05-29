@@ -1,6 +1,8 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
+import 'package:brother_store/features/shop/controllers/address_controller.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -14,6 +16,7 @@ class UserAdressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AddressController());
     return Directionality(
       textDirection: Get.locale?.languageCode == 'en'
           ? TextDirection.ltr
@@ -34,18 +37,31 @@ class UserAdressScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
-        body: const SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(TSizes.defaultSpace),
-            child: Column(
-              children: [
-                TSingleAddress(
-                  selectedAddress: false,
-                ),
-                TSingleAddress(
-                  selectedAddress: true,
-                )
-              ],
+            padding: const EdgeInsets.all(TSizes.defaultSpace),
+            child: Obx(
+              () => FutureBuilder(
+                  key: Key(controller.refreshData.value.toString()),
+                  future: controller.getAllUserAddresses(),
+                  builder: (context, snapshot) {
+                    final response =
+                        TCloudHelperFunctions.checkMuiltiRecordState(
+                            snapshot: snapshot);
+                    if (response != null) return response;
+                    final address = snapshot.data!;
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (_, index) {
+                          final addresses = snapshot.data!;
+                          return TSingleAddress(
+                            onTap: () =>
+                                controller.selectAddress(addresses[index]),
+                            address: addresses[index],
+                          );
+                        });
+                  }),
             ),
           ),
         ),
