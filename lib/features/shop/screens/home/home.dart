@@ -3,7 +3,7 @@
 import 'package:brother_store/common/widgets/image_text_widets/vertical_image_text.dart';
 import 'package:brother_store/common/widgets/layout/grid_layout.dart';
 import 'package:brother_store/common/widgets/products/product_cards/product_card_vertical.dart';
-import 'package:brother_store/features/Gallery/screen/gallery.dart';
+import 'package:brother_store/features/gallery/screen/gallery.dart';
 import 'package:brother_store/features/shop/controllers/product/productController.dart';
 import 'package:brother_store/features/shop/screens/all_products/all_products.dart';
 import 'package:brother_store/features/shop/screens/home/widgets/gallery_slider%20.dart';

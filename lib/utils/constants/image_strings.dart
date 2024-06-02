@@ -26,7 +26,8 @@ class TImages {
   //users image
   static const String userImage = "assets/images/users/user.png";
   //payment methode
-  static const String paymentLogo = "assets/images/stripe.png";
+  static const String stripLogo = "assets/images/stripe.png";
+  static const String paypalLogo = "assets/images/paypal.png";
 
   static const String truePaymentblack = "assets/images/true.gif";
   static const String truePaymentwhite = "assets/images/white.gif";

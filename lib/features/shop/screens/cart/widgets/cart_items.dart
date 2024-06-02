@@ -12,7 +12,7 @@ class TCartItems extends StatelessWidget {
   final bool showAddRemoveButtons;
   @override
   Widget build(BuildContext context) {
-    final controller = CartController.instance;
+    final cartController = CartController.instance;
     return Obx(
       () => ListView.separated(
         shrinkWrap: true,
@@ -27,9 +27,9 @@ class TCartItems extends StatelessWidget {
             ),
           ],
         ),
-        itemCount: controller.cartItems.length,
+        itemCount: cartController.cartItems.length,
         itemBuilder: (_, index) => Obx(() {
-          final item = controller.cartItems[index];
+          final item = cartController.cartItems[index];
           return Column(
             children: [
               TCartItem(cartItem: item),
@@ -48,14 +48,14 @@ class TCartItems extends StatelessWidget {
                         // // ),
                         TProductQuantityWithAddRemoveButtons(
                           quantity: item.quantity,
-                          add: () => controller.addOneToCart(item),
-                          remove: () => controller.removeOneFromCart(item),
+                          add: () => cartController.addOneToCart(item),
+                          remove: () => cartController.removeOneFromCart(item),
                         ),
                       ],
                     ),
                     TProductPriceText(
                         isLarg: true,
-                        price: (item.price * item.quantity).toStringAsFixed(2))
+                        price: (item.price * item.quantity).toStringAsFixed(1))
                   ],
                 ),
             ],

@@ -5,6 +5,7 @@ import 'package:brother_store/data/repositoies/user/user_repository.dart';
 import 'package:brother_store/features/authontication/screens/login/phone_verification.dart';
 import 'package:brother_store/features/authontication/screens/onboarding/onboarding.dart';
 import 'package:brother_store/features/personlization/models/users/user_model.dart';
+import 'package:brother_store/utils/storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -33,7 +34,7 @@ class AuthenticationRepository extends GetxController {
 
   void screenRedirect() async {
     final user = _auth.currentUser;
-
+    await TLocalStorage.init('EyTbtgIxRwamzlhsPnSs4lehlcc2');
     // user.uid = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
     if (user != null) {
       if (kDebugMode) {

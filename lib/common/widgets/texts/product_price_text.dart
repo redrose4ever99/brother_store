@@ -6,7 +6,7 @@ class TProductPriceText extends StatelessWidget {
   const TProductPriceText({
     Key? key,
     required this.price,
-    this.color = TColors.textPrimary,
+    this.color = TColors.primary,
     this.currentSign = ' SAR',
     this.maxLines = 1,
     this.isLarg = false,

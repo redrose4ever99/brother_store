@@ -69,7 +69,12 @@ class TProductCardHorizontal extends StatelessWidget {
                   ),
 
                   //favorite icon button
-                  const Positioned(top: 0, right: 0, child: TFavoriteIcon()),
+                  Positioned(
+                      top: 0,
+                      right: 0,
+                      child: TFavoriteIcon(
+                        productId: product.id,
+                      )),
                 ],
               ),
             ),

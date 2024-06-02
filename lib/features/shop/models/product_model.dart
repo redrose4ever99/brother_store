@@ -13,7 +13,6 @@ class ProductModel {
   String arabicTitle;
   double salePrice;
   String thumbnail;
-
   bool? isFeature;
   BrandModel? brand;
   String? description;

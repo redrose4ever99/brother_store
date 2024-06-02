@@ -50,7 +50,7 @@ class TProductCardVertical extends StatelessWidget {
                 children: [
                   TRoundedImage(
                     imageUrl: product.thumbnail == ''
-                        ? TImages.bwhite
+                        ? TImages.bBlack
                         : product.thumbnail,
                     applyImageRaduis: true,
                     isNetworkImage: product.thumbnail == '' ? false : true,
@@ -73,7 +73,12 @@ class TProductCardVertical extends StatelessWidget {
                   ),
 
                   //favorite icon button
-                  const Positioned(top: 0, right: 0, child: TFavoriteIcon()),
+                  Positioned(
+                      top: 0,
+                      right: 0,
+                      child: TFavoriteIcon(
+                        productId: product.id,
+                      )),
                 ],
               ),
             ),

@@ -1,7 +1,12 @@
+import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/data/repositoies/address/address_repository.dart';
 import 'package:brother_store/features/authontication/controllers/network_manager.dart';
+import 'package:brother_store/features/personlization/screens/address/add_new_address.dart';
+import 'package:brother_store/features/personlization/screens/address/widgets/single_address.dart';
 import 'package:brother_store/features/shop/models/address_model.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
+import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
 import 'package:brother_store/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -132,5 +137,55 @@ class AddressController extends GetxController {
     city.clear();
     country.clear();
     addressFormKey.currentState?.reset();
+  }
+
+  Future<dynamic> selectNewAddressPopup(BuildContext context) {
+    return showModalBottomSheet(
+        //isScrollControlled: true,
+        context: context,
+        builder: (_) => SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(TSizes.lg),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TSectionHeading(
+                        showActionButton: false,
+                        title: AppLocalizations.of(context)!.selectAddress),
+                    const SizedBox(
+                      height: TSizes.spaceBtwInputFields,
+                    ),
+                    FutureBuilder(
+                        future: getAllUserAddresses(),
+                        builder: (_, snapshot) {
+                          final response =
+                              TCloudHelperFunctions.checkMuiltiRecordState(
+                                  snapshot: snapshot);
+                          if (response != null) return response;
+
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (_, index) => TSingleAddress(
+                                    address: snapshot.data![index],
+                                    onTap: () async {
+                                      await selectAddress(
+                                          snapshot.data![index]);
+                                      Get.back();
+                                    },
+                                  ));
+                        }),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: () =>
+                              Get.to(() => const AddNewAddressScreen()),
+                          child: Text(
+                              AppLocalizations.of(context)!.addNewAddress)),
+                    )
+                  ],
+                ),
+              ),
+            ));
   }
 }

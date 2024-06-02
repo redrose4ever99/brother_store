@@ -1,4 +1,3 @@
-import 'package:brother_store/data/repositoies/product/product_repository.dart';
 import 'package:brother_store/features/shop/models/cart_item_model.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/utils/constants/color.dart';
@@ -15,7 +14,7 @@ class CartController extends GetxController {
   RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
 
   CartController() {
-    // loadCartItem();
+    loadCartItem();
   }
 
   CartItemModel convertToCartItem(ProductModel product, int quantity) {
@@ -37,19 +36,22 @@ class CartController extends GetxController {
     } else {
       cartItems.add(item);
     }
+    updateCart();
   }
 
   void removeOneFromCart(CartItemModel item) {
     int index = cartItems
         .indexWhere((cartItem) => cartItem.productId == item.productId);
+
     if (index >= 0) {
       if (cartItems[index].quantity > 1) {
         cartItems[index].quantity -= 1;
+      } else {
+        cartItems[index].quantity == 1
+            ? removeFromCartDialog(index)
+            : cartItems.removeAt(index);
       }
-    } else {
-      cartItems[index].quantity == 1
-          ? removeFromCartDialog(index)
-          : cartItems.removeAt(index);
+      updateCart();
     }
   }
 
@@ -59,15 +61,15 @@ class CartController extends GetxController {
         middleText: 'Are you Sure you want to remove this item?',
         onConfirm: () {
           cartItems.removeAt(index);
-          UpdateCart();
+          updateCart();
+          Get.back();
           Get.snackbar(
             'info',
             'successfully removed from cart',
             snackPosition: SnackPosition.BOTTOM,
           );
-          Get.back();
         },
-        onCancel: () => () => Get.back());
+        onCancel: () => Get.back());
   }
 
   void addToCart(ProductModel product) {
@@ -104,7 +106,7 @@ class CartController extends GetxController {
     } else {
       cartItems.add(selectedCartItem);
     }
-    UpdateCart();
+    updateCart();
     Get.snackbar(
       'info',
       'successfully added to cart',
@@ -112,9 +114,10 @@ class CartController extends GetxController {
     );
   }
 
-  void UpdateCart() {
+  void updateCart() {
     updateTotal();
     saveCartItems();
+    cartItems.refresh();
   }
 
   void updateTotal() {
@@ -154,7 +157,7 @@ class CartController extends GetxController {
   void clearCart() {
     productQuantityinCart.value = 0;
     cartItems.clear();
-    UpdateCart();
+    updateCart();
   }
 
   void updateAlreadyAddedProductCount(ProductModel product) {

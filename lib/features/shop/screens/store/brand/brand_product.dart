@@ -38,7 +38,7 @@ class BrandProducts extends StatelessWidget {
                   height: TSizes.spaceBtWItems,
                 ),
                 FutureBuilder(
-                    future: controller.getBrandProducts(brand.id),
+                    future: controller.getBrandProducts(brandId: brand.id),
                     builder: (context, snapshot) {
                       const loader = TVerticalProductShummer();
                       final widget =

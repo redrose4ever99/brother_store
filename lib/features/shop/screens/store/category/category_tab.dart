@@ -5,6 +5,7 @@ import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/shop/controllers/category_controller.dart';
 import 'package:brother_store/features/shop/models/category_model.dart';
 import 'package:brother_store/features/shop/screens/store/brand/brand_show_case.dart';
+import 'package:brother_store/features/shop/screens/store/category/category_brand.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -28,12 +29,9 @@ class TCategoryTab extends StatelessWidget {
           child: Column(
             children: [
               //-- Brands
-              const TBrandShowCase(
-                images: [
-                  TImages.brandImage1,
-                  TImages.brandImage2,
-                  TImages.productImg1
-                ],
+              CategoryBrand(category: category),
+              const SizedBox(
+                height: TSizes.spaceBtWItems,
               ),
 
               TSectionHeading(

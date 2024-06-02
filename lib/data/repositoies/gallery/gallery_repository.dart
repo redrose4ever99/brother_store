@@ -1,4 +1,4 @@
-import 'package:brother_store/features/Gallery/models/gallery_model.dart';
+import 'package:brother_store/features/gallery/models/gallery_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 

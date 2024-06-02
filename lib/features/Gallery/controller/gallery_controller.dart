@@ -1,5 +1,5 @@
 import 'package:brother_store/data/repositoies/gallery/gallery_repository.dart';
-import 'package:brother_store/features/Gallery/models/gallery_model.dart';
+import 'package:brother_store/features/gallery/models/gallery_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 

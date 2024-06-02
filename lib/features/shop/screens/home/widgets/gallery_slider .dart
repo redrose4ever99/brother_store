@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
-import 'package:brother_store/features/Gallery/controller/gallery_controller.dart';
+import 'package:brother_store/features/gallery/controller/gallery_controller.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';

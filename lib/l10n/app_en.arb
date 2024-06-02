@@ -32,6 +32,7 @@
     "myCart":"My Cart",
     "myOrders":"My Orders",
     "wishList":"Wish List",
+    "wishlistIsEmpty":"Whoops! Wishlist is empty ...",
     "myProjects":"My Projects",
     "notifications":"Notifications",
     "accountPrivacy":"Account Privacy",
@@ -102,8 +103,24 @@
     "congratulation":"Congratulation",
     "nameChange":"Your name has been updated",
     "saveAddressMessage":"Your address has been saved successfully",
-    "changeNameMessage":"Use real name for easy verification. this name will appear on several pages"
-
+    "changeNameMessage":"Use real name for easy verification. this name will appear on several pages",
+    "successfullyAddedToFavorites":"Successfully added to Favorites",
+    "info":"Info",
+    "productHasBeenRemoved":"Product has been removed from the Wishlist.",
+    "selectPaymentMethode":"Select Payment method",
+    "paymentMethod":"Payment Method",
+    "change":"Change",
+    "shippingAddress":"Shipping Address",
+    "selectAddress":"Select Address",
+    "deliverd":"Delivered",
+    "shipmentInWay":"Shippment in way",
+    "processing":"Processing",
+    "paymentSuccessfull":"Payment Successfull",
+    "yourItemWillBeShippingSoon":"Your Item will be shipping soon!",
+    "cartEmpty":"Cart Empty",
+    "addItemTotheCartForOrderProcess":"Add items in the cart in order to proceed",
+    "order":"Order",
+    "shippingDate":"Shipping Date"
 
 
     

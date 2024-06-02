@@ -31,8 +31,13 @@ class ImagesController extends GetxController {
                     padding: const EdgeInsets.symmetric(
                         horizontal: TSizes.defaultSpace,
                         vertical: TSizes.defaultSpace * 2),
-                    child: CachedNetworkImage(
-                      imageUrl: image,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: image,
+                      ),
                     ),
                   ),
                   const SizedBox(height: TSizes.spaceBtWsections),

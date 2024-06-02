@@ -19,8 +19,6 @@ void main() async {
     print(GetStorage().read('en'));
   }
 
-
-
   WidgetsFlutterBinding.ensureInitialized();
 
   TDeviceUtils.isAndroid()

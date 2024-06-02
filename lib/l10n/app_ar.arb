@@ -28,6 +28,8 @@
     "myCart":"سلتي",
     "myOrders":"طلباتي",
     "wishList":"المفضلة",
+    "wishlistIsEmpty":"أووه .. المفضلة فارعة ",
+    "successfullyAddedToFavorites":"تمت الأضافة إلى قائمة المفضلة بنجاح",
     "myProjects":"مشاريعي",
     "notifications":"الأشعارات",
     "accountPrivacy":"خصوصية الحساب",
@@ -88,7 +90,24 @@
     "congratulation":"تهانينا",
     "nameChange":"تم تحديث الاسم بنجاح",
     "saveAddressMessage":"تم حفظ العنوان بنجاح ..",
-    "changeNameMessage":"فضلا استخدم اسمك الحقيقي. لسهولة التوثيق حيث سيظهر هذا الاسم في عدة أماكن أخرى"
+    "changeNameMessage":"فضلا استخدم اسمك الحقيقي. لسهولة التوثيق حيث سيظهر هذا الاسم في عدة أماكن أخرى",
+    "info":"معلومات",
+    "productHasBeenRemoved":"تمت ازالة المنتج من المفضلة",
+    "selectPaymentMethode":"اختر وسيلة الدفع",
+    "paymentMethod":"وسيلة الدفع",
+    "change":"تعديل",
+    "shippingAddress":"عنوان الشحن",
+    "selectAddress":"اختر عنوان الشحن",
+    "deliverd":"تم التوصيل",
+    "shipmentInWay":"قيد الشحن",
+    "processing":"قيد المعالجة",
+    "paymentSuccessfull":"تمت العملية بنجاح",
+    "yourItemWillBeShippingSoon":"سوف يتم شحن الطلب بأسرع وقت",
+    "cartEmpty":"السلة فارغة",
+    "addItemTotheCartForOrderProcess":"أضف البضائع للسلة لإكمال العملية",
+    "order":"الطلب",
+    "shippingDate":"تاريخ الشحن"
+
     
     
      

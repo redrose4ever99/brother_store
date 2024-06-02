@@ -26,12 +26,15 @@ class THomeAppbar extends StatelessWidget {
             final networkImage = controller.user.value.profilePicture;
             final image =
                 networkImage.isNotEmpty ? networkImage : TImages.userImage;
-            return TCircularImage(
-              image: image,
-              isNetworkImage: networkImage.isNotEmpty,
-              width: 60,
-              height: 60,
-            );
+            return networkImage.isNotEmpty
+                ? CircleAvatar(
+                    backgroundImage: NetworkImage(image),
+                    radius: MediaQuery.of(context).size.height * 0.05,
+                  )
+                : CircleAvatar(
+                    backgroundImage: AssetImage(image),
+                    radius: MediaQuery.of(context).size.height * 0.05,
+                  );
           }),
         )
       ],

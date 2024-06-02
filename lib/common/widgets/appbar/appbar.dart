@@ -20,6 +20,7 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData? leadingIcon;
   final List<Widget>? actions;
   final VoidCallback? leadingOnPress;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

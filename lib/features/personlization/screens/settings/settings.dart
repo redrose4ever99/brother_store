@@ -93,12 +93,12 @@ class SettingsScreen extends StatelessWidget {
                       title: AppLocalizations.of(context)!.wishList,
                       subTitle: 'Ea do nisi esse esse occaecat.',
                     ),
-                    TSettingMenuTile(
-                      onTap: () => Get.to(() => const ProjectsScreen()),
-                      icon: Iconsax.component,
-                      title: AppLocalizations.of(context)!.myProjects,
-                      subTitle: 'track processing projects ',
-                    ),
+                    // TSettingMenuTile(
+                    //   onTap: () => Get.to(() => const ProjectsScreen()),
+                    //   icon: Iconsax.component,
+                    //   title: AppLocalizations.of(context)!.myProjects,
+                    //   subTitle: 'track processing projects ',
+                    // ),
                     // ),
                     TSettingMenuTile(
                       onTap: () => Get.to(() => const SignupScreen()),

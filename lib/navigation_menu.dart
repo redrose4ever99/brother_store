@@ -1,4 +1,4 @@
-import 'package:brother_store/features/Gallery/screen/gallery.dart';
+import 'package:brother_store/features/gallery/screen/gallery.dart';
 import 'package:brother_store/features/shop/screens/store/store.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';

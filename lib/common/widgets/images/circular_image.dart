@@ -15,7 +15,7 @@ class TCircularImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     required this.image,
     this.isNetworkImage = false,
-    this.padding = TSizes.sm,
+    this.padding = 1,
     this.overLayColor,
     this.backgroundColor,
   }) : super(key: key);
@@ -50,7 +50,8 @@ class TCircularImage extends StatelessWidget {
                     progressIndicatorBuilder:
                         (context, url, downloadProgress) => ClipRRect(
                             borderRadius: BorderRadius.circular(100),
-                            child: const TShimmerEffect(width: 60, height: 60)),
+                            child:
+                                const TShimmerEffect(width: 80, height: 800)),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error))
                 : Image(

@@ -57,10 +57,12 @@ class UserController extends GetxController {
         await userRepository.updateSingleFieldUser(json);
         user.value.profilePicture = imageUrl;
         user.refresh();
-        Get.snackbar('Success', "profile photo change successfully");
+        Get.snackbar('Success', "profile photo change successfully",
+            snackPosition: SnackPosition.BOTTOM);
       }
     } catch (e) {
-      Get.snackbar("ohSnap", "Something went wrong!");
+      Get.snackbar("ohSnap", "Something went wrong!",
+          snackPosition: SnackPosition.BOTTOM);
     } finally {
       imageUploading.value = false;
     }

@@ -1,3 +1,5 @@
+import 'package:brother_store/common/widgets/texts/product_price_text.dart';
+import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +7,9 @@ class TBillingAmountSection extends StatelessWidget {
   const TBillingAmountSection({super.key});
   @override
   Widget build(BuildContext context) {
+    final cartController = CartController.instance;
+    final subTotal = cartController.totalOfCartPrice.value;
+
     return Column(
       children: [
         Row(
@@ -14,7 +19,8 @@ class TBillingAmountSection extends StatelessWidget {
               'subtotal',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            Text('\$256', style: Theme.of(context).textTheme.bodyLarge)
+            TProductPriceText(price: subTotal.toString())
+            //Text('\$', style: Theme.of(context).textTheme.bodyLarge)
           ],
         ),
         const SizedBox(
@@ -27,7 +33,8 @@ class TBillingAmountSection extends StatelessWidget {
               'Shipping free',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            Text('\$6.0', style: Theme.of(context).textTheme.bodyLarge)
+            TProductPriceText(price: 0.toString())
+            //Text('\$6.0', style: Theme.of(context).textTheme.bodyLarge)
           ],
         ),
         const SizedBox(
@@ -40,7 +47,8 @@ class TBillingAmountSection extends StatelessWidget {
               'Order Total',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            Text('\$230.0', style: Theme.of(context).textTheme.bodyLarge)
+            TProductPriceText(price: subTotal.toString())
+            // Text('\$230.0', style: Theme.of(context).textTheme.bodyLarge)
           ],
         ),
       ],

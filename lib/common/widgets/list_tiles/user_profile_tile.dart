@@ -22,18 +22,28 @@ class TUserProfileTile extends StatelessWidget {
         final image =
             networkImage.isNotEmpty ? networkImage : TImages.userImage;
         return controller.imageUploading.value
-            ? const TShimmerEffect(
-                width: 80,
-                height: 80,
-                raduis: 80,
-              )
-            : TCircularImage(
-                image: image,
-                fit: BoxFit.contain,
-                isNetworkImage: networkImage.isNotEmpty,
-                width: 50,
-                height: 50,
-              );
+                ? const TShimmerEffect(
+                    width: 80,
+                    height: 80,
+                    raduis: 80,
+                  )
+                : networkImage.isNotEmpty
+                    ? CircleAvatar(
+                        backgroundImage: NetworkImage(image),
+                        radius: MediaQuery.of(context).size.height * 0.05,
+                      )
+                    : CircleAvatar(
+                        backgroundImage: AssetImage(image),
+                        radius: MediaQuery.of(context).size.height * 0.05,
+                      )
+            // TCircularImage(
+            //     image: image,
+            //     fit: BoxFit.contain,
+            //     isNetworkImage: networkImage.isNotEmpty,
+            //     width: 50,
+            //     height: 50,
+            //   )
+            ;
       }),
       title: Text(
         controller.user.value.fullName,

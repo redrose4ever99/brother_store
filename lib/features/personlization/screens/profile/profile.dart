@@ -50,18 +50,32 @@ class ProfileScreen extends StatelessWidget {
                             ? networkImage
                             : TImages.userImage;
                         return controller.imageUploading.value
-                            ? const TShimmerEffect(
-                                width: 80,
-                                height: 80,
-                                raduis: 80,
-                              )
-                            : TCircularImage(
-                                image: image,
-                                fit: BoxFit.contain,
-                                isNetworkImage: networkImage.isNotEmpty,
-                                width: 80,
-                                height: 80,
-                              );
+                                ? const TShimmerEffect(
+                                    width: 80,
+                                    height: 80,
+                                    raduis: 80,
+                                  )
+                                : networkImage.isNotEmpty
+                                    ? CircleAvatar(
+                                        backgroundImage: NetworkImage(image),
+                                        radius:
+                                            MediaQuery.of(context).size.height *
+                                                0.05,
+                                      )
+                                    : CircleAvatar(
+                                        backgroundImage: AssetImage(image),
+                                        radius:
+                                            MediaQuery.of(context).size.height *
+                                                0.05,
+                                      )
+                            // TCircularImage(
+                            //     image: image,
+                            //     fit: BoxFit.cover,
+                            //     isNetworkImage: networkImage.isNotEmpty,
+                            //     width: 80,
+                            //     height: 80,
+                            //   );
+                            ;
                       }),
                       TextButton(
                           onPressed: () {

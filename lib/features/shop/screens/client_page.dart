@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:brother_store/common/widgets/images/rounded_image.dart';
+import 'package:brother_store/common/widgets/layout/grid_gallery_layout.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
+import 'package:brother_store/features/shop/controllers/product/images_controller.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -21,44 +24,36 @@ class ClientScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final controller = BrandController.instance;
+    final imageController = Get.put(ImagesController());
     return Directionality(
-      textDirection: Get.locale?.languageCode == 'en'
-          ? TextDirection.ltr
-          : TextDirection.rtl,
-      child: Scaffold(
-        appBar: TAppBar(
-          title: Text(
-            Get.locale?.languageCode == 'en'
-                ? client.name ?? 'Client'
-                : client.arabicName ?? 'عميل',
-            style: Theme.of(context).textTheme.headlineMedium,
+        textDirection: Get.locale?.languageCode == 'en'
+            ? TextDirection.ltr
+            : TextDirection.rtl,
+        child: Scaffold(
+          appBar: TAppBar(
+            title: Text(
+              Get.locale?.languageCode == 'en'
+                  ? client.name ?? 'Client'
+                  : client.arabicName ?? 'عميل',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            showBackArrow: true,
           ),
-          showBackArrow: true,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: ListView.separated(
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              itemCount: client.images!.length,
-              separatorBuilder: (_, __) => const SizedBox(
-                    height: 1,
-                  ),
-              itemBuilder: (_, index) {
-                return TRoundedContainer(
-                  width: double.infinity,
-                  child: CachedNetworkImage(
+          body: Container(
+            padding: const EdgeInsets.symmetric(
+                horizontal: TSizes.defaultSpace, vertical: TSizes.defaultSpace),
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30))),
+            child: TGridGalleryLayout(
+                itemCount: client.images!.length,
+                itemBuilder: (_, index) => TRoundedImage(
                       imageUrl: client.images![index],
-                      progressIndicatorBuilder: (_, __, DownloadProgress) =>
-                          CircularProgressIndicator(
-                            value: DownloadProgress.progress,
-                            color: TColors.primary,
-                          )),
-                );
-              }),
-        ),
-      ),
-    );
+                      isNetworkImage: true,
+                    )),
+          ),
+        ));
   }
 }
 /////////////
