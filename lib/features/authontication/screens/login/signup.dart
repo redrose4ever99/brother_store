@@ -2,7 +2,6 @@ import 'package:brother_store/app.dart';
 import 'package:brother_store/common/styles/spacing_style.dart';
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/features/authontication/controllers.onboarding/signup/signup_controller.dart';
-import 'package:brother_store/features/authontication/screens/login/phone_verification.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';

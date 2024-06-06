@@ -1,13 +1,7 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/layout/grid_layout.dart';
-import 'package:brother_store/common/widgets/shimmers/brand_shimmer.dart';
 import 'package:brother_store/common/widgets/shimmers/calient_shimmer%20.dart';
-import 'package:brother_store/common/widgets/texts/section_heading.dart';
-import 'package:brother_store/features/shop/controllers/brand_controller.dart';
 import 'package:brother_store/features/shop/controllers/clients_controller.dart';
-import 'package:brother_store/features/shop/models/clients_model.dart';
-import 'package:brother_store/features/shop/screens/store/brand/brand_card.dart';
-import 'package:brother_store/features/shop/screens/store/brand/brand_product.dart';
 import 'package:brother_store/utils/constants/color.dart';
 
 import 'package:brother_store/utils/constants/sizes.dart';

@@ -1,25 +1,28 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/appbar/tabbar.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/search_container.dart';
-import 'package:brother_store/common/widgets/images/rounded_image.dart';
-import 'package:brother_store/common/widgets/layout/grid_gallery_layout.dart';
 import 'package:brother_store/common/widgets/product.cart/cart_menu_icon.dart';
-import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/utils/constants/color.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../controller/album_controller.dart';
+import 'widgets/album_tab.dart';
 
 class TGalleryScreen extends StatelessWidget {
   const TGalleryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isEg = Get.locale?.languageCode == 'en';
+    final controller = Get.put(AlbumController());
+    final albums = controller.allalbums;
     return DefaultTabController(
-      length: 7,
+      length: albums.length,
       child: Scaffold(
         appBar: TAppBar(
           title: Text(
@@ -78,95 +81,24 @@ class TGalleryScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                bottom: const TTabbar(tabs: [
-                  Tab(
-                    child: Text('Album1'),
-                  ),
-                  Tab(
-                    child: Text('Album2'),
-                  ),
-                  Tab(
-                    child: Text('Album3'),
-                  ),
-                  Tab(
-                    child: Text('Album4'),
-                  ),
-                  Tab(
-                    child: Text('Album5'),
-                  ),
-                  Tab(
-                    child: Text('Album6'),
-                  ),
-                  Tab(
-                    child: Text('Album7'),
-                  )
-                ]),
+                bottom: TTabbar(
+                    tabs: isEg
+                        ? albums
+                            .map((album) => Tab(child: Text(album.name)))
+                            .toList()
+                        : albums
+                            .map((album) => Tab(child: Text(album.arabicName)))
+                            .toList()),
               )
             ];
           },
           // ignore: prefer_const_constructors
-          body: TabBarView(children: const [
-            TTabGalleryView(),
-            TTabGalleryView(),
-            TTabGalleryView(),
-            TTabGalleryView(),
-            TTabGalleryView(),
-            TTabGalleryView(),
-            TTabGalleryView(),
-          ]),
+          body: TabBarView(
+              children: albums
+                  .map((album) => TTabGalleryView(album: album))
+                  .toList()),
         ),
       ),
-    );
-  }
-}
-
-class TTabGalleryView extends StatelessWidget {
-  const TTabGalleryView({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: Column(
-            children: [
-              //-- Brands
-              // const TBrandShowCase(
-              //   images: [
-              //     TImages.brandImage1,
-              //     TImages.brandImage2,
-              //     TImages.productImg1
-              //   ],
-              // ),
-
-              TSectionHeading(
-                title: AppLocalizations.of(context)!.artPaces,
-                buttonTitle: AppLocalizations.of(context)!.viewAll,
-                showActionButton: true,
-                onPress: () {},
-              ),
-              const SizedBox(
-                height: TSizes.spaceBtWItems,
-              ),
-              TGridGalleryLayout(
-                  itemCount: 4,
-                  itemBuilder: (_, index) => const TRoundedImage(
-                        imageUrl: TImages.bannerOne,
-                        width: 100,
-                        height: 100,
-                      )),
-              const SizedBox(
-                height: TSizes.spaceBtWsections,
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

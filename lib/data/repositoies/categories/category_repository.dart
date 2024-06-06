@@ -55,4 +55,28 @@ class CategoryRepository extends GetxController {
       throw e.code;
     }
   }
+
+  Future<List<CategoryModel>> getCategoryForBrand(String brandId) async {
+    try {
+      QuerySnapshot brandCategoryQuery = await _db
+          .collection('BrandCategory')
+          .where('BrandId', isEqualTo: brandId)
+          .get();
+      List<String> brandIds = brandCategoryQuery.docs
+          .map((doc) => doc['CategoryId'] as String)
+          .toList();
+      final brandQuery = await _db
+          .collection('Categories')
+          .where(FieldPath.documentId, whereIn: brandIds)
+          .limit(4)
+          .get();
+      List<CategoryModel> brands =
+          brandQuery.docs.map((e) => CategoryModel.fromSnapshot(e)).toList();
+      return brands;
+    } on FirebaseException catch (e) {
+      throw e.code;
+    } catch (e) {
+      throw (e.toString());
+    }
+  }
 }

@@ -2,7 +2,6 @@ import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_co
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/shop/controllers/product/checkoutController.dart';
 import 'package:brother_store/utils/constants/color.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';

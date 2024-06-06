@@ -12,7 +12,7 @@ class TAppTheme {
       useMaterial3: true,
       fontFamily: 'AvenirArabic',
       brightness: Brightness.light,
-      primaryColor: const Color(0xFF0055ff),
+      primaryColor: const Color(0xFF0099ff),
 
       // primaryColor: TColors.primary,
       scaffoldBackgroundColor: Colors.white,

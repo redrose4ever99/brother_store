@@ -1,8 +1,8 @@
+import 'package:brother_store/common/widgets/images/rounded_image.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ImagesController extends GetxController {
@@ -35,7 +35,8 @@ class ImagesController extends GetxController {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: CachedNetworkImage(
+                      child: TRoundedImage(
+                        isNetworkImage: true,
                         imageUrl: image,
                       ),
                     ),

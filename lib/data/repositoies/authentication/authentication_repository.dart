@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:brother_store/app.dart';
 import 'package:brother_store/data/repositoies/user/user_repository.dart';
 import 'package:brother_store/features/authontication/screens/login/phone_verification.dart';
@@ -11,7 +9,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:logger/logger.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -29,7 +26,7 @@ class AuthenticationRepository extends GetxController {
   void onReady() {
     FlutterNativeSplash.remove();
     screenRedirect();
-    super.onReady();
+    //super.onReady();
   }
 
   void screenRedirect() async {

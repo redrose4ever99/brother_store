@@ -1,17 +1,12 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:brother_store/common/widgets/products/cart/coupon_code.dart';
-import 'package:brother_store/common/widgets/success_screen/success_screen.dart';
 import 'package:brother_store/common/widgets/texts/product_price_text.dart';
 import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
-import 'package:brother_store/features/shop/controllers/product/checkoutController.dart';
 import 'package:brother_store/features/shop/controllers/product/order_controller.dart';
 import 'package:brother_store/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:brother_store/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:brother_store/features/shop/screens/checkout/widgets/billing_amount_section.dart';
-import 'package:brother_store/navigation_menu.dart';
 import 'package:brother_store/utils/constants/color.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +48,7 @@ class CheckoutScreen extends StatelessWidget {
               ),
 
               ///Copoun code
-              const TCouponCode(),
+              //pconst TCouponCode(),
               const SizedBox(
                 height: TSizes.spaceBtWsections,
               ),

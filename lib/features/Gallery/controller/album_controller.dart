@@ -1,5 +1,7 @@
 import 'package:brother_store/data/repositoies/album/album_repository.dart';
+import 'package:brother_store/data/repositoies/gallery/gallery_repository.dart';
 import 'package:brother_store/features/gallery/models/album_model.dart';
+import 'package:brother_store/features/gallery/models/gallery_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -31,5 +33,12 @@ class AlbumController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  Future<List<GalleryModel>> getGalleryAlbum(
+      {required String albumId, int limit = 4}) async {
+    final gallery = await GalleryRepository.instance
+        .getPhotoForAlbum(albumId: albumId, limit: limit);
+    return gallery;
   }
 }

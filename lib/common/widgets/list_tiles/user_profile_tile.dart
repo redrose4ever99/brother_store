@@ -1,4 +1,3 @@
-import 'package:brother_store/common/widgets/images/circular_image.dart';
 import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
 import 'package:brother_store/features/personlization/controllers/user_controller.dart';
 import 'package:brother_store/features/personlization/screens/profile/profile.dart';

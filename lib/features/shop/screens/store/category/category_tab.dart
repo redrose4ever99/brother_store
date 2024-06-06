@@ -4,9 +4,7 @@ import 'package:brother_store/common/widgets/shimmers/vertical_product_shimmer.d
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/shop/controllers/category_controller.dart';
 import 'package:brother_store/features/shop/models/category_model.dart';
-import 'package:brother_store/features/shop/screens/store/brand/brand_show_case.dart';
 import 'package:brother_store/features/shop/screens/store/category/category_brand.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,16 +32,6 @@ class TCategoryTab extends StatelessWidget {
                 height: TSizes.spaceBtWItems,
               ),
 
-              TSectionHeading(
-                title: AppLocalizations.of(context)!.youMightLike,
-                showActionButton: true,
-                buttonTitle: AppLocalizations.of(context)!.viewAll,
-                onPress: () {},
-              ),
-              const SizedBox(
-                height: TSizes.spaceBtWItems,
-              ),
-
               FutureBuilder(
                   future:
                       controller.getCategoryProduct(categoryId: category.id),
@@ -54,12 +42,7 @@ class TCategoryTab extends StatelessWidget {
                     if (!snapshot.hasData ||
                         snapshot.data == null ||
                         snapshot.data!.isEmpty) {
-                      return Center(
-                        child: Text(
-                          'لايوجد بيانات',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      );
+                      return const SizedBox();
                     }
                     if (snapshot.hasError) {
                       return Center(
@@ -71,19 +54,32 @@ class TCategoryTab extends StatelessWidget {
                     }
                     final products = snapshot.data!;
                     if (products.isEmpty) {
-                      return Center(
-                        child: Text(
-                          AppLocalizations.of(context)!.noData,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      );
+                      return const SizedBox(
+                          // child: Text(
+                          //   AppLocalizations.of(context)!.noData,
+                          //   style: Theme.of(context).textTheme.bodyMedium,
+                          // ),
+                          );
                     }
 
-                    return TGridLayout(
-                        itemCount: products.length,
-                        itemBuilder: (_, index) => TProductCardVertical(
-                              product: products[index],
-                            ));
+                    return Column(
+                      children: [
+                        TSectionHeading(
+                          title: AppLocalizations.of(context)!.youMightLike,
+                          showActionButton: true,
+                          buttonTitle: AppLocalizations.of(context)!.viewAll,
+                          onPress: () {},
+                        ),
+                        const SizedBox(
+                          height: TSizes.spaceBtWItems,
+                        ),
+                        TGridLayout(
+                            itemCount: products.length,
+                            itemBuilder: (_, index) => TProductCardVertical(
+                                  product: products[index],
+                                )),
+                      ],
+                    );
 
                     //return TSortableProducts(products: products);
                   }),

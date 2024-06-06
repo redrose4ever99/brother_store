@@ -1,14 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:brother_store/common/widgets/images/rounded_image.dart';
 import 'package:brother_store/common/widgets/layout/grid_gallery_layout.dart';
-import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/shop/controllers/product/images_controller.dart';
-import 'package:brother_store/utils/constants/color.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
@@ -48,9 +42,14 @@ class ClientScreen extends StatelessWidget {
                     topRight: Radius.circular(30))),
             child: TGridGalleryLayout(
                 itemCount: client.images!.length,
-                itemBuilder: (_, index) => TRoundedImage(
-                      imageUrl: client.images![index],
-                      isNetworkImage: true,
+                itemBuilder: (_, index) => GestureDetector(
+                      onTap: () => imageController
+                          .showEnLargedImage(client.images![index]),
+                      child: TRoundedImage(
+                        imageUrl: client.images![index],
+                        fit: BoxFit.cover,
+                        isNetworkImage: true,
+                      ),
                     )),
           ),
         ));

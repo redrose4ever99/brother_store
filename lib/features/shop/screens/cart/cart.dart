@@ -1,7 +1,6 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/loaders/animation_loading.dart';
 import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
-import 'package:brother_store/features/shop/models/cart_item_model.dart';
 import 'package:brother_store/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:brother_store/features/shop/screens/checkout/checkout.dart';
 import 'package:brother_store/navigation_menu.dart';

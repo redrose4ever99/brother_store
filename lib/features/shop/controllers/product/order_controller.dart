@@ -1,22 +1,16 @@
 import 'package:brother_store/common/widgets/success_screen/success_screen.dart';
-import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/data/repositoies/order/order_repository.dart';
 import 'package:brother_store/features/shop/controllers/address_controller.dart';
 import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
 import 'package:brother_store/features/shop/controllers/product/checkoutController.dart';
-import 'package:brother_store/features/shop/models/cart_item_model.dart';
 import 'package:brother_store/features/shop/models/order_model.dart';
-import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/navigation_menu.dart';
-import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/enums.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:brother_store/utils/popups/full_screen_loader.dart';
-import 'package:brother_store/utils/storage/storage_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OrderController extends GetxController {

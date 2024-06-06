@@ -60,6 +60,16 @@ class CategoryController extends GetxController {
     }
   }
 
+  Future<List<CategoryModel>> getBrandCategorys(String brandId) async {
+    try {
+      final categoriesForBrand =
+          await _categoryRepository.getCategoryForBrand(brandId);
+      return categoriesForBrand;
+    } catch (e) {
+      return [];
+    }
+  }
+
   Future<List<ProductModel>> getCategoryProduct(
       {required String categoryId, int limit = 4}) async {
     final product = await ProductRepository.instance

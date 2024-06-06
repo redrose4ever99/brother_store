@@ -22,15 +22,15 @@ class BrandRepository extends GetxController {
     try {
       QuerySnapshot brandCategoryQuery = await _db
           .collection('BrandCategory')
-          .where('categoryId', isEqualTo: categoryId)
+          .where('CategoryId', isEqualTo: categoryId)
           .get();
       List<String> brandIds = brandCategoryQuery.docs
           .map((doc) => doc['BrandId'] as String)
           .toList();
       final brandQuery = await _db
-          .collection('Brand')
+          .collection('Brands')
           .where(FieldPath.documentId, whereIn: brandIds)
-          .limit(2)
+          .limit(4)
           .get();
       List<BrandModel> brands =
           brandQuery.docs.map((e) => BrandModel.fromSnapshot(e)).toList();

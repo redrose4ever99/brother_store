@@ -1,9 +1,10 @@
-import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/products/sortable/sortable_products.dart';
 import 'package:brother_store/common/widgets/shimmers/vertical_product_shimmer.dart';
+import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/shop/controllers/brand_controller.dart';
 import 'package:brother_store/features/shop/models/brand_model.dart';
-import 'package:brother_store/features/shop/screens/store/brand/brand_card.dart';
+import 'package:brother_store/features/shop/screens/store/brand/brand_category.dart';
+import 'package:brother_store/features/shop/screens/store/brand/brand_up_page.dart';
 import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
@@ -21,23 +22,32 @@ class BrandProducts extends StatelessWidget {
           ? TextDirection.ltr
           : TextDirection.rtl,
       child: Scaffold(
-        appBar: TAppBar(
-          title: Text(
-            brand.name,
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          showBackArrow: true,
-        ),
+        // appBar: TAppBar(
+        //   title: Text(
+        //     brand.name,
+        //     style: Theme.of(context).textTheme.headlineMedium,
+        //   ),
+        //   showBackArrow: true,
+        // ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(TSizes.defaultSpace),
-            child: Column(
-              children: [
-                TBrandCard(showBorder: false, brand: brand),
-                const SizedBox(
-                  height: TSizes.spaceBtWItems,
-                ),
-                FutureBuilder(
+          child: Column(
+            children: [
+              TBrandUpPage(showBorder: false, brand: brand),
+              const SizedBox(
+                height: TSizes.spaceBtWItems,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(
+                    left: TSizes.defaultSpace, right: TSizes.defaultSpace),
+                child: TSectionHeading(title: 'Categories'),
+              ),
+              BrandCategory(brand: brand),
+              const SizedBox(
+                height: TSizes.spaceBtWItems,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                child: FutureBuilder(
                     future: controller.getBrandProducts(brandId: brand.id),
                     builder: (context, snapshot) {
                       const loader = TVerticalProductShummer();
@@ -57,9 +67,9 @@ class BrandProducts extends StatelessWidget {
                         );
                       }
                       return TSortableProducts(products: brandProducts);
-                    })
-              ],
-            ),
+                    }),
+              )
+            ],
           ),
         ),
       ),

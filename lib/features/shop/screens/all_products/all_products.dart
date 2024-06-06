@@ -60,7 +60,7 @@ class AllProducts extends StatelessWidget {
                   }
                   final products = snapshot.data!;
 
-                  if (products.isEmpty) {
+                  if (products == []) {
                     return Center(
                       child: Text(
                         AppLocalizations.of(context)!.noData,

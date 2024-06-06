@@ -8,6 +8,7 @@ class TVerticalImageText extends StatelessWidget {
     super.key,
     required this.image,
     required this.title,
+    this.borderColor,
     this.isNetworkImage = false,
     this.textColor,
     this.backgroundColor,
@@ -18,6 +19,7 @@ class TVerticalImageText extends StatelessWidget {
   final bool isNetworkImage;
 
   final Color? backgroundColor;
+  final Color? borderColor;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class TVerticalImageText extends StatelessWidget {
               height: 80,
               padding: const EdgeInsets.all(TSizes.md),
               decoration: BoxDecoration(
+                  border: Border.all(color: borderColor ?? Colors.transparent),
                   color:
                       backgroundColor ?? (dark ? TColors.white : TColors.white),
                   borderRadius: BorderRadius.circular(100)),
@@ -63,7 +66,7 @@ class TVerticalImageText extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .apply(color: TColors.white),
+                      .apply(color: textColor),
                 ),
               ),
             ])

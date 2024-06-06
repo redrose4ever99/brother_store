@@ -100,7 +100,7 @@ class TProductMetaData extends StatelessWidget {
             TCircularImage(
               image: product.brand!.image != ''
                   ? product.brand!.image
-                  : TImages.brandImage1,
+                  : TImages.bBlack,
               isNetworkImage: product.brand!.image != '' ? true : false,
               width: 32,
               height: 32,

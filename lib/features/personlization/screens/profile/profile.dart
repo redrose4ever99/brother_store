@@ -1,5 +1,4 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
-import 'package:brother_store/common/widgets/images/circular_image.dart';
 import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/personlization/controllers/user_controller.dart';

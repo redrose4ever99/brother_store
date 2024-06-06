@@ -39,12 +39,13 @@ class TCloudHelperFunctions {
     }
     if (!snapshot.hasData || snapshot.data == null || snapshot.data!.isEmpty) {
       if (nothingFound != null) return nothingFound;
-      return Center(
-        child: Text(
-          AppLocalizations.of(Get.context!)!.noData,
-          style: Theme.of(Get.context!).textTheme.bodyMedium,
-        ),
-      );
+      return const SizedBox();
+      // Center(
+      //   child: Text(
+      //     AppLocalizations.of(Get.context!)!.noData,
+      //     style: Theme.of(Get.context!).textTheme.bodyMedium,
+      //   ),
+      // );
     }
     if (snapshot.hasError) {
       if (error != null) return error;

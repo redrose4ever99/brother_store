@@ -5,7 +5,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:brother_store/utils/constants/color.dart';
-import 'package:brother_store/utils/constants/sizes.dart';
 
 class TCircularImage extends StatelessWidget {
   const TCircularImage({

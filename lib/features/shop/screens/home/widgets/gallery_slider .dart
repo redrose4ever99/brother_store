@@ -14,10 +14,10 @@ import 'package:brother_store/utils/constants/sizes.dart';
 class TGallerySlider extends StatelessWidget {
   const TGallerySlider({
     Key? key,
-    required this.banners,
+   
     this.autoPlay = true,
   }) : super(key: key);
-  final List<String> banners;
+
   final bool autoPlay;
   @override
   Widget build(BuildContext context) {

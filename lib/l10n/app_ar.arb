@@ -30,6 +30,7 @@
     "wishList":"المفضلة",
     "wishlistIsEmpty":"أووه .. المفضلة فارعة ",
     "successfullyAddedToFavorites":"تمت الأضافة إلى قائمة المفضلة بنجاح",
+    "successfullyAddedToCart":"تمت الأضافة إلى قائمة السلة بنجاح",
     "myProjects":"مشاريعي",
     "notifications":"الأشعارات",
     "accountPrivacy":"خصوصية الحساب",
@@ -93,6 +94,7 @@
     "changeNameMessage":"فضلا استخدم اسمك الحقيقي. لسهولة التوثيق حيث سيظهر هذا الاسم في عدة أماكن أخرى",
     "info":"معلومات",
     "productHasBeenRemoved":"تمت ازالة المنتج من المفضلة",
+    "productHasBeenRemovedFromCart":"تمت ازالة المنتج من السلة",
     "selectPaymentMethode":"اختر وسيلة الدفع",
     "paymentMethod":"وسيلة الدفع",
     "change":"تعديل",
@@ -106,9 +108,18 @@
     "cartEmpty":"السلة فارغة",
     "addItemTotheCartForOrderProcess":"أضف البضائع للسلة لإكمال العملية",
     "order":"الطلب",
-    "shippingDate":"تاريخ الشحن"
-
-    
+    "shippingDate":"تاريخ الشحن",
+    "termsCondition":"البنود والظروف",
+    "privacyPolicy":"سياسة الخصوصية",
+    "aboutUs":"من نحن",
+    "cancelPolicy":"سياسة الألغاء",
+    "returnPolicy":"سياسة الأعادة",
+    "chooseYourPrightness":"اختر الإضاءة المفضلة لديك",
+    "chooseYourLanguage":"اختر اللغة الأنسب لك",
+    "wishlistSubTitle":"هنا يمكنك إيجاد المنتجات المحببة لديك",
+    "ordersSubtitle":"هنا يمكنك ايجاد جميع الطلبات التي قمت بها",
+    "cartSubtitle":"من هنا قم بإضافة وازالة المنتجات من السلة وبعد ذلك انتقل للدفع",
+    "addressSubtile":"اضف عناوينك للتوصيل"
     
      
 }

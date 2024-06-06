@@ -105,8 +105,10 @@
     "saveAddressMessage":"Your address has been saved successfully",
     "changeNameMessage":"Use real name for easy verification. this name will appear on several pages",
     "successfullyAddedToFavorites":"Successfully added to Favorites",
+    "successfullyAddedToCart":"Successfully added to Cart",
     "info":"Info",
     "productHasBeenRemoved":"Product has been removed from the Wishlist.",
+    "productHasBeenRemovedFromCart":"Product has been removed from the Cart.",
     "selectPaymentMethode":"Select Payment method",
     "paymentMethod":"Payment Method",
     "change":"Change",
@@ -120,7 +122,18 @@
     "cartEmpty":"Cart Empty",
     "addItemTotheCartForOrderProcess":"Add items in the cart in order to proceed",
     "order":"Order",
-    "shippingDate":"Shipping Date"
+    "shippingDate":"Shipping Date",
+    "termsCondition":"Terms Condition",
+    "privacyPolicy":"Privacy Policy",
+    "aboutUs":"About Us",
+    "cancelPolicy":"Cancellation Policy",
+    "returnPolicy":"Return Policy",
+    "chooseYourPrightness":"Choose Your Brightness",
+    "chooseYourLanguage":"Choose Your Language",
+    "wishlistSubTitle":"Here you can find your favorite products",
+    "ordersSubtitle":"Here you can find all previose orders",
+    "cartSubtitle":"Add, remove products and move to chickout",
+    "addressSubtile":"Set Delivery address"
 
 
     

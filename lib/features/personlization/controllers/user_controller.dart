@@ -1,8 +1,6 @@
 import 'package:brother_store/data/repositoies/user/user_repository.dart';
 import 'package:brother_store/features/personlization/models/users/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserController extends GetxController {

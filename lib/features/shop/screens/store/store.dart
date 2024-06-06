@@ -54,7 +54,7 @@ class StoreScreen extends StatelessWidget {
                 backgroundColor: THelperFunctions.isDarkMode(context)
                     ? TColors.black
                     : TColors.white,
-                expandedHeight: 370,
+                expandedHeight: 320,
                 flexibleSpace: Padding(
                   padding: const EdgeInsets.all(TSizes.defaultSpace),
                   child: ListView(
@@ -84,15 +84,10 @@ class StoreScreen extends StatelessWidget {
                           );
                         }
                         if (brandController.featureBrands.isEmpty) {
-                          return Center(
-                            child: Text(
-                              AppLocalizations.of(context)!.noData,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          );
+                          return const SizedBox();
                         }
                         return SizedBox(
-                          height: 250,
+                          height: 150,
                           child: ListView.builder(
                               // gridDelegate:
                               //     const SliverGridDelegateWithFixedCrossAxisCount(

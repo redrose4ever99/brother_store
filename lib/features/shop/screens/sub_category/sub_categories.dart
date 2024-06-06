@@ -11,7 +11,6 @@ import 'package:brother_store/common/widgets/images/rounded_image.dart';
 import 'package:brother_store/common/widgets/products/product_cards/product_card_horizontal.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/shop/models/category_model.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,8 +42,9 @@ class SubCategoriesScreen extends StatelessWidget {
             padding: const EdgeInsets.all(TSizes.defaultSpace),
             child: Column(
               children: [
-                const TRoundedImage(
-                  imageUrl: TImages.bannerTow,
+                TRoundedImage(
+                  imageUrl: category.image,
+                  isNetworkImage: true,
                   width: double.infinity,
                 ),
                 const SizedBox(

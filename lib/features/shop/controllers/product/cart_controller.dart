@@ -5,6 +5,7 @@ import 'package:brother_store/utils/storage/storage_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CartController extends GetxController {
   static CartController get instance => Get.find();
@@ -64,8 +65,8 @@ class CartController extends GetxController {
           updateCart();
           Get.back();
           Get.snackbar(
-            'info',
-            'successfully removed from cart',
+            AppLocalizations.of(Get.context!)!.info,
+            AppLocalizations.of(Get.context!)!.productHasBeenRemovedFromCart,
             snackPosition: SnackPosition.BOTTOM,
           );
         },
@@ -108,8 +109,8 @@ class CartController extends GetxController {
     }
     updateCart();
     Get.snackbar(
-      'info',
-      'successfully added to cart',
+      AppLocalizations.of(Get.context!)!.info,
+      AppLocalizations.of(Get.context!)!.successfullyAddedToCart,
       snackPosition: SnackPosition.BOTTOM,
     );
   }
