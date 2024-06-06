@@ -13,7 +13,7 @@ class BrotherModel {
   String arabicReturnPolicy;
   String termsCondition;
   String arabicTermsCondition;
-  String primaryColor;
+  String? primaryColor;
 
   List<String> phoneNumbers;
   BrotherModel(

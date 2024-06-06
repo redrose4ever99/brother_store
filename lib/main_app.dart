@@ -22,6 +22,7 @@ class MainApp extends StatelessWidget {
     //TLocalStorage.init('nuwar_packet');
     //Get.updateLocale(const Locale('en'));
     return GetMaterialApp(
+      initialBinding: GeneralBindings(),
       debugShowCheckedModeBanner: false,
       title: 'Brothers Store',
       themeMode: ThemeMode.system,
@@ -29,7 +30,7 @@ class MainApp extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialBinding: GeneralBindings(),
+
       // localizationsDelegates: const [
       //   AppLocalizations.delegate,
       //   GlobalMaterialLocalizations.delegate,

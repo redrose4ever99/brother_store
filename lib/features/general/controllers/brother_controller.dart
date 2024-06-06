@@ -1,4 +1,3 @@
-
 import 'package:brother_store/data/repositoies/brothers/brothers_repository.dart';
 import 'package:brother_store/features/general/models/brother_model.dart';
 import 'package:flutter/foundation.dart';
@@ -7,6 +6,7 @@ import 'package:get/get.dart';
 class BrothersController extends GetxController {
   static BrothersController get instance => Get.find();
   final isLoading = false.obs;
+  RxString? primaryColor = "Color(0xff0099ff)".obs;
   final _brothersRepository = Get.put(BrotherRepository());
   RxList<BrotherModel> allData = <BrotherModel>[].obs;
 
@@ -22,6 +22,7 @@ class BrothersController extends GetxController {
 
       final data = await _brothersRepository.getAlldata();
       allData.assignAll(data);
+      primaryColor?.value = allData[0].primaryColor!;
     } catch (e) {
       if (kDebugMode) {
         print(e);
