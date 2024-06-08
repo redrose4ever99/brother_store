@@ -69,13 +69,6 @@ class NavigationMenu extends StatelessWidget {
                     ),
                     icon: const Icon(Iconsax.gallery),
                     label: AppLocalizations.of(context)!.gallery),
-                // NavigationDestination(
-                //     selectedIcon: Icon(
-                //       Iconsax.user,
-                //       color: TColors.primary,
-                //     ),
-                //     icon: Icon(Iconsax.heart),
-                //     label: 'المفضلة'),
                 NavigationDestination(
                     selectedIcon: const Icon(
                       Iconsax.shopping_bag,
@@ -97,32 +90,37 @@ class NavigationMenu extends StatelessWidget {
   }
 
   Future<bool> showExitDialog() async {
-    return await showDialog(
-        context: Get.context!,
-        builder: (context) => AlertDialog(
-              title: Text(
-                AppLocalizations.of(context)!.exitApp,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              content: Text(AppLocalizations.of(context)!.doYouWantToExit,
-                  style: Theme.of(context).textTheme.bodyMedium),
-              actions: [
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.no,
-                      style: Theme.of(context).textTheme.labelLarge,
-                    )),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(true);
-                    },
-                    child: Text(AppLocalizations.of(context)!.yes,
-                        style: Theme.of(context).textTheme.bodyLarge))
-              ],
-            ));
+    if (NavigationController.instance.selectedIndex.value != 0) {
+      NavigationController.instance.selectedIndex.value = 0;
+      return false;
+    } else {
+      return await showDialog(
+          context: Get.context!,
+          builder: (context) => AlertDialog(
+                title: Text(
+                  AppLocalizations.of(context)!.exitApp,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                content: Text(AppLocalizations.of(context)!.doYouWantToExit,
+                    style: Theme.of(context).textTheme.bodyMedium),
+                actions: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        AppLocalizations.of(context)!.no,
+                        style: Theme.of(context).textTheme.labelLarge,
+                      )),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                      child: Text(AppLocalizations.of(context)!.yes,
+                          style: Theme.of(context).textTheme.bodyLarge))
+                ],
+              ));
+    }
   }
 }
 
