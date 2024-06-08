@@ -18,7 +18,7 @@ class ImagesController extends GetxController {
     return images.toList();
   }
 
-  void showEnLargedImage(String image) {
+  void showEnLargedImage(String image, String? title, String? description) {
     Get.to(
         fullscreenDialog: true,
         () => Dialog.fullscreen(
@@ -31,14 +31,52 @@ class ImagesController extends GetxController {
                     padding: const EdgeInsets.symmetric(
                         horizontal: TSizes.defaultSpace,
                         vertical: TSizes.defaultSpace * 2),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: TRoundedImage(
-                        isNetworkImage: true,
-                        imageUrl: image,
-                      ),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: TRoundedImage(
+                            isNetworkImage: true,
+                            imageUrl: image,
+                          ),
+                        ),
+                        if (title != '')
+                          const SizedBox(height: TSizes.spaceBtWsections / 2),
+                        if (title != '')
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: TSizes.defaultSpace,
+                                right: TSizes.defaultSpace),
+                            child: Align(
+                              alignment: Get.locale?.languageCode == 'en'
+                                  ? Alignment.topLeft
+                                  : Alignment.topRight,
+                              child: Text(title!,
+                                  style: Theme.of(Get.context!)
+                                      .textTheme
+                                      .headlineSmall),
+                            ),
+                          ),
+                        if (description != '')
+                          const SizedBox(height: TSizes.spaceBtWsections / 2),
+                        if (description != '')
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: TSizes.defaultSpace,
+                                right: TSizes.defaultSpace),
+                            child: Align(
+                              alignment: Get.locale?.languageCode == 'en'
+                                  ? Alignment.topLeft
+                                  : Alignment.topRight,
+                              child: Text(description!,
+                                  style: Theme.of(Get.context!)
+                                      .textTheme
+                                      .bodyMedium),
+                            ),
+                          ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: TSizes.spaceBtWsections),

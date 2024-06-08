@@ -43,8 +43,8 @@ class ClientScreen extends StatelessWidget {
             child: TGridGalleryLayout(
                 itemCount: client.images!.length,
                 itemBuilder: (_, index) => GestureDetector(
-                      onTap: () => imageController
-                          .showEnLargedImage(client.images![index]),
+                      onTap: () => imageController.showEnLargedImage(
+                          client.images![index], '', ''),
                       child: TRoundedImage(
                         imageUrl: client.images![index],
                         fit: BoxFit.cover,

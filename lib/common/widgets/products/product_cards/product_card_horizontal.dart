@@ -2,6 +2,7 @@
 import 'package:brother_store/common/widgets/product.cart/favorite_icon.dart';
 import 'package:brother_store/common/widgets/texts/brand_title_with_verified_icon.dart';
 import 'package:brother_store/common/widgets/texts/product_price_text.dart';
+import 'package:brother_store/features/shop/controllers/product/productController.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/features/shop/screens/product_details/product_detail.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
@@ -17,6 +18,8 @@ import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 
+import 'add_to_cart_button.dart';
+
 class TProductCardHorizontal extends StatelessWidget {
   const TProductCardHorizontal({super.key, required this.product});
   final ProductModel product;
@@ -24,6 +27,10 @@ class TProductCardHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     final isEg = Get.locale?.languageCode == 'en';
+    final controller = ProductController.instance;
+    final salePrecentage =
+        controller.calculateSalePresentage(product.price, product.salePrice);
+
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailsScreen(
             product: product,
@@ -53,13 +60,14 @@ class TProductCardHorizontal extends StatelessWidget {
 
                   Positioned(
                     top: 12,
+                    left: 0,
                     child: TRoundedContainer(
                       radius: TSizes.sm,
                       backgroundColor: TColors.secondary.withOpacity(0.8),
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.sm, vertical: TSizes.xs),
                       child: Text(
-                        '25%',
+                        '$salePrecentage%',
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -111,32 +119,7 @@ class TProductCardHorizontal extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const TProductPriceText(price: '250.0'),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: TColors.dark,
-                              borderRadius: isEg
-                                  ? const BorderRadius.only(
-                                      topLeft: Radius.circular(
-                                          TSizes.productImageRadius),
-                                      bottomRight: Radius.circular(
-                                          TSizes.productImageRadius),
-                                    )
-                                  : const BorderRadius.only(
-                                      topRight: Radius.circular(
-                                          TSizes.productImageRadius),
-                                      bottomLeft: Radius.circular(
-                                          TSizes.productImageRadius))),
-                          child: const SizedBox(
-                            width: TSizes.iconLg * 1.2,
-                            height: TSizes.iconLg * 1.2,
-                            child: Center(
-                              child: Icon(
-                                Iconsax.add,
-                                color: TColors.white,
-                              ),
-                            ),
-                          ),
-                        )
+                        ProductAddToCartButton(product: product)
                       ])
                 ],
               ),

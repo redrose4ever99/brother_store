@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:brother_store/utils/logging/logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CategoryModel {
@@ -32,7 +35,7 @@ class CategoryModel {
       DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
-
+      TLoggerHelper.info(data['Name']);
       return CategoryModel(
         id: document.id,
         name: data['Name'] ?? '',

@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:brother_store/common/widgets/image_text_widets/vertical_image_text.dart';
 import 'package:brother_store/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:brother_store/features/shop/controllers/category_controller.dart';
 import 'package:brother_store/features/shop/screens/all_products/all_products.dart';
+import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,15 +44,6 @@ class SubCategoriesScreen extends StatelessWidget {
             padding: const EdgeInsets.all(TSizes.defaultSpace),
             child: Column(
               children: [
-                TRoundedImage(
-                  imageUrl: category.image,
-                  isNetworkImage: true,
-                  width: double.infinity,
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtWsections,
-                ),
-
                 ///sub categories
                 FutureBuilder(
                     future: controller.getSubCategories(category.id),
@@ -59,80 +52,179 @@ class SubCategoriesScreen extends StatelessWidget {
                       final widget =
                           TCloudHelperFunctions.checkMuiltiRecordState(
                               snapshot: snapshot, loader: loader);
-                      if (widget != null) return widget;
+                      if (widget != null) {
+                        return widget;
+                      }
                       final subCategories = snapshot.data!;
                       if (subCategories.isEmpty) {
-                        return Center(
-                          child: Text(
-                            AppLocalizations.of(context)!.noData,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        );
+                        return const SizedBox();
                       }
-                      return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: subCategories.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (_, index) {
-                            final subCategory = subCategories[index];
-                            FutureBuilder(
-                                future: controller.getCategoryProduct(
-                                    categoryId: subCategory.id),
-                                builder: (context, snapshot) {
-                                  final widget = TCloudHelperFunctions
-                                      .checkMuiltiRecordState(
-                                          snapshot: snapshot, loader: loader);
-                                  if (widget != null) return widget;
-                                  final products = snapshot.data!;
-                                  if (products.isEmpty) {
-                                    return Center(
-                                      child: Text(
-                                        AppLocalizations.of(context)!.noData,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium,
-                                      ),
-                                    );
-                                  }
-
-                                  return Column(
-                                    children: [
-                                      TSectionHeading(
-                                        title: isEg
-                                            ? subCategory.name
-                                            : subCategory.arabicName,
-                                        onPress: () => Get.to(() => AllProducts(
-                                              title: subCategory.name,
-                                              futureMethode:
-                                                  controller.getCategoryProduct(
-                                                      categoryId:
-                                                          subCategory.id,
-                                                      limit: -1),
-                                            )),
-                                      ),
-                                      const SizedBox(
-                                        height: TSizes.spaceBtWItems / 2,
-                                      ),
-                                      SizedBox(
-                                        height: 150,
-                                        child: ListView.separated(
-                                          itemCount: products.length,
-                                          scrollDirection: Axis.horizontal,
-                                          separatorBuilder: (context, index) =>
+                      return Column(
+                        children: [
+                          SizedBox(
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: subCategories.length,
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (_, index) {
+                                    final subCategory = subCategories[index];
+                                    return FutureBuilder(
+                                        future: controller.getCategoryProduct(
+                                            categoryId: subCategory.id),
+                                        builder: (context, snapshot) {
+                                          final widget = TCloudHelperFunctions
+                                              .checkMuiltiRecordState(
+                                                  snapshot: snapshot,
+                                                  loader: loader);
+                                          if (widget != null) return widget;
+                                          final products = snapshot.data!;
+                                          return Column(
+                                            children: [
+                                              TSectionHeading(
+                                                title: isEg
+                                                    ? subCategory.name
+                                                    : subCategory.arabicName,
+                                                showActionButton: true,
+                                                onPress: () =>
+                                                    Get.to(() => AllProducts(
+                                                          title: isEg
+                                                              ? subCategory.name
+                                                              : subCategory
+                                                                  .arabicName,
+                                                          futureMethode: controller
+                                                              .getCategoryProduct(
+                                                                  categoryId:
+                                                                      subCategory
+                                                                          .id,
+                                                                  limit: -1),
+                                                        )),
+                                              ),
                                               const SizedBox(
-                                            width: TSizes.spaceBtWItems,
-                                          ),
-                                          itemBuilder: (context, index) =>
-                                              TProductCardHorizontal(
-                                            product: products[index],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                });
-                            return null;
-                          });
+                                                height: TSizes.spaceBtWsections,
+                                              ),
+                                              SizedBox(
+                                                height: 150,
+                                                child: ListView.separated(
+                                                  itemCount: products.length,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  separatorBuilder:
+                                                      (context, index) =>
+                                                          const SizedBox(
+                                                    width: TSizes.spaceBtWItems,
+                                                  ),
+                                                  itemBuilder: (context,
+                                                          index) =>
+                                                      TProductCardHorizontal(
+                                                    product: products[index],
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          );
+                                        });
+                                    // TVerticalImageText(
+                                    //     image: category.image == ""
+                                    //         ? TImages.bBlack
+                                    //         : category.image,
+                                    //     isNetworkImage:
+                                    //         category.image == "" ? false : true,
+                                    //     title: Get.locale?.languageCode == 'en'
+                                    //         ? category.name
+                                    //         : category.arabicName,
+                                    //     onTap: () => AllProducts(
+                                    //           title: Get.locale?.languageCode ==
+                                    //                   'en'
+                                    //               ? category.name
+                                    //               : category.arabicName,
+                                    //           futureMethode:
+                                    //               controller.getCategoryProduct(
+                                    //                   categoryId: category.id,
+                                    //                   limit: -1),
+                                    //         ));
+                                  })),
+                          // SizedBox(
+                          //   height: TSizes.spaceBtWsections,
+                          // ),
+                          // GridView.builder(
+                          //     shrinkWrap: true,
+                          //     padding: EdgeInsets.zero,
+                          //     physics: const NeverScrollableScrollPhysics(),
+                          //     gridDelegate:
+                          //         const SliverGridDelegateWithFixedCrossAxisCount(
+                          //             crossAxisCount: 2,
+                          //             mainAxisSpacing: TSizes.gridViewSpacing,
+                          //             crossAxisSpacing: TSizes.gridViewSpacing,
+                          //             mainAxisExtent: 2),
+                          //     itemBuilder: (_, index) =>
+                          //         Text(subCategories[index].name))
+                        ],
+                      );
+
+                      //  ListView.builder(
+                      //     shrinkWrap: true,
+                      //     itemCount: subCategories.length,
+                      //     physics: const NeverScrollableScrollPhysics(),
+                      //     itemBuilder: (_, index) {
+                      //       final subCategory = subCategories[index];
+                      //       FutureBuilder(
+                      //           future: controller.getCategoryProduct(
+                      //               categoryId: subCategory.id),
+                      //           builder: (context, snapshot) {
+                      //             final widget = TCloudHelperFunctions
+                      //                 .checkMuiltiRecordState(
+                      //                     snapshot: snapshot, loader: loader);
+                      //             if (widget != null) return widget;
+                      //             final products = snapshot.data!;
+                      //             if (products.isEmpty) {
+                      //               return Center(
+                      //                 child: Text(
+                      //                   AppLocalizations.of(context)!.noData,
+                      //                   style: Theme.of(context)
+                      //                       .textTheme
+                      //                       .bodyMedium,
+                      //                 ),
+                      //               );
+                      //             }
+
+                      //             return Column(
+                      //               children: [
+                      //                 TSectionHeading(
+                      //                   title: isEg
+                      //                       ? subCategory.name
+                      //                       : subCategory.arabicName,
+                      //                   onPress: () => Get.to(() => AllProducts(
+                      //                         title: subCategory.name,
+                      //                         futureMethode:
+                      //                             controller.getCategoryProduct(
+                      //                                 categoryId:
+                      //                                     subCategory.id,
+                      //                                 limit: -1),
+                      //                       )),
+                      //                 ),
+                      //                 const SizedBox(
+                      //                   height: TSizes.spaceBtWItems / 2,
+                      //                 ),
+                      //                 SizedBox(
+                      //                   height: 150,
+                      //                   child: ListView.separated(
+                      //                     itemCount: products.length,
+                      //                     scrollDirection: Axis.horizontal,
+                      //                     separatorBuilder: (context, index) =>
+                      //                         const SizedBox(
+                      //                       width: TSizes.spaceBtWItems,
+                      //                     ),
+                      //                     itemBuilder: (context, index) =>
+                      //                         TProductCardHorizontal(
+                      //                       product: products[index],
+                      //                     ),
+                      //                   ),
+                      //                 ),
+                      //               ],
+                      //             );
+                      //           });
+                      //       return null;
+                      //     });
                     })
               ],
             ),

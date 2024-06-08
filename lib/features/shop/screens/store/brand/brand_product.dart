@@ -36,10 +36,11 @@ class BrandProducts extends StatelessWidget {
               const SizedBox(
                 height: TSizes.spaceBtWItems,
               ),
-              const Padding(
-                padding: EdgeInsets.only(
+              Padding(
+                padding: const EdgeInsets.only(
                     left: TSizes.defaultSpace, right: TSizes.defaultSpace),
-                child: TSectionHeading(title: 'Categories'),
+                child: TSectionHeading(
+                    title: AppLocalizations.of(context)!.popularCategory),
               ),
               BrandCategory(brand: brand),
               const SizedBox(

@@ -84,8 +84,14 @@ class TTabGalleryView extends StatelessWidget {
                     return TGridGalleryLayout(
                         itemCount: photos.length,
                         itemBuilder: (_, index) => GestureDetector(
-                              onTap: () => imageController
-                                  .showEnLargedImage(photos[index].image),
+                              onTap: () => imageController.showEnLargedImage(
+                                  photos[index].image,
+                                  Get.locale?.languageCode == 'en'
+                                      ? photos[index].name ?? ""
+                                      : photos[index].arabicName ?? "",
+                                  Get.locale?.languageCode == 'en'
+                                      ? photos[index].description ?? ""
+                                      : photos[index].arabicDescription ?? ""),
                               child: TRoundedImage(
                                 imageUrl: photos[index].image,
                                 width: 100,

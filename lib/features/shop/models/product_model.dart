@@ -1,6 +1,7 @@
 import 'package:brother_store/features/shop/models/brand_model.dart';
 import 'package:brother_store/features/shop/models/product_atribute_model.dart';
 import 'package:brother_store/features/shop/models/product_variation_model.dart';
+import 'package:brother_store/utils/logging/logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
@@ -80,9 +81,7 @@ class ProductModel {
       DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() == null) return ProductModel.empty();
     final data = document.data()!;
-    if (kDebugMode) {
-      print(data['Images']);
-    }
+    TLoggerHelper.info(data['Title']);
     return ProductModel(
       id: data['Id'] ?? '',
       title: data['Title'],

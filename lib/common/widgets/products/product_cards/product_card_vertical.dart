@@ -57,6 +57,7 @@ class TProductCardVertical extends StatelessWidget {
                   ),
                   Positioned(
                     top: 12,
+                    left: 0,
                     child: TRoundedContainer(
                       radius: TSizes.sm,
                       backgroundColor: TColors.secondary,
