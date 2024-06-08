@@ -1,6 +1,5 @@
 import 'package:brother_store/bindings/general_binding.dart';
 import 'package:brother_store/utils/theme/theme.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,13 +13,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final controller = Get.put(BrotherController());
-    if (kDebugMode) {
-      print('=======lang===========');
-      print(Get.locale?.languageCode);
-    }
-    //TLocalStorage.init('nuwar_packet');
-    //Get.updateLocale(const Locale('en'));
     return GetMaterialApp(
       initialBinding: GeneralBindings(),
       debugShowCheckedModeBanner: false,

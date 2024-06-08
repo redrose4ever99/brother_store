@@ -18,11 +18,6 @@ class NavigationMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      print('=======lang=============');
-      print(Get.locale?.languageCode);
-    }
-
     final controller = Get.put(NavigationController());
     final darkMode = THelperFunctions.isDarkMode(context);
     return Directionality(
@@ -134,22 +129,6 @@ class NavigationMenu extends StatelessWidget {
 class NavigationController extends GetxController {
   static NavigationController get instance => Get.find();
   final Rx<int> selectedIndex = 0.obs;
-
-  @override
-  void onInit() {
-    if (Get.locale?.languageCode == null && GetStorage().read('en')) {
-      Get.updateLocale(const Locale('en'));
-    } else {
-      Get.updateLocale(const Locale('ar'));
-    }
-
-    if (kDebugMode) {
-      print('=======lang=============');
-      print(Get.locale?.languageCode);
-    }
-
-    super.onInit();
-  }
 
   void updateSelectedIndex(int index) {
     selectedIndex.value = index;

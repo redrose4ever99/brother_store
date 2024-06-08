@@ -16,6 +16,11 @@ void main() async {
     print('=========get storage = =======');
     print(GetStorage().read('en'));
   }
+  if (Get.locale?.languageCode == null && GetStorage().read('en')) {
+    Get.updateLocale(const Locale('en'));
+  } else {
+    Get.updateLocale(const Locale('ar'));
+  }
 
   final WidgetsBinding widgetsFlutterBinding =
       WidgetsFlutterBinding.ensureInitialized();
