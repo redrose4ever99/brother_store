@@ -2,10 +2,8 @@ import 'package:brother_store/features/gallery/screen/gallery.dart';
 import 'package:brother_store/features/shop/screens/store/store.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
-import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'features/personlization/screens/settings/settings.dart';

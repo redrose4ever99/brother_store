@@ -72,8 +72,11 @@ class CartScreen extends StatelessWidget {
                         SizedBox(
                             width: 250,
                             child: ElevatedButton(
-                                onPressed: () =>
-                                    Get.off(() => const NavigationMenu()),
+                                onPressed: () {
+                                  NavigationController
+                                      .instance.selectedIndex.value = 1;
+                                  Get.off(() => const NavigationMenu());
+                                },
                                 child: Text(
                                   AppLocalizations.of(context)!.letsFillIt,
                                   style: Theme.of(context)

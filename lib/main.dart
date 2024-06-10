@@ -16,6 +16,7 @@ void main() async {
     print('=========get storage = =======');
     print(GetStorage().read('en'));
   }
+  GetStorage().writeIfNull('en', true);
   if (Get.locale?.languageCode == null && GetStorage().read('en')) {
     Get.updateLocale(const Locale('en'));
   } else {

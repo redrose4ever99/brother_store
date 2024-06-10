@@ -1,5 +1,6 @@
 {
     "language":"English",
+    "brotherCreative":"Brother Creative",
     "@language": {
         "description": "The current language"
         
@@ -68,6 +69,7 @@
     "userId":"User ID",
     "email":"E-mail",
     "phoneNumber":"Phone Number",
+    "phoneNumbers":"Phone Numbers",
     "closeAccount":"Close Account",
     "showMore":"Show More",
     "less":"Less",

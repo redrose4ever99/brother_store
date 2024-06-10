@@ -13,7 +13,7 @@ class TSortableProducts extends StatelessWidget {
   final List<ProductModel> products;
   @override
   Widget build(BuildContext context) {
-    final isEg = Get.locale?.languageCode == 'en';
+    //final isEg = Get.locale?.languageCode == 'en';
     final controller = Get.put(AllProductController());
     controller.assignProducts(products);
     return Column(

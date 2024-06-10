@@ -76,8 +76,8 @@ class BrotherModel {
         arabicAboutUs: data['ArabicAboutUs'] ?? '',
         cancellationPolicy: data['CancellationPolicy'] ?? '',
         arabicCancellationPolicy: data['ArabicCancellationPolicy'] ?? '',
-        phoneNumbers: data['PhonNumbers'] != null
-            ? List<String>.from(data['PhonNumbers'])
+        phoneNumbers: data['PhoneNumbers'] != null
+            ? List<String>.from(data['PhoneNumbers'])
             : [],
         privacyPolicy: data['PrivacyPolicy'] ?? '',
         arabicPrivacyPolicy: data['ArabicPrivacyPolicy'] ?? '',

@@ -7,8 +7,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class OnBoardingSkip extends StatelessWidget {
   const OnBoardingSkip({
     super.key,
+    required this.count,
   });
-
+  final int count;
   @override
   Widget build(BuildContext context) {
     return Positioned(

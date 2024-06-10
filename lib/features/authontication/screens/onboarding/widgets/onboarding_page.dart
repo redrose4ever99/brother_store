@@ -1,3 +1,5 @@
+import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +18,14 @@ class OnBoardingPage extends StatelessWidget {
       padding: const EdgeInsets.all(TSizes.defaultSpace),
       child: Column(
         children: [
-          Image(
-            width: THelperFunctions.screenwidth() * 0.8,
-            height: THelperFunctions.screenHeight() * 0.6,
-            image: AssetImage(image),
+          TRoundedContainer(
+            child: Image(
+              width: THelperFunctions.screenwidth() * 0.8,
+              height: THelperFunctions.screenHeight() * 0.5,
+              image: Image != ''
+                  ? NetworkImage(image) as ImageProvider
+                  : const AssetImage(TImages.bBlack),
+            ),
           ),
           Text(
             title,

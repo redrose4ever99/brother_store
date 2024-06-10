@@ -5,7 +5,6 @@ import 'package:brother_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/general/controllers/brother_controller.dart';
 import 'package:brother_store/features/personlization/screens/settings/language/language.dart';
-import 'package:brother_store/features/personlization/screens/settings/terms.dart';
 import 'package:brother_store/features/shop/screens/cart/cart.dart';
 import 'package:brother_store/features/shop/screens/orders/widgets/order.dart';
 import 'package:brother_store/features/shop/screens/wishlist/wishlist.dart';
@@ -26,9 +25,9 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final termController = BrothersController.instance;
-    final brotherData = termController.allData;
-    bool isEg = Get.locale?.languageCode == 'en';
+    // final termController = BrothersController.instance;
+    // final brotherData = termController.allData;
+    // bool isEg = Get.locale?.languageCode == 'en';
     return Directionality(
       textDirection: Get.locale?.languageCode == 'en'
           ? TextDirection.ltr
@@ -153,62 +152,62 @@ class SettingsScreen extends StatelessWidget {
                             }
                           }),
                     ),
-                    const Divider(),
-                    TSettingMenuTile(
-                      onTap: () => Get.to(() => TermsScreen(
-                            data: isEg
-                                ? brotherData[0].termsCondition
-                                : brotherData[0].arabicTermsCondition,
-                            title: AppLocalizations.of(context)!.termsCondition,
-                          )),
-                      icon: Icons.terminal,
-                      title: AppLocalizations.of(context)!.termsCondition,
-                      subTitle: AppLocalizations.of(context)!.termsCondition,
-                    ),
-                    TSettingMenuTile(
-                      onTap: () => Get.to(() => TermsScreen(
-                            data: isEg
-                                ? brotherData[0].privacyPolicy
-                                : brotherData[0].arabicPrivacyPolicy,
-                            title: AppLocalizations.of(context)!.privacyPolicy,
-                          )),
-                      icon: Icons.security,
-                      title: AppLocalizations.of(context)!.privacyPolicy,
-                      subTitle: AppLocalizations.of(context)!.privacyPolicy,
-                    ),
-                    TSettingMenuTile(
-                      onTap: () => Get.to(() => TermsScreen(
-                            data: isEg
-                                ? brotherData[0].returnPolicy
-                                : brotherData[0].arabicReturnPolicy,
-                            title: AppLocalizations.of(context)!.returnPolicy,
-                          )),
-                      icon: Icons.all_inclusive,
-                      title: AppLocalizations.of(context)!.returnPolicy,
-                      subTitle: AppLocalizations.of(context)!.returnPolicy,
-                    ),
-                    TSettingMenuTile(
-                      onTap: () => Get.to(() => TermsScreen(
-                            data: isEg
-                                ? brotherData[0].cancellationPolicy
-                                : brotherData[0].arabicCancellationPolicy,
-                            title: AppLocalizations.of(context)!.cancelPolicy,
-                          )),
-                      icon: Icons.cancel_schedule_send_rounded,
-                      title: AppLocalizations.of(context)!.cancelPolicy,
-                      subTitle: AppLocalizations.of(context)!.cancelPolicy,
-                    ),
-                    TSettingMenuTile(
-                      onTap: () => Get.to(() => TermsScreen(
-                            data: isEg
-                                ? brotherData[0].aboutUs
-                                : brotherData[0].arabicAboutUs,
-                            title: AppLocalizations.of(context)!.aboutUs,
-                          )),
-                      icon: Icons.info_outlined,
-                      title: AppLocalizations.of(context)!.aboutUs,
-                      subTitle: AppLocalizations.of(context)!.aboutUs,
-                    ),
+                    // const Divider(),
+                    // TSettingMenuTile(
+                    //   onTap: () => Get.to(() => TermsScreen(
+                    //         data: isEg
+                    //             ? brotherData[0].termsCondition
+                    //             : brotherData[0].arabicTermsCondition,
+                    //         title: AppLocalizations.of(context)!.termsCondition,
+                    //       )),
+                    //   icon: Icons.terminal,
+                    //   title: AppLocalizations.of(context)!.termsCondition,
+                    //   subTitle: AppLocalizations.of(context)!.termsCondition,
+                    // ),
+                    // TSettingMenuTile(
+                    //   onTap: () => Get.to(() => TermsScreen(
+                    //         data: isEg
+                    //             ? brotherData[0].privacyPolicy
+                    //             : brotherData[0].arabicPrivacyPolicy,
+                    //         title: AppLocalizations.of(context)!.privacyPolicy,
+                    //       )),
+                    //   icon: Icons.security,
+                    //   title: AppLocalizations.of(context)!.privacyPolicy,
+                    //   subTitle: AppLocalizations.of(context)!.privacyPolicy,
+                    // ),
+                    // TSettingMenuTile(
+                    //   onTap: () => Get.to(() => TermsScreen(
+                    //         data: isEg
+                    //             ? brotherData[0].returnPolicy
+                    //             : brotherData[0].arabicReturnPolicy,
+                    //         title: AppLocalizations.of(context)!.returnPolicy,
+                    //       )),
+                    //   icon: Icons.all_inclusive,
+                    //   title: AppLocalizations.of(context)!.returnPolicy,
+                    //   subTitle: AppLocalizations.of(context)!.returnPolicy,
+                    // ),
+                    // TSettingMenuTile(
+                    //   onTap: () => Get.to(() => TermsScreen(
+                    //         data: isEg
+                    //             ? brotherData[0].cancellationPolicy
+                    //             : brotherData[0].arabicCancellationPolicy,
+                    //         title: AppLocalizations.of(context)!.cancelPolicy,
+                    //       )),
+                    //   icon: Icons.cancel_schedule_send_rounded,
+                    //   title: AppLocalizations.of(context)!.cancelPolicy,
+                    //   subTitle: AppLocalizations.of(context)!.cancelPolicy,
+                    // ),
+                    // TSettingMenuTile(
+                    //   onTap: () => Get.to(() => TermsScreen(
+                    //         data: isEg
+                    //             ? brotherData[0].aboutUs ?? ""
+                    //             : brotherData[0].arabicAboutUs ?? '',
+                    //         title: AppLocalizations.of(context)!.aboutUs,
+                    //       )),
+                    //   icon: Icons.info_outlined,
+                    //   title: AppLocalizations.of(context)!.aboutUs,
+                    //   subTitle: AppLocalizations.of(context)!.aboutUs,
+                    // ),
                   ],
                 ),
               )

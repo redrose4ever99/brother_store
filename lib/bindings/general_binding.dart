@@ -1,3 +1,4 @@
+import 'package:brother_store/features/authontication/controllers.onboarding/onboarding_controller.dart';
 import 'package:brother_store/features/authontication/controllers/network_manager.dart';
 import 'package:brother_store/features/general/controllers/brother_controller.dart';
 import 'package:brother_store/features/shop/controllers/address_controller.dart';
@@ -8,6 +9,8 @@ class GeneralBindings extends Bindings {
   @override
   void dependencies() {
     Get.put(NetworkManager());
+    Get.put(OnBoardingController());
+    //Get.put(AuthenticationRepository());
     Get.put(BrothersController());
     Get.put(AddressController());
     Get.put(CheckoutController());

@@ -1,21 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:brother_store/common/widgets/image_text_widets/vertical_image_text.dart';
 import 'package:brother_store/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:brother_store/features/shop/controllers/category_controller.dart';
 import 'package:brother_store/features/shop/screens/all_products/all_products.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
-import 'package:brother_store/common/widgets/images/rounded_image.dart';
 import 'package:brother_store/common/widgets/products/product_cards/product_card_horizontal.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/shop/models/category_model.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SubCategoriesScreen extends StatelessWidget {
   const SubCategoriesScreen({

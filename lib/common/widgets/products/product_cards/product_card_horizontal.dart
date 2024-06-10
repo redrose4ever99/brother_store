@@ -8,8 +8,6 @@ import 'package:brother_store/features/shop/screens/product_details/product_deta
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-
 import 'package:brother_store/common/styles/shadows.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:brother_store/common/widgets/images/rounded_image.dart';
@@ -26,7 +24,7 @@ class TProductCardHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
-    final isEg = Get.locale?.languageCode == 'en';
+    //final isEg = Get.locale?.languageCode == 'en';
     final controller = ProductController.instance;
     final salePrecentage =
         controller.calculateSalePresentage(product.price, product.salePrice);

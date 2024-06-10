@@ -6,8 +6,6 @@ import "package:flutter/material.dart";
 import "package:brother_store/common/widgets/custom_shapes/containers/circuler_container.dart";
 import "package:brother_store/common/widgets/custom_shapes/curved_edges/curved_edge_widget.dart";
 import "package:brother_store/utils/constants/color.dart";
-import "package:get/get.dart";
-import 'package:string_to_color/string_to_color.dart';
 
 class TPrimaryHeaderContainer extends StatelessWidget {
   const TPrimaryHeaderContainer({
@@ -22,11 +20,10 @@ class TPrimaryHeaderContainer extends StatelessWidget {
     // const String secondChoice = "Color(0xff0099ff)";
     // brotherData[0].termsCondition
     return TCurvedEdgesWidget(
-        child: Obx(
-      () => Container(
+      child: Container(
           color: THelperFunctions.isDarkMode(context)
               ? TColors.darkerGray
-              : ColorUtils.stringToColor(controller.primaryColor.toString()),
+              : controller.color,
           padding: const EdgeInsets.all(0),
           child: SizedBox(
             child: Stack(
@@ -49,6 +46,6 @@ class TPrimaryHeaderContainer extends StatelessWidget {
               ],
             ),
           )),
-    ));
+    );
   }
 }

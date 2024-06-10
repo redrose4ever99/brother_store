@@ -15,6 +15,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: GeneralBindings(),
+
       debugShowCheckedModeBanner: false,
       title: 'Brothers Store',
       themeMode: ThemeMode.system,

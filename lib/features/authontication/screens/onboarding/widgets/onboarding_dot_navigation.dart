@@ -8,9 +8,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingDotNavigation extends StatelessWidget {
   const OnBoardingDotNavigation({
+    required this.count,
     super.key,
   });
-
+  final int count;
   @override
   Widget build(BuildContext context) {
     final controller = OnBoardingController.instance;
@@ -20,7 +21,7 @@ class OnBoardingDotNavigation extends StatelessWidget {
         child: SmoothPageIndicator(
             controller: controller.pageController,
             onDotClicked: controller.dotNavigationClick,
-            count: 3,
+            count: count,
             effect: ExpandingDotsEffect(
                 activeDotColor: THelperFunctions.isDarkMode(context)
                     ? TColors.light

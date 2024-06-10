@@ -1,5 +1,6 @@
 import 'package:brother_store/features/authontication/controllers.onboarding/onboarding_controller.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
+import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,46 +15,62 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OnBoardingController());
+    final controller = OnBoardingController.instance;
+    final screens = controller.allData;
+    bool isEg = Get.locale?.languageCode == 'en';
     return Directionality(
-      textDirection: Get.locale?.languageCode == 'en'
-          ? TextDirection.ltr
-          : TextDirection.rtl,
+      textDirection: isEg ? TextDirection.ltr : TextDirection.rtl,
       child: Scaffold(
-        body: Stack(children: [
-          ///Horizontal scrolle pages
-          PageView(
-            controller: controller.pageController,
-            onPageChanged: controller.updatePageIndicator,
-            children: [
-              OnBoardingPage(
-                image: TImages.bBlack,
-                title: AppLocalizations.of(context)!.onboardingTitle1,
-                subTitle: AppLocalizations.of(context)!.onboardingSubtitle1,
-              ),
-              OnBoardingPage(
-                image: TImages.bBlack,
-                title: AppLocalizations.of(context)!.onboardingTitle2,
-                subTitle: AppLocalizations.of(context)!.onboardingSubtitle2,
-              ),
-              OnBoardingPage(
-                image: TImages.bBlack,
-                title: AppLocalizations.of(context)!.onboardingTitle3,
-                subTitle: AppLocalizations.of(context)!.onboardingSubtitle3,
-              )
-            ],
-          ),
+        body: FutureBuilder(
+            future: controller.fetchAllData(),
+            builder: (_, snapshot) {
+              final response = TCloudHelperFunctions.checkMuiltiRecordState(
+                  snapshot: snapshot);
+              if (response != null) return response;
 
-          ///skip button
-          const OnBoardingSkip(),
+              return Stack(children: [
+                ///Horizontal scrolle pages
+                PageView.builder(
+                  itemCount: screens.length,
+                  controller: controller.pageController,
+                  onPageChanged: controller.updatePageIndicator,
 
-          ///dot navigation indicator
-          const OnBoardingDotNavigation(),
+                  itemBuilder: (BuildContext context, int index) =>
+                      OnBoardingPage(
+                    image: screens[index].image == ''
+                        ? TImages.bBlack
+                        : screens[index].image,
+                    title: screens[index].title == ''
+                        ? AppLocalizations.of(context)!.onboardingTitle1
+                        : isEg
+                            ? screens[index].title
+                            : screens[index].arabicTitle,
+                    subTitle: screens[index].subTitle == ''
+                        ? AppLocalizations.of(context)!.onboardingSubtitle1
+                        : isEg
+                            ? screens[index].subTitle
+                            : screens[index].arabicSubtitle,
+                  ),
 
-          /// button circuler
+                  // OnBoardingPage(
+                  //   image:
+                  //       screens[2].image == '' ? TImages.bBlack : screens[2].image,
+                  //   title: AppLocalizations.of(context)!.onboardingTitle3,
+                  //   subTitle: AppLocalizations.of(context)!.onboardingSubtitle3,
+                  // )
+                ),
 
-          const OnBoardingNextButton()
-        ]),
+                ///skip button
+                OnBoardingSkip(count: screens.length),
+
+                ///dot navigation indicator
+                OnBoardingDotNavigation(count: screens.length),
+
+                /// button circuler
+
+                const OnBoardingNextButton()
+              ]);
+            }),
       ),
     );
   }

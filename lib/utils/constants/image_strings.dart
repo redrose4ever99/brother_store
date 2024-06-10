@@ -8,7 +8,7 @@ class TImages {
   static const String onBoarding1 = "assets/images/on_boarding/onBoarding1.gif";
   static const String onBoarding2 = "assets/images/on_boarding/onBoarding2.gif";
   static const String onBoarding3 = "assets/images/on_boarding/onBoarding3.gif";
-
+//ticktock
   //banner images
   // static const String bannerOne = "assets/images/banners/ban4.jpeg";
   // static const String bannerTow = "assets/images/banners/ban3.jpeg";
@@ -40,5 +40,17 @@ class TImages {
   static const String wordBlack = "assets/logos/4.png";
   static const String wordWhite = "assets/logos/3.png";
   static const String arWord = "assets/logos/ar1.png";
+
+//social media
+
+  static const String facebookIcon = "assets/logos/facebook.png";
+  static const String behanceIcon = "assets/logos/behance.png";
+  static const String instagramIcon = "assets/logos/instagram.jpeg";
+  static const String paintrestIcon = "assets/logos/paintrest.png";
+  static const String ticktockIcon = "assets/logos/1946552.png";
+  static const String whaatsupIcon = "assets/logos/whatsup.jpeg";
+
+//ticktock
+  ///background
   static const String background = "assets/images/back.png";
 }

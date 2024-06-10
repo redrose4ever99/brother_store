@@ -49,7 +49,7 @@ class UserAdressScreen extends StatelessWidget {
                         TCloudHelperFunctions.checkMuiltiRecordState(
                             snapshot: snapshot);
                     if (response != null) return response;
-                    final address = snapshot.data!;
+
                     return ListView.builder(
                         shrinkWrap: true,
                         itemCount: snapshot.data!.length,
