@@ -44,6 +44,7 @@ class TProductCardHorizontal extends StatelessWidget {
           children: [
             TRoundedContainer(
               height: 120,
+              width: 120,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: dark ? TColors.dark : TColors.light,
               child: Stack(
@@ -106,7 +107,7 @@ class TProductCardHorizontal extends StatelessWidget {
                           smalSize: true,
                         ),
                         const SizedBox(height: TSizes.spaceBtWItems / 2),
-                        const TBrandTitleWithVerifiedIcon(title: 'Amazon'),
+                        TBrandTitleWithVerifiedIcon(title: product.brand!.name),
 
                         //price row
                       ],

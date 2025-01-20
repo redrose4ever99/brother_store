@@ -1,7 +1,12 @@
+import 'dart:io';
+import 'package:brother_store/features/authontication/screens/login/login.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:brother_store/app.dart';
 import 'package:brother_store/data/repositoies/user/user_repository.dart';
 import 'package:brother_store/features/authontication/screens/login/phone_verification.dart';
 import 'package:brother_store/features/authontication/screens/onboarding/onboarding.dart';
+import 'package:brother_store/features/authontication/screens/register/verify_email.dart';
 import 'package:brother_store/features/personlization/models/users/user_model.dart';
 import 'package:brother_store/utils/storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,6 +21,7 @@ class AuthenticationRepository extends GetxController {
   ///variables
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
+  final isGust = true.obs;
   var verificationId = ''.obs;
 
   late final Rx<User?> firebaseUser;
@@ -31,27 +37,68 @@ class AuthenticationRepository extends GetxController {
 
   void screenRedirect() async {
     final user = _auth.currentUser;
-    await TLocalStorage.init('EyTbtgIxRwamzlhsPnSs4lehlcc2');
-    // user.uid = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
     if (user != null) {
-      if (kDebugMode) {
-        print('=============================current user id=================');
-        print('EyTbtgIxRwamzlhsPnSs4lehlcc2');
+      if (user.emailVerified) {
+        isGust.value = false;
+        await TLocalStorage.init(_auth.currentUser!.uid);
+        Get.offAll(const App());
+      } else {
+        Get.offAll(() => VerifyEmailScreen(
+              email: _auth.currentUser?.email,
+            ));
       }
-    }
-    if (kDebugMode) {
-      print('=============================Get Storage=================');
-      print(deviceStorage.read('isTheFirstTime'));
-    }
-    deviceStorage.writeIfNull('isTheFirstTime', true);
-    deviceStorage.writeIfNull('en', true);
+    } else {
+      //await TLocalStorage.init('EyTbtgIxRwamzlhsPnSs4lehlcc2');
+      // user.uid = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
+      await TLocalStorage.init('gust');
+      isGust.value = true;
+      deviceStorage.writeIfNull('isTheFirstTime', true);
+      deviceStorage.writeIfNull('en', true);
 
-    deviceStorage.read('isTheFirstTime') != true
-        ? Get.offAll(() => const App())
-        : Get.offAll(() => const OnBoardingScreen());
+      deviceStorage.read('isTheFirstTime') != true
+          ? Get.offAll(() => const App())
+          : Get.offAll(() => const OnBoardingScreen());
+    }
   }
 
   ///Rigesteration
+
+  Future<UserCredential> registerWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      var s = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      isGust.value = false;
+      return s;
+    } on FirebaseAuthException catch (e) {
+      throw (e.code).toString();
+    } on FirebaseException catch (e) {
+      throw (e.code).toString();
+    } on FormatException catch (_) {
+      throw 'error formate';
+    } on Platform catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something wrong';
+    }
+  }
+
+  Future<void> sendEmailVerification() async {
+    try {
+      await _auth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      throw (e.code).toString();
+    } on FirebaseException catch (e) {
+      throw (e.code).toString();
+    } on FormatException catch (_) {
+      throw 'error formate';
+    } on Platform catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something wrong';
+    }
+  }
+
   Future<void> phoneAuthentication(String phoneNum) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNum,
@@ -60,14 +107,10 @@ class AuthenticationRepository extends GetxController {
         if (kDebugMode) {
           print(credential.verificationId.toString());
         }
-        Get.snackbar(
-            snackPosition: SnackPosition.BOTTOM,
-            'sussess',
-            credential.verificationId.toString());
-        Get.snackbar(
-            snackPosition: SnackPosition.BOTTOM,
-            'sussess',
-            'complite verification please');
+        TLoader.successSnackBar(
+            title: 'sussess', message: credential.verificationId.toString());
+        TLoader.successSnackBar(
+            title: 'sussess', message: 'complite verification please');
         Get.to(const PhoneVerificationScreen());
       },
       codeSent: (verificationId, resendingToken) {
@@ -82,13 +125,12 @@ class AuthenticationRepository extends GetxController {
           print(e.message.toString());
         }
         if (e.code == 'invalid_phone_number') {
-          Get.snackbar(
-            snackPosition: SnackPosition.BOTTOM,
-            'Error',
-            'the provided phone number is not valid.',
+          TLoader.erroreSnackBar(
+            title: 'Error',
+            message: 'the provided phone number is not valid.',
           );
         } else {
-          Get.snackbar('Error', e.message.toString());
+          TLoader.erroreSnackBar(title: 'Error', message: e.message.toString());
           if (kDebugMode) {
             print(e.message.toString());
           }
@@ -107,12 +149,125 @@ class AuthenticationRepository extends GetxController {
           UserModel(id: uid, phoneNumber: credentials.user!.phoneNumber);
       final userRepository = Get.put(UserRepository());
       userRepository.saveUserRecord(user);
-      Get.snackbar(
-          snackPosition: SnackPosition.BOTTOM,
-          "sussess",
-          "your Account created sussessfully");
+      TLoader.successSnackBar(
+          title: "sussess", message: "your Account created sussessfully");
     }
 
     return credentials.user != null ? true : false;
+  }
+
+  Future<void> logOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw (e.code).toString();
+    } on FirebaseException catch (e) {
+      throw (e.code).toString();
+    } on FormatException catch (_) {
+      throw 'error formate';
+    } on Platform catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something wrong';
+    }
+  }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw (e.code).toString();
+    } on FirebaseException catch (e) {
+      throw (e.code).toString();
+    } on FormatException catch (_) {
+      throw 'error formate';
+    } on Platform catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something wrong';
+    }
+  }
+
+  Future<void> reAuthenticateWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      AuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: password);
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw (e.code).toString();
+    } on FirebaseException catch (e) {
+      throw (e.code).toString();
+    } on FormatException catch (_) {
+      throw 'error formate';
+    } on Platform catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something wrong';
+    }
+  }
+
+  Future<UserCredential?> loginWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw (e.code).toString();
+    } on FirebaseException catch (e) {
+      throw (e.code).toString();
+    } on FormatException catch (_) {
+      throw 'error formate';
+    } on Platform catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something wrong';
+    }
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw (e.code).toString();
+    } on FirebaseException catch (e) {
+      throw (e.code).toString();
+    } on FormatException catch (_) {
+      throw 'error formate';
+    } on Platform catch (e) {
+      throw e.toString();
+    } catch (e) {
+      return null;
+      //throw 'Something wrong';
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw (e.code).toString();
+    } on FirebaseException catch (e) {
+      throw (e.code).toString();
+    } on FormatException catch (_) {
+      throw 'error formate';
+    } on Platform catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something wrong';
+    }
   }
 }

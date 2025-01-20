@@ -1,3 +1,4 @@
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/shop/models/order_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -9,8 +10,8 @@ class OrderRepository extends GetxController {
 
   Future<List<OrderModel>> fetchUserOrders() async {
     try {
-      const userId = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
-      // AuthenticationRepository.instance.authUser!.uid;
+      var userId = // 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
+          AuthenticationRepository.instance.authUser!.uid;
       // if (userId.isEmpty) {
       //   throw 'Unable to find user information. try again later';
       // }

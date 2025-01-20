@@ -4,7 +4,6 @@ class UserModel {
   String? firstName;
   String? lastName;
   String? email;
-
   String? id;
   String? phoneNumber;
   String profilePicture;

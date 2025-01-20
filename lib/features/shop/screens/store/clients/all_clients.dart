@@ -69,9 +69,9 @@ class AllClientsScreen extends StatelessWidget {
                                     imageUrl:
                                         controller.allClients[index].thumbnail,
                                     progressIndicatorBuilder:
-                                        (_, __, DownloadProgress) =>
+                                        (_, __, downloadProgress) =>
                                             CircularProgressIndicator(
-                                              value: DownloadProgress.progress,
+                                              value: downloadProgress.progress,
                                               color: TColors.primary,
                                             )),
                               ),

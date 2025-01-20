@@ -1,3 +1,4 @@
+import 'package:brother_store/features/project/screens/prices/add_new_price_request.dart';
 import 'package:brother_store/features/project/screens/projects/interview_request.dart';
 import 'package:brother_store/features/project/screens/projects/price_request.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
@@ -40,6 +41,12 @@ class MenuScreen extends StatelessWidget {
                   iconColor: iconColor,
                   title: AppLocalizations.of(context)!.addProject,
                   subTitle: 'you can Request for new Project or decoration'),
+              TSettingMenuTile(
+                  onTap: () => Get.to(() => const AddNewPriceRequestScreen()),
+                  icon: Iconsax.dollar_circle,
+                  iconColor: iconColor,
+                  title: AppLocalizations.of(context)!.addProject,
+                  subTitle: 'you can Request for Price or decoration price'),
               TSettingMenuTile(
                   onTap: () => Get.to(() => const PriceRequestScreen()),
                   icon: Icons.price_change,

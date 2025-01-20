@@ -6,11 +6,11 @@ class TElevatedButtonTheme {
       style: ElevatedButton.styleFrom(
           elevation: 0,
           foregroundColor: Colors.white,
-          backgroundColor: Colors.blue,
+          backgroundColor: const Color(0xFF0055ff),
           disabledBackgroundColor: Colors.grey,
           disabledForegroundColor: Colors.grey,
           side: const BorderSide(
-            color: Colors.blue,
+            color: Color(0xFF0055ff),
           ),
           padding: const EdgeInsets.symmetric(vertical: 18),
           textStyle: const TextStyle(
@@ -21,11 +21,11 @@ class TElevatedButtonTheme {
       style: ElevatedButton.styleFrom(
           elevation: 0,
           foregroundColor: Colors.white,
-          backgroundColor: Colors.blue,
+          backgroundColor: const Color(0xFF0099ff),
           disabledBackgroundColor: Colors.grey,
           disabledForegroundColor: Colors.grey,
           side: const BorderSide(
-            color: Colors.blue,
+            color: Color(0xFF0099ff),
           ),
           padding: const EdgeInsets.symmetric(vertical: 18),
           textStyle: const TextStyle(

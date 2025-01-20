@@ -21,20 +21,23 @@ class THomeAppbar extends StatelessWidget {
       actions: [
         GestureDetector(
           onTap: () => Get.to(() => const ProfileScreen()),
-          child: Obx(() {
-            final networkImage = controller.user.value.profilePicture;
-            final image =
-                networkImage.isNotEmpty ? networkImage : TImages.userImage;
-            return networkImage.isNotEmpty
-                ? CircleAvatar(
-                    backgroundImage: NetworkImage(image),
-                    radius: MediaQuery.of(context).size.height * 0.05,
-                  )
-                : CircleAvatar(
-                    backgroundImage: AssetImage(image),
-                    radius: MediaQuery.of(context).size.height * 0.05,
-                  );
-          }),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Obx(() {
+              final networkImage = controller.user.value.profilePicture;
+              final image =
+                  networkImage.isNotEmpty ? networkImage : TImages.userImage;
+              return networkImage.isNotEmpty
+                  ? CircleAvatar(
+                      backgroundImage: NetworkImage(image),
+                      radius: MediaQuery.of(context).size.height * 0.05,
+                    )
+                  : CircleAvatar(
+                      backgroundImage: AssetImage(image),
+                      radius: MediaQuery.of(context).size.height * 0.05,
+                    );
+            }),
+          ),
         )
       ],
       //leadingIcon: Icons.menu_outlined,

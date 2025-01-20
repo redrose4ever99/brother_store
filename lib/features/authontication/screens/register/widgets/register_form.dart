@@ -1,0 +1,197 @@
+import 'package:brother_store/app.dart';
+import 'package:brother_store/features/authontication/controllers/register/register_controller.dart';
+import 'package:brother_store/features/authontication/screens/login/login.dart';
+import 'package:brother_store/features/general/controllers/brother_controller.dart';
+import 'package:brother_store/features/personlization/screens/settings/terms.dart';
+import 'package:brother_store/utils/constants/color.dart';
+import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/helper_functions.dart';
+import 'package:brother_store/utils/validators/validator.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:iconsax/iconsax.dart';
+
+class TRegisterForm extends StatelessWidget {
+  const TRegisterForm({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isEg = Get.locale?.languageCode == 'en';
+    final brotherData = BrothersController.instance.allData;
+    final controller = Get.put(RegisterController());
+    final dark = THelperFunctions.isDarkMode(context);
+    return Form(
+        key: controller.registerFormKey,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child: TextFormField(
+                  controller: controller.firstName,
+                  validator: (value) => TValidator.validateEmptyText(
+                      AppLocalizations.of(context)!.firstName, value),
+                  expands: false,
+                  decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.firstName,
+                      prefixIcon: const Icon(Iconsax.user)),
+                )),
+                const SizedBox(
+                  width: TSizes.spaceBtwInputFields,
+                ),
+                Expanded(
+                    child: TextFormField(
+                  controller: controller.lastName,
+                  validator: (value) => TValidator.validateEmptyText(
+                      AppLocalizations.of(context)!.lastName, value),
+                  expands: false,
+                  decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.lastName,
+                      prefixIcon: const Icon(Iconsax.user)),
+                ))
+              ],
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwInputFields,
+            ),
+            TextFormField(
+              controller: controller.email,
+              validator: (value) => TValidator.validateEmail(value),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.email,
+                  prefixIcon: const Icon(Iconsax.direct)),
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwInputFields,
+            ),
+            TextFormField(
+              validator: (value) => TValidator.validatePhoneNumber(value),
+              controller: controller.phoneNumber,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Iconsax.call),
+              ),
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwInputFields,
+            ),
+            Obx(
+              () => TextFormField(
+                validator: (value) => TValidator.validateEmptyText(
+                    AppLocalizations.of(context)!.password, value),
+                controller: controller.password,
+                obscureText: controller.hidePassword.value,
+                decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.password,
+                    prefixIcon: const Icon(Iconsax.password_check),
+                    suffixIcon: IconButton(
+                        onPressed: () => controller.hidePassword.value =
+                            !controller.hidePassword.value,
+                        icon: Icon(controller.hidePassword.value
+                            ? Iconsax.eye_slash
+                            : Iconsax.eye))),
+              ),
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtWsections,
+            ),
+            Wrap(
+              children: [
+                SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Obx(() => Checkbox(
+                        value: controller.privacyPolicy.value,
+                        onChanged: (value) => controller.privacyPolicy.value =
+                            !controller.privacyPolicy.value))),
+                const SizedBox(
+                  width: TSizes.spaceBtWItems / 3,
+                ),
+                Text.rich(TextSpan(children: [
+                  TextSpan(
+                      text: AppLocalizations.of(context)!.iAgreeTo,
+                      style: Theme.of(context).textTheme.bodySmall),
+                  TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Get.to(() => TermsScreen(
+                            data: isEg
+                                ? brotherData[0].privacyPolicy
+                                : brotherData[0].arabicPrivacyPolicy,
+                            title: AppLocalizations.of(context)!.privacyPolicy,
+                          )),
+                    text: AppLocalizations.of(context)!.privacyPolicy,
+                    style: Theme.of(context).textTheme.bodySmall!.apply(
+                        color: dark ? TColors.white : TColors.primary,
+                        decoration: TextDecoration.underline,
+                        decorationColor:
+                            dark ? TColors.white : TColors.primary),
+                  ),
+                  TextSpan(
+                      text: AppLocalizations.of(context)!.and,
+                      style: Theme.of(context).textTheme.bodySmall),
+                  TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Get.to(() => TermsScreen(
+                            data: isEg
+                                ? brotherData[0].termsCondition
+                                : brotherData[0].arabicTermsCondition,
+                            title: AppLocalizations.of(context)!.termsCondition,
+                          )),
+                    text: AppLocalizations.of(context)!.termsCondition,
+                    style: Theme.of(context).textTheme.bodySmall!.apply(
+                        color: dark ? TColors.white : TColors.primary,
+                        decoration: TextDecoration.underline,
+                        decorationColor:
+                            dark ? TColors.white : TColors.primary),
+                  ),
+                ]))
+              ],
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtWsections,
+            ),
+            SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: () {
+                      if (controller.registerFormKey.currentState!.validate()) {
+                        controller.register();
+                        // controller.phoneAuthentication(
+                        //     controller.phoneNumber.text.trim());
+                      }
+                    },
+                    child: Text(AppLocalizations.of(context)!.register))),
+            const SizedBox(
+              height: TSizes.spaceBtWsections,
+            ),
+            SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: () => Get.to(() => const App()),
+                    child: const Text('Continue as gust'))),
+            const SizedBox(
+              height: TSizes.spaceBtWsections,
+            ),
+            Text.rich(TextSpan(children: [
+              TextSpan(
+                  text: "I have an account ",
+                  style: Theme.of(context).textTheme.bodySmall),
+              TextSpan(
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => Get.to(
+                        () => const LoginScreen(),
+                      ),
+                text: AppLocalizations.of(context)!.login,
+                style: Theme.of(context).textTheme.bodySmall!.apply(
+                    color: dark ? TColors.white : TColors.primary,
+                    decoration: TextDecoration.underline,
+                    decorationColor: dark ? TColors.white : TColors.primary),
+              ),
+            ]))
+          ],
+        ));
+  }
+}

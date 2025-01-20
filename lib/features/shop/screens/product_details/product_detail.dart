@@ -1,7 +1,13 @@
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
+import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
+import 'package:brother_store/features/shop/controllers/product/order_controller.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
+import 'package:brother_store/features/shop/screens/checkout/checkout.dart';
 import 'package:brother_store/features/shop/screens/product_details/widgets/product_meta_data.dart';
+import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/helper_functions.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
@@ -15,15 +21,17 @@ class ProductDetailsScreen extends StatelessWidget {
   final ProductModel product;
   @override
   Widget build(BuildContext context) {
+    final controller = CartController.instance;
+
     //final dark = THelperFunctions.isDarkMode(context);
     return Directionality(
       textDirection: Get.locale?.languageCode == 'en'
           ? TextDirection.ltr
           : TextDirection.rtl,
       child: Scaffold(
-        bottomNavigationBar: TBottomAddToCart(
-          product: product,
-        ),
+        // bottomNavigationBar: TBottomAddToCart(
+        //   product: product,
+        // ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -37,20 +45,17 @@ class ProductDetailsScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(TSizes.defaultSpace),
                 child: Column(children: [
                   ///Rating and share buttons
-                  const TRatingAndShare(),
+                  TRatingAndShare(product: product),
 
                   ///price Title,Stack, & brand
                   TProductMetaData(
                     product: product,
                   ),
 
-                  ///Attributes
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(AppLocalizations.of(context)!.checkout)),
-                  ),
+                  // TBottomAddToCart(
+                  //   product: product,
+                  // ),
+
                   const SizedBox(
                     height: TSizes.spaceBtWsections,
                   ),
@@ -84,26 +89,58 @@ class ProductDetailsScreen extends StatelessWidget {
                     height: TSizes.spaceBtWItems,
                   ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const TSectionHeading(
-                        title: 'Reviews (199)',
-                        showActionButton: false,
-                      ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Get.locale?.languageCode == 'en'
-                                ? Icons.keyboard_arrow_right
-                                : Icons.keyboard_arrow_left,
-                          ))
-                    ],
+                  Visibility(
+                    visible: true,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const TSectionHeading(
+                          title: 'Reviews (190)',
+                          showActionButton: false,
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Get.locale?.languageCode == 'en'
+                                  ? Icons.keyboard_arrow_right
+                                  : Icons.keyboard_arrow_left,
+                            ))
+                      ],
+                    ),
                   ),
-
                   const SizedBox(
-                    height: TSizes.spaceBtWsections,
+                    height: TSizes.spaceBtWsections / 2,
                   ),
+                  // Obx(
+                  //   () => controller.totalOfCartPrice.value > 0
+                  //       ? SizedBox(
+                  //           width: THelperFunctions.screenwidth() * 0.6,
+                  //           child: ElevatedButton(
+                  //               onPressed: controller.totalOfCartPrice.value > 0
+                  //                   ? () => Get.to(() => const CheckoutScreen())
+                  //                   : () => TLoader.warningSnackBar(
+                  //                       title: AppLocalizations.of(context)!
+                  //                           .cartEmpty,
+                  //                       message: AppLocalizations.of(context)!
+                  //                           .addItemTotheCartForOrderProcess),
+                  //               style: ElevatedButton.styleFrom(
+                  //                   backgroundColor:
+                  //                       controller.totalOfCartPrice.value > 0
+                  //                           ? TColors.primary
+                  //                           : TColors.darkerGray,
+                  //                   side:
+                  //                       const BorderSide(color: TColors.black),
+                  //                   padding: const EdgeInsets.all(TSizes.md)),
+                  //               child: Text(
+                  //                 AppLocalizations.of(context)!.checkout,
+                  //                 style: Theme.of(context)
+                  //                     .textTheme
+                  //                     .titleMedium!
+                  //                     .apply(color: TColors.white),
+                  //               )),
+                  //         )
+                  //       : const SizedBox(),
+                  // ),
                 ]),
               ),
             ],

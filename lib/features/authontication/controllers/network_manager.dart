@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:brother_store/utils/constants/color.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find();
@@ -24,16 +25,8 @@ class NetworkManager extends GetxController {
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     _connectivityStatus.value = result;
     if (_connectivityStatus.value == ConnectivityResult.none) {
-      Get.snackbar(
-          snackPosition: SnackPosition.BOTTOM,
-          'look at this',
-          'no internet connection',
-          backgroundColor: Colors.orange,
-          colorText: TColors.white,
-          icon: const Icon(
-            Iconsax.warning_2,
-            color: TColors.white,
-          ));
+      TLoader.warningSnackBar(
+          title: AppLocalizations.of(Get.context!)!.noInternetConnection);
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:brother_store/bindings/general_binding.dart';
+import 'package:brother_store/routes/app_routes.dart';
 import 'package:brother_store/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: GeneralBindings(),
-
+      getPages: AppRoutes.pages,
       debugShowCheckedModeBanner: false,
       title: 'Brothers Store',
       themeMode: ThemeMode.system,

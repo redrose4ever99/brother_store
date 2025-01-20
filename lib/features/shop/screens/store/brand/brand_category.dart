@@ -24,33 +24,37 @@ class BrandCategory extends StatelessWidget {
             snapshot: snapshot, loader: loader);
         if (widget != null) return widget;
         final categories = snapshot.data!;
-        return ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: categories.length,
-          itemBuilder: (_, index) {
-            final category = categories[index];
-            return TVerticalImageText(
-              borderColor: TColors.primary,
-              image: category.image == "" ? TImages.bBlack : category.image,
-              textColor: TColors.black,
-              isNetworkImage: category.image == "" ? false : true,
-              title: Get.locale?.languageCode == 'en'
-                  ? category.name
-                  : category.arabicName,
-              onTap: () => Get.to(() => AllProducts(
-                    title: Get.locale?.languageCode == 'en'
-                        ? category.name
-                        : category.arabicName,
-                    futureMethode: controller.getCategoryProduct(
-                        categoryId: category.id, limit: -1),
-                  )),
+        return SizedBox(
+          height: 150,
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: categories.length,
+            itemBuilder: (_, index) {
+              final category = categories[index];
+              return TVerticalImageText(
+                borderColor: TColors.primary,
+                image: category.image == "" ? TImages.bBlack : category.image,
+                textColor: TColors.black,
+                isNetworkImage: category.image == "" ? false : true,
+                title: Get.locale?.languageCode == 'en'
+                    ? category.name
+                    : category.arabicName,
+                onTap: () => Get.to(() => AllProducts(
+                      title: Get.locale?.languageCode == 'en'
+                          ? category.name
+                          : category.arabicName,
+                      futureMethode: controller.getCategoryProduct(
+                          categoryId: category.id, limit: -1),
+                    )),
 
-              // SubCategoriesScreen(
-              //   category: category,
-              // )),
-            );
-          },
+                // SubCategoriesScreen(
+                //   category: category,
+                // )),
+              );
+            },
+          ),
         );
       },
     );

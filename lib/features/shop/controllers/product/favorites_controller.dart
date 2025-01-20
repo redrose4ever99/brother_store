@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:brother_store/data/repositoies/product/product_repository.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/storage/storage_utility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -40,20 +41,19 @@ class FavoriteController extends GetxController {
     if (!favorites.containsKey(productId)) {
       favorites[productId] = true;
       saveFavoritesToStorage();
-      Get.snackbar(
-        AppLocalizations.of(Get.context!)!.info,
-        AppLocalizations.of(Get.context!)!.successfullyAddedToFavorites,
-        snackPosition: SnackPosition.BOTTOM,
+      TLoader.successSnackBar(
+        title: AppLocalizations.of(Get.context!)!.info,
+        message:
+            AppLocalizations.of(Get.context!)!.successfullyAddedToFavorites,
       );
     } else {
       TLocalStorage.instance().removeData(productId);
       favorites.remove(productId);
       saveFavoritesToStorage();
       favorites.refresh();
-      Get.snackbar(
-        AppLocalizations.of(Get.context!)!.info,
-        AppLocalizations.of(Get.context!)!.productHasBeenRemoved,
-        snackPosition: SnackPosition.BOTTOM,
+      TLoader.successSnackBar(
+        title: AppLocalizations.of(Get.context!)!.info,
+        message: AppLocalizations.of(Get.context!)!.productHasBeenRemoved,
       );
     }
   }

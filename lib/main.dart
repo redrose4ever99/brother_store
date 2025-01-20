@@ -1,3 +1,4 @@
+import 'package:brother_store/api/frebase_api.dart';
 import 'package:brother_store/main_app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +9,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'data/repositoies/authentication/authentication_repository.dart';
-import 'firebase_options.dart';
+import 'utils/devices/device_utility.dart';
 
 void main() async {
   await GetStorage.init();
   if (kDebugMode) {
-    print('=========get storage = =======');
+    print('=========get storage ========');
     print(GetStorage().read('en'));
   }
   GetStorage().writeIfNull('en', true);
@@ -26,21 +27,21 @@ void main() async {
   final WidgetsBinding widgetsFlutterBinding =
       WidgetsFlutterBinding.ensureInitialized();
 
-  // TDeviceUtils.isAndroid()
-  //     ? await Firebase.initializeApp(
-  //         options: const FirebaseOptions(
-  //             apiKey: 'AIzaSyD9UQWdfrV9oWjMYsGjqD8ToxRK-Jx0IxQ',
-  //             appId: '1:9527223797:android:7ff0fec7a325c921996cbc',
-  //             messagingSenderId: '9527223797',
-  //             projectId: 'brothers-creative'),
-  //       ).then((FirebaseApp value) => Get.put(AuthenticationRepository()))
-  //     : await Firebase.initializeApp()
-  //         .then((FirebaseApp value) => Get.put(AuthenticationRepository()));
-
   FlutterNativeSplash.preserve(widgetsBinding: widgetsFlutterBinding);
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((FirebaseApp value) => Get.put(AuthenticationRepository()));
+  TDeviceUtils.isAndroid()
+      ? await Firebase.initializeApp(
+          options: const FirebaseOptions(
+              apiKey: 'AIzaSyD9UQWdfrV9oWjMYsGjqD8ToxRK-Jx0IxQ',
+              appId: '1:9527223797:android:7ff0fec7a325c921996cbc',
+              messagingSenderId: '9527223797',
+              projectId: 'brothers-creative'),
+        ).then((FirebaseApp value) => Get.put(AuthenticationRepository()))
+      : await Firebase.initializeApp()
+          .then((FirebaseApp value) => Get.put(AuthenticationRepository()));
 
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+  //     .then((FirebaseApp value) => Get.put(AuthenticationRepository()));
+  Get.put(FirebaseApiController());
   runApp(const MainApp());
 }

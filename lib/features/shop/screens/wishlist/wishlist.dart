@@ -4,8 +4,8 @@ import 'package:brother_store/common/widgets/layout/grid_layout.dart';
 import 'package:brother_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:brother_store/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:brother_store/features/shop/controllers/product/favorites_controller.dart';
-import 'package:brother_store/features/shop/screens/store/store.dart';
 import 'package:brother_store/navigation_menu.dart';
+import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter/material.dart';
@@ -55,20 +55,27 @@ class FavoriteScreen extends StatelessWidget {
                         ),
                         Text(
                           AppLocalizations.of(context)!.wishlistIsEmpty,
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const SizedBox(
-                          height: TSizes.spaceBtwInputFields,
+                          height: TSizes.appBarHeight,
                         ),
                         ElevatedButton(
-                            onPressed: () => Get.to(const StoreScreen()),
+                            onPressed: () {
+                              NavigationController
+                                  .instance.selectedIndex.value = 1;
+                              Get.to(const NavigationMenu());
+                            },
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   left: TSizes.defaultSpace,
                                   right: TSizes.defaultSpace),
                               child: Text(
                                 AppLocalizations.of(context)!.letsFillIt,
-                                style: Theme.of(context).textTheme.bodyLarge,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .apply(color: TColors.light),
                               ),
                             )),
                       ],

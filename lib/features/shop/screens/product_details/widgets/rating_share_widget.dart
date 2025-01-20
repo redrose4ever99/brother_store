@@ -1,12 +1,15 @@
+import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:share/share.dart';
 
 class TRatingAndShare extends StatelessWidget {
   const TRatingAndShare({
     super.key,
+    required this.product,
   });
-
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -30,7 +33,10 @@ class TRatingAndShare extends StatelessWidget {
           ],
         ),
         IconButton(
-            onPressed: () {},
+            onPressed: () => {
+                  Share.share('check out my product ${product.thumbnail}',
+                      subject: 'Look what I like!')
+                },
             icon: const Icon(Icons.share, size: TSizes.iconMd))
       ],
     );

@@ -3,8 +3,11 @@ import 'package:brother_store/common/widgets/custom_shapes/containers/primary_he
 import 'package:brother_store/common/widgets/list_tiles/setting_menu_tile.dart';
 import 'package:brother_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
-import 'package:brother_store/features/general/controllers/brother_controller.dart';
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/personlization/screens/settings/language/language.dart';
+import 'package:brother_store/features/project/screens/prices/add_new_price_request.dart';
+import 'package:brother_store/features/project/screens/prices/prices.dart';
+import 'package:brother_store/features/project/screens/projects/projects.dart';
 import 'package:brother_store/features/shop/screens/cart/cart.dart';
 import 'package:brother_store/features/shop/screens/orders/widgets/order.dart';
 import 'package:brother_store/features/shop/screens/wishlist/wishlist.dart';
@@ -94,15 +97,22 @@ class SettingsScreen extends StatelessWidget {
                         title: AppLocalizations.of(context)!.wishList,
                         subTitle:
                             AppLocalizations.of(context)!.wishlistSubTitle),
+                    TSettingMenuTile(
+                      onTap: () => Get.to(() => const ProjectsScreen()),
+                      icon: Iconsax.component,
+                      title: AppLocalizations.of(context)!.myProjects,
+                      subTitle: 'track processing projects ',
+                    ),
+
+                    TSettingMenuTile(
+                        onTap: () => Get.to(() => const TPricesRequestScreen()),
+                        icon: Iconsax.dollar_circle,
+                        title: 'Price Request',
+                        subTitle:
+                            'you can Request for Price or decoration price'),
+                    //  ),
                     // TSettingMenuTile(
-                    //   onTap: () => Get.to(() => const ProjectsScreen()),
-                    //   icon: Iconsax.component,
-                    //   title: AppLocalizations.of(context)!.myProjects,
-                    //   subTitle: 'track processing projects ',
-                    // ),
-                    // ),
-                    // TSettingMenuTile(
-                    //   onTap: () => Get.to(() => const SignupScreen()),
+                    //   onTap: () => Get.to(() => const NotificationScreen()),
                     //   icon: Iconsax.notification,
                     //   title: AppLocalizations.of(context)!.notifications,
                     //   subTitle: 'Do culpa reprehenderit ullamco fugiat.',
@@ -152,6 +162,13 @@ class SettingsScreen extends StatelessWidget {
                             }
                           }),
                     ),
+                    TSettingMenuTile(
+                      onTap: () => AuthenticationRepository.instance.logOut(),
+                      icon: Icons.logout,
+                      title: AppLocalizations.of(context)!.logout,
+                      subTitle: AppLocalizations.of(context)!.logout,
+                    ),
+
                     // const Divider(),
                     // TSettingMenuTile(
                     //   onTap: () => Get.to(() => TermsScreen(

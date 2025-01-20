@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/personlization/models/users/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -29,15 +30,15 @@ class UserRepository extends GetxController {
 
   Future<UserModel> fetchUserDetails() async {
     try {
+      // final snapshotDocument = await _db
+      //     .collection("Users")
+      //     .doc('EyTbtgIxRwamzlhsPnSs4lehlcc2')
+      //     .get();
+
       final snapshotDocument = await _db
           .collection("Users")
-          .doc('EyTbtgIxRwamzlhsPnSs4lehlcc2')
+          .doc(AuthenticationRepository.instance.authUser?.uid)
           .get();
-
-      //  final snapshotDocument = await _db
-      //     .collection("Users")
-      //     .doc(AuthenticationRepository.instance.authUser?.uid)
-      //     .get();
 
       if (snapshotDocument.exists) {
         if (kDebugMode) {
@@ -60,11 +61,11 @@ class UserRepository extends GetxController {
 
   Future<void> updateUserDetails(UserModel user) async {
     try {
-      await _db
-          .collection("Users")
-          .doc('EyTbtgIxRwamzlhsPnSs4lehlcc2')
-          .update(user.toJson());
-//        await _db.collection("Users").doc(user.id).update(user.toJson());
+      // await _db
+      //     .collection("Users")
+      //     .doc('EyTbtgIxRwamzlhsPnSs4lehlcc2')
+      //     .update(user.toJson());
+      await _db.collection("Users").doc(user.id).update(user.toJson());
       if (kDebugMode) {
         print("====  user updated======");
       }
@@ -81,8 +82,8 @@ class UserRepository extends GetxController {
     try {
       await _db
           .collection("Users")
-          .doc('EyTbtgIxRwamzlhsPnSs4lehlcc2')
-          // .doc(AuthenticationRepository.instance.authUser?.uid)
+          // .doc('EyTbtgIxRwamzlhsPnSs4lehlcc2')
+          .doc(AuthenticationRepository.instance.authUser?.uid)
           .update(json);
       if (kDebugMode) {
         print("====  user updated======");

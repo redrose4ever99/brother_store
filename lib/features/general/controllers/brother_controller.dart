@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:brother_store/data/repositoies/brothers/brothers_repository.dart';
 import 'package:brother_store/features/general/models/brother_model.dart';
 import 'package:brother_store/utils/constants/color.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:string_to_color/string_to_color.dart';
@@ -28,12 +29,12 @@ class BrothersController extends GetxController {
       final data = await _brothersRepository.getAlldata();
       allData.assignAll(data);
       primaryColor?.value = allData[0].primaryColor!;
-      color = ColorUtils.stringToColor(primaryColor.toString());
+      // color = ColorUtils.stringToColor(primaryColor.toString());
     } catch (e) {
       if (kDebugMode) {
         print(e);
       }
-      Get.snackbar('oh Snap!', e.toString());
+      TLoader.erroreSnackBar(title: 'oh Snap!', message: e.toString());
     } finally {
       isLoading.value = false;
     }

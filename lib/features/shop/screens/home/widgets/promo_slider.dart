@@ -53,6 +53,7 @@ class TPromoSlider extends StatelessWidget {
                         imageUrl:
                             banner.image == "" ? TImages.bBlack : banner.image,
                         isNetworkImage: banner.image == "" ? false : true,
+                        onPressed: () => Get.toNamed(banner.targetScreen),
                       ),
                     ))
                 .toList(),

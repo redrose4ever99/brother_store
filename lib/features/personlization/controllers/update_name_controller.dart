@@ -3,6 +3,7 @@ import 'package:brother_store/features/authontication/controllers/network_manage
 import 'package:brother_store/features/personlization/controllers/user_controller.dart';
 import 'package:brother_store/features/personlization/screens/profile/profile.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -63,14 +64,14 @@ class UpdateNameController extends GetxController {
       userController.user.value.firstName = firstName.text.trim();
       userController.user.value.lastName = lastName.text.trim();
       TFullScreenLoader.stopLoading();
+      TLoader.successSnackBar(
+          title: AppLocalizations.of(Get.context!)!.congratulation,
+          message: AppLocalizations.of(Get.context!)!.nameChange);
 
-      Get.snackbar(AppLocalizations.of(Get.context!)!.congratulation,
-          AppLocalizations.of(Get.context!)!.nameChange,
-          snackPosition: SnackPosition.BOTTOM);
       Get.off(() => const ProfileScreen());
     } catch (e) {
       TFullScreenLoader.stopLoading();
-      Get.snackbar('oh snap', e.toString());
+      TLoader.erroreSnackBar(title: 'oh snap', message: e.toString());
     }
   }
 }

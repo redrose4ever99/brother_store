@@ -40,6 +40,14 @@ class TImages {
   static const String wordBlack = "assets/logos/4.png";
   static const String wordWhite = "assets/logos/3.png";
   static const String arWord = "assets/logos/ar1.png";
+//email verification
+  static const String verifyIcon = "assets/images/Email-receive.png";
+
+  //Email-receive
+  //lottie
+
+  static const String successfullLottie = "assets/images/lottie/success.json";
+  static const String proccessLottie = "assets/images/lottie/processing.json";
 
 //social media
 
@@ -48,7 +56,9 @@ class TImages {
   static const String instagramIcon = "assets/logos/instagram.jpeg";
   static const String paintrestIcon = "assets/logos/paintrest.png";
   static const String ticktockIcon = "assets/logos/1946552.png";
-  static const String whaatsupIcon = "assets/logos/whatsup.jpeg";
+  static const String whatsupIcon = "assets/logos/whatsup.jpeg";
+  static const String googleIcon = "assets/logos/google.jpeg";
+  static const String appleIcon = "assets/logos/apple.png";
 
 //ticktock
   ///background

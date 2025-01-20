@@ -1,6 +1,7 @@
 import 'package:brother_store/app.dart';
 import 'package:brother_store/data/repositoies/brothers/onboarding_repository.dart';
 import 'package:brother_store/features/general/models/onboarding_model.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +34,7 @@ class OnBoardingController extends GetxController {
       return data;
     } catch (e) {
       TLoggerHelper.error(e.toString());
-      Get.snackbar('oh Snap!', e.toString());
+      TLoader.erroreSnackBar(title: 'oh Snap!', message: e.toString());
       return [];
     } finally {
       isLoading.value = false;

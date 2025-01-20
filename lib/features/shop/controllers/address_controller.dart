@@ -7,6 +7,7 @@ import 'package:brother_store/features/shop/models/address_model.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,10 +39,8 @@ class AddressController extends GetxController {
           orElse: () => AddressModel.empty());
       return addresses;
     } catch (e) {
-      Get.snackbar(
-          snackPosition: SnackPosition.BOTTOM,
-          'address not found',
-          e.toString());
+      TLoader.erroreSnackBar(title: 'address not found', message: e.toString());
+
       return [];
     }
   }
@@ -57,10 +56,8 @@ class AddressController extends GetxController {
       await addressRepository.updateSelectedAddress(
           selectedAddress.value.id, true);
     } catch (e) {
-      Get.snackbar(
-          snackPosition: SnackPosition.BOTTOM,
-          'error in selection ',
-          e.toString());
+      TLoader.erroreSnackBar(
+          title: 'error in selection ', message: e.toString());
     }
   }
 
@@ -68,7 +65,8 @@ class AddressController extends GetxController {
     try {
       //start loading
       TFullScreenLoader.openloadingDialog(
-          AppLocalizations.of(Get.context!)!.storingAddress, TImages.bBlack);
+          AppLocalizations.of(Get.context!)!.storingAddress,
+          TImages.proccessLottie);
 
       // check the internet connectivity
 
@@ -106,10 +104,9 @@ class AddressController extends GetxController {
 
       //show success message
 
-      Get.snackbar(
-          snackPosition: SnackPosition.BOTTOM,
-          AppLocalizations.of(Get.context!)!.congratulation,
-          AppLocalizations.of(Get.context!)!.saveAddressMessage);
+      TLoader.successSnackBar(
+          title: AppLocalizations.of(Get.context!)!.congratulation,
+          message: AppLocalizations.of(Get.context!)!.saveAddressMessage);
 
       //Refresh data
       refreshData.toggle();
@@ -121,10 +118,9 @@ class AddressController extends GetxController {
       Navigator.of(Get.context!).pop();
     } catch (e) {
       TFullScreenLoader.stopLoading();
-      Get.snackbar(
-        'error',
-        e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
+      TLoader.erroreSnackBar(
+        title: 'error',
+        message: e.toString(),
       );
     }
   }

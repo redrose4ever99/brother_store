@@ -14,7 +14,7 @@ class OtpController extends GetxController {
         ? Get.offAll(SuccessScreen(
             subTitle: AppLocalizations.of(Get.context!)!.congratulation,
             title: "Your phone verified successfully",
-            image: TImages.wordBlack,
+            image: TImages.successfullLottie,
             onPressed: () => Get.offAll(() => const NavigationMenu()),
           ))
         : Get.back();

@@ -1,10 +1,9 @@
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/shop/models/cart_item_model.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
-import 'package:brother_store/utils/constants/color.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/storage/storage_utility.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CartController extends GetxController {
@@ -15,7 +14,7 @@ class CartController extends GetxController {
   RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
 
   CartController() {
-    loadCartItem();
+    if (!AuthenticationRepository.instance.isGust.value) loadCartItem();
   }
 
   CartItemModel convertToCartItem(ProductModel product, int quantity) {
@@ -64,35 +63,25 @@ class CartController extends GetxController {
           cartItems.removeAt(index);
           updateCart();
           Get.back();
-          Get.snackbar(
-            AppLocalizations.of(Get.context!)!.info,
-            AppLocalizations.of(Get.context!)!.productHasBeenRemovedFromCart,
-            snackPosition: SnackPosition.BOTTOM,
-          );
+          TLoader.successSnackBar(
+              title: AppLocalizations.of(Get.context!)!.info,
+              message: AppLocalizations.of(Get.context!)!
+                  .productHasBeenRemovedFromCart);
         },
         onCancel: () => Get.back());
   }
 
   void addToCart(ProductModel product) {
     if (productQuantityinCart.value < 1) {
-      Get.snackbar(
-        'warning',
-        'Please Select Quantity',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-
+      removeOneFromCart(
+          convertToCartItem(product, productQuantityinCart.value));
+      // TLoader.warningSnackBar(
+      //     title: 'warrning',
+      //     message: AppLocalizations.of(Get.context!)!.pleaseSelectQuantity);
       return;
     } else if (product.stock < productQuantityinCart.value) {
-      Get.snackbar(
-          snackPosition: SnackPosition.BOTTOM,
-          'ooh snap!',
-          'Selected Product is out of stock',
-          backgroundColor: Colors.orange,
-          colorText: TColors.white,
-          icon: const Icon(
-            Iconsax.warning_2,
-            color: TColors.white,
-          ));
+      TLoader.warningSnackBar(
+          title: 'warrning', message: 'Selected Product is out of stock');
       return;
     }
     final selectedCartItem =
@@ -108,11 +97,10 @@ class CartController extends GetxController {
       cartItems.add(selectedCartItem);
     }
     updateCart();
-    Get.snackbar(
-      AppLocalizations.of(Get.context!)!.info,
-      AppLocalizations.of(Get.context!)!.successfullyAddedToCart,
-      snackPosition: SnackPosition.BOTTOM,
-    );
+    // TLoader.successSnackBar(
+    //   title: AppLocalizations.of(Get.context!)!.info,
+    //   message: AppLocalizations.of(Get.context!)!.successfullyAddedToCart,
+    // );
   }
 
   void updateCart() {

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:brother_store/utils/constants/color.dart';
+import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,10 @@ class TAnimationLoaderWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset(animation,
+            // Lottie.network(
+            //     'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+
+            Lottie.asset(TImages.proccessLottie,
                 width: THelperFunctions.screenwidth() * 0.5),
             const SizedBox(
               height: TSizes.defaultSpace,
@@ -52,7 +56,7 @@ class TAnimationLoaderWidget extends StatelessWidget {
                           actionText!,
                           style: Theme.of(context)
                               .textTheme
-                              .bodyMedium!
+                              .headlineSmall!
                               .apply(color: TColors.light),
                         )),
                   )

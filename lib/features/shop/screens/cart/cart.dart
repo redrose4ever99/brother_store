@@ -63,7 +63,7 @@ class CartScreen extends StatelessWidget {
                         Center(
                             child: Text(
                           AppLocalizations.of(context)!.cartIsEmpty,
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                           textAlign: TextAlign.center,
                         )),
                         const SizedBox(
@@ -81,7 +81,7 @@ class CartScreen extends StatelessWidget {
                                   AppLocalizations.of(context)!.letsFillIt,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyMedium!
+                                      .headlineSmall!
                                       .apply(color: TColors.light),
                                 ))
 

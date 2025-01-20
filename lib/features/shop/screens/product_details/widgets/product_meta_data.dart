@@ -11,6 +11,8 @@ import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'bottom_add_to_cart_widget.dart';
+
 class TProductMetaData extends StatelessWidget {
   const TProductMetaData({super.key, required this.product});
   final ProductModel product;
@@ -69,6 +71,7 @@ class TProductMetaData extends StatelessWidget {
 
         ///title
         TProductTitleText(
+          smalSize: true,
           title: Get.locale?.languageCode == 'en'
               ? product.title
               : product.arabicTitle,
@@ -85,7 +88,7 @@ class TProductMetaData extends StatelessWidget {
             ),
             Text(
               controller.getProductStockStatus(product.stock),
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.bodySmall,
             )
           ],
         ),
@@ -96,17 +99,25 @@ class TProductMetaData extends StatelessWidget {
         ///Brand
 
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            TCircularImage(
-              image: product.brand!.image != ''
-                  ? product.brand!.image
-                  : TImages.bBlack,
-              isNetworkImage: product.brand!.image != '' ? true : false,
-              width: 32,
-              height: 32,
+            Row(
+              children: [
+                TCircularImage(
+                  image: product.brand!.image != ''
+                      ? product.brand!.image
+                      : TImages.bBlack,
+                  isNetworkImage: product.brand!.image != '' ? true : false,
+                  width: 32,
+                  height: 32,
+                ),
+                TBrandTitleWithVerifiedIcon(
+                    title: product.brand != null ? product.brand!.name : ''),
+              ],
             ),
-            TBrandTitleWithVerifiedIcon(
-                title: product.brand != null ? product.brand!.name : ''),
+            TBottomAddToCart(
+              product: product,
+            ),
           ],
         ),
       ],

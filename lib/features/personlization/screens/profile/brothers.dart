@@ -181,7 +181,13 @@ class BrotherScreen extends StatelessWidget {
                     const SizedBox(
                       height: TSizes.spaceBtWItems,
                     ),
-                    const SocialMediaVertical()
+                    const SocialMediaVertical(),
+                    const SizedBox(
+                      height: TSizes.spaceBtWsections,
+                    ),
+                    const SizedBox(
+                      height: TSizes.spaceBtWsections,
+                    ),
                   ],
                 ),
               ),

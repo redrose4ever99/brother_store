@@ -10,6 +10,7 @@ class BrandModel {
   String cover;
   final int? productCount;
   final bool? isFeature;
+  // List<CategoryModel>? categories;
 
   BrandModel({
     required this.id,
@@ -18,6 +19,7 @@ class BrandModel {
     required this.name,
     this.productCount,
     this.isFeature,
+    // this.categories
   });
   static BrandModel empty() =>
       BrandModel(id: '', name: '', image: '', cover: '');

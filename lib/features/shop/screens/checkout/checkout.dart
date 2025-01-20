@@ -1,11 +1,13 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:brother_store/common/widgets/texts/product_price_text.dart';
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
 import 'package:brother_store/features/shop/controllers/product/order_controller.dart';
 import 'package:brother_store/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:brother_store/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:brother_store/features/shop/screens/checkout/widgets/billing_amount_section.dart';
+import 'package:brother_store/features/shop/screens/wellcome_widget.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
@@ -28,79 +30,82 @@ class CheckoutScreen extends StatelessWidget {
           ? TextDirection.ltr
           : TextDirection.rtl,
       child: Scaffold(
-        appBar: TAppBar(
-          showBackArrow: true,
-          title: Text(
-            'Order Review',
-            style: Theme.of(context).textTheme.headlineSmall,
+          appBar: TAppBar(
+            showBackArrow: true,
+            title: Text(
+              'Order Review',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
-        ),
-        body: SingleChildScrollView(
-            child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: Column(
-            children: [
-              const TCartItems(
-                showAddRemoveButtons: false,
-              ),
-              const SizedBox(
-                height: TSizes.spaceBtWsections,
-              ),
-
-              ///Copoun code
-              //pconst TCouponCode(),
-              const SizedBox(
-                height: TSizes.spaceBtWsections,
-              ),
-              TRoundedContainer(
-                  showBorder: true,
-                  backgroundColor: dark ? TColors.black : TColors.white,
-                  padding: const EdgeInsets.all(TSizes.md),
-                  child: const Column(
+          body: !AuthenticationRepository.instance.isGust.value
+              ? SingleChildScrollView(
+                  child: Padding(
+                  padding: const EdgeInsets.all(TSizes.defaultSpace),
+                  child: Column(
                     children: [
-                      TBillingAmountSection(),
-                      SizedBox(
-                        height: TSizes.spaceBtWItems,
+                      const TCartItems(
+                        showAddRemoveButtons: false,
                       ),
-                      Divider(),
-                      SizedBox(
-                        height: TSizes.spaceBtWItems,
+                      const SizedBox(
+                        height: TSizes.spaceBtWsections,
                       ),
-                      TbillingPaymentSection(),
-                      SizedBox(
-                        height: TSizes.spaceBtWItems,
+
+                      ///Copoun code
+                      //pconst TCouponCode(),
+                      const SizedBox(
+                        height: TSizes.spaceBtWsections,
                       ),
-                      TBillingAddressSection(),
-                      SizedBox(
-                        height: TSizes.spaceBtWItems,
-                      ),
+                      TRoundedContainer(
+                          showBorder: true,
+                          backgroundColor: dark ? TColors.black : TColors.white,
+                          padding: const EdgeInsets.all(TSizes.md),
+                          child: const Column(
+                            children: [
+                              TBillingAmountSection(),
+                              SizedBox(
+                                height: TSizes.spaceBtWItems,
+                              ),
+                              Divider(),
+                              SizedBox(
+                                height: TSizes.spaceBtWItems,
+                              ),
+                              TbillingPaymentSection(),
+                              SizedBox(
+                                height: TSizes.spaceBtWItems,
+                              ),
+                              TBillingAddressSection(),
+                              SizedBox(
+                                height: TSizes.spaceBtWItems,
+                              ),
+                            ],
+                          )),
                     ],
-                  )),
-            ],
-          ),
-        )),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: ElevatedButton(
-              onPressed: subtotal > 0
-                  ? () => orderController.processOrder(subtotal)
-                  : () => Get.snackbar(
-                      AppLocalizations.of(context)!.cartEmpty,
-                      AppLocalizations.of(context)!
-                          .addItemTotheCartForOrderProcess),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(AppLocalizations.of(context)!.checkout),
-                  const SizedBox(
-                    width: 15,
                   ),
-                  TProductPriceText(
-                      color: TColors.white, price: subtotal.toString())
-                ],
-              )),
-        ),
-      ),
+                ))
+              : const WellcomeWidget(),
+          bottomNavigationBar: !AuthenticationRepository.instance.isGust.value
+              ? Padding(
+                  padding: const EdgeInsets.all(TSizes.defaultSpace),
+                  child: ElevatedButton(
+                      onPressed: subtotal > 0
+                          ? () => orderController.processOrder(subtotal)
+                          : () => Get.snackbar(
+                              AppLocalizations.of(context)!.cartEmpty,
+                              AppLocalizations.of(context)!
+                                  .addItemTotheCartForOrderProcess),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(AppLocalizations.of(context)!.checkout),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          TProductPriceText(
+                              color: TColors.white, price: subtotal.toString())
+                        ],
+                      )),
+                )
+              : null),
     );
   }
 }

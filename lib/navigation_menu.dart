@@ -12,7 +12,8 @@ import 'features/shop/screens/home/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavigationMenu extends StatelessWidget {
-  const NavigationMenu({super.key});
+  const NavigationMenu({super.key, this.isGust});
+  final bool? isGust;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class NavigationMenu extends StatelessWidget {
                 ),
                 NavigationDestination(
                     selectedIcon: const Icon(
-                      Iconsax.heart,
+                      Iconsax.gallery,
                       color: TColors.primary,
                     ),
                     icon: const Icon(Iconsax.gallery),
@@ -108,14 +109,22 @@ class NavigationMenu extends StatelessWidget {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.no,
-                        style: Theme.of(context).textTheme.labelLarge,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .apply(color: TColors.white),
                       )),
                   ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       },
-                      child: Text(AppLocalizations.of(context)!.yes,
-                          style: Theme.of(context).textTheme.bodyLarge))
+                      child: Text(
+                        AppLocalizations.of(context)!.yes,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .apply(color: TColors.white),
+                      ))
                 ],
               ));
     }

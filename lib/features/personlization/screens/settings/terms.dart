@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,11 +28,11 @@ class TermsScreen extends StatelessWidget {
         ),
         body: Container(
           decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(TImages.background),
-              fit: BoxFit.cover,
-            ),
-          ),
+              // image: DecorationImage(
+              //   image: AssetImage(TImages.arWord),
+              //   fit: BoxFit.cover,
+              // ),
+              ),
           child: Stack(
             children: [
               Container(

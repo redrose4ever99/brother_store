@@ -1,4 +1,5 @@
 import 'package:brother_store/common/widgets/success_screen/success_screen.dart';
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/data/repositoies/order/order_repository.dart';
 import 'package:brother_store/features/shop/controllers/address_controller.dart';
 import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
@@ -7,7 +8,7 @@ import 'package:brother_store/features/shop/models/order_model.dart';
 import 'package:brother_store/navigation_menu.dart';
 import 'package:brother_store/utils/constants/enums.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
-import 'package:brother_store/utils/helpers/helper_functions.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,12 +27,14 @@ class OrderController extends GetxController {
   // RxInt productQuantityinCart = 0.obs;
   // RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
 
+// if (AuthenticationRepository.instance.isGust.value)
+
   Future<List<OrderModel>> fetchUserOrders() async {
     try {
       final userOrder = await orderRepository.fetchUserOrders();
       return userOrder;
     } catch (e) {
-      Get.snackbar('Oh Snap!', e.toString());
+      TLoader.erroreSnackBar(title: 'Oh Snap!', message: e.toString());
       return [];
     }
   }
@@ -39,9 +42,9 @@ class OrderController extends GetxController {
   void processOrder(double totalAmount) async {
     TFullScreenLoader.openloadingDialog(
         'Processing your order', TImages.bBlack);
-    const userId = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
+    //const userId = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
 
-    // final userId = AuthenticationRepository.instance.authUser.uid;
+    final userId = AuthenticationRepository.instance.authUser!.uid;
     // if (userId.isEmpty) return;
     final order = OrderModel(
       id: UniqueKey().toString(),
@@ -57,9 +60,7 @@ class OrderController extends GetxController {
     await orderRepository.saveOrder(order, userId);
     cartController.clearCart();
     Get.off(() => SuccessScreen(
-          image: THelperFunctions.isDarkMode(Get.context!)
-              ? TImages.truePaymentblack
-              : TImages.truePaymentwhite,
+          image: TImages.successfullLottie,
           title: AppLocalizations.of(Get.context!)!.paymentSuccessfull,
           subTitle:
               AppLocalizations.of(Get.context!)!.yourItemWillBeShippingSoon,

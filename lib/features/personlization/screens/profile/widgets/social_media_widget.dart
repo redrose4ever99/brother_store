@@ -13,7 +13,7 @@ class SocialMediaVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = 50;
+    double width = 30;
     return TRoundedContainer(
       showBorder: true,
       padding: const EdgeInsets.all(TSizes.md),
@@ -38,7 +38,7 @@ class SocialMediaVertical extends StatelessWidget {
               launchUrlString(url);
             },
             child: TRoundedImage(
-              imageUrl: TImages.whaatsupIcon,
+              imageUrl: TImages.whatsupIcon,
               width: width,
             ),
           )

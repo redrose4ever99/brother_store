@@ -44,13 +44,14 @@ class TProductCardVertical extends StatelessWidget {
           children: [
             TRoundedContainer(
               height: 180,
+              width: 180,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: dark ? TColors.dark : TColors.light,
               child: Stack(
                 children: [
                   TRoundedImage(
                     imageUrl: product.thumbnail == ''
-                        ? TImages.bBlack
+                        ? TImages.logo
                         : product.thumbnail,
                     applyImageRaduis: true,
                     isNetworkImage: product.thumbnail == '' ? false : true,

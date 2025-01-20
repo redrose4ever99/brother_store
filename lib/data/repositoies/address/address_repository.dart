@@ -1,3 +1,4 @@
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/shop/models/address_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
@@ -9,8 +10,8 @@ class AddressRepository extends GetxController {
 
   Future<List<AddressModel>> fetchUserAddress() async {
     try {
-      const userId = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
-      // AuthenticationRepository.instance.authUser!.uid;
+      // const userId = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
+      var userId = AuthenticationRepository.instance.authUser!.uid;
       if (userId.isEmpty) {
         throw 'Unable to find user information. try again later';
       }
@@ -31,8 +32,8 @@ class AddressRepository extends GetxController {
 
   Future<void> updateSelectedAddress(String addressId, bool selected) async {
     try {
-      const userId = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
-      //final userId = AuthenticationRepository.instance.authUser!.uid;
+      //const userId = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
+      final userId = AuthenticationRepository.instance.authUser!.uid;
       await _db
           .collection('Users')
           .doc(userId)
@@ -46,8 +47,8 @@ class AddressRepository extends GetxController {
 
   Future<String> addAddress(AddressModel address) async {
     try {
-      const userId = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
-      // AuthenticationRepository.instance.authUser!.uid;
+      var userId = //'EyTbtgIxRwamzlhsPnSs4lehlcc2';
+          AuthenticationRepository.instance.authUser!.uid;
       final currentAddress = await _db
           .collection('Users')
           .doc(userId)

@@ -1,16 +1,18 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
-import 'package:brother_store/common/widgets/custom_shapes/curved_edges/curved_edge_widget.dart';
-import 'package:brother_store/common/widgets/images/rounded_image.dart';
+import 'package:brother_store/common/widgets/custom_shapes/containers/circuler_container.dart';
+import 'package:brother_store/common/widgets/icons/circuler_icon.dart';
 import 'package:brother_store/common/widgets/product.cart/favorite_icon.dart';
 import 'package:brother_store/features/shop/controllers/product/images_controller.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
+import 'package:brother_store/features/shop/screens/cart/cart.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 class TProductImageSlider extends StatelessWidget {
   const TProductImageSlider({super.key, required this.product});
@@ -21,83 +23,165 @@ class TProductImageSlider extends StatelessWidget {
 
     final images = controller.getAllProductImage(product);
     final dark = THelperFunctions.isDarkMode(context);
-    return TCurvedEdgesWidget(
-      child: Container(
-        color: dark ? TColors.darkerGray : TColors.light,
-        child: Stack(
-          children: [
-            ///main larg image
-            SizedBox(
-              height: 400,
-              child: Padding(
-                padding: const EdgeInsets.all(TSizes.productImageRadius * 2),
-                child: Center(child: Obx(() {
-                  final image = controller.selectedProductImage.value;
-                  return GestureDetector(
-                    onTap: () => controller.showEnLargedImage(image, '', ''),
-                    child: CachedNetworkImage(
-                        imageUrl: image,
-                        progressIndicatorBuilder: (_, __, DownloadProgress) =>
-                            CircularProgressIndicator(
-                              value: DownloadProgress.progress,
-                              color: TColors.primary,
-                            )),
-                  );
-                })),
-              ),
-            )
 
-            ///image slider for the small images
-            ,
-            Positioned(
-                bottom: 30,
-                right: 0,
-                left: TSizes.defaultSpace,
+    return Container(
+      color: Colors.transparent,
+      child: Column(
+        children: [
+          const SizedBox(
+            height: TSizes.defaultSpace * 2,
+          ),
+          Stack(
+            children: [
+              Column(
+                children: [
+                  const SizedBox(
+                    height: TSizes.defaultSpace,
+                  ),
+                  CarouselSlider(
+                    carouselController: controller.carouselController,
+                    options: CarouselOptions(
+                        height: THelperFunctions.screenwidth() * 0.9,
+                        autoPlayCurve: Curves.bounceOut,
+                        viewportFraction: 1,
+                        onPageChanged: (index, _) => controller
+                            .selectedProductImage.value = images[index]),
+                    items: images
+                        .map((image) => GestureDetector(
+                              onTap: () {
+                                ImagesController.instance
+                                    .fullScreenImage(image);
+                              },
+                              child: Image(
+                                width: THelperFunctions.screenwidth(),
+                                height: THelperFunctions.screenwidth() * 0.9,
+                                fit: BoxFit.contain,
+                                image: NetworkImage(
+                                  image,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                  // Row(
+                  //   mainAxisSize: MainAxisSize.min,
+                  //   children: [
+                  //     for (int i = 0; i < images.length; i++)
+                  //       TCirculerContainer(
+                  //         width: 20,
+                  //         height: 5,
+                  //         margin: const EdgeInsets.only(right: 5, left: 5),
+                  //         backgroundColor:
+                  //               controller.selectedProductImage.value != images[index]
+                  //                 ? TColors.black
+                  //                 : TColors.grey,
+                  //       )
+                  //   ],
+                  // ),
+                ],
+              ),
+              Positioned(
+                bottom: 10,
+                left: 4,
+                right: 4,
                 child: SizedBox(
-                  height: 80,
-                  child: ListView.separated(
-                    itemCount: images.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    itemBuilder: (_, index) => Obx(
-                      () {
-                        final imageSelected =
-                            controller.selectedProductImage.value !=
-                                images[index];
-                        if (kDebugMode) {
-                          print(images[index]);
-                        }
-                        return TRoundedImage(
-                          onPressed: () => controller
-                              .selectedProductImage.value = images[index],
-                          imageUrl: images[index],
-                          backgroundColor: dark ? TColors.dark : TColors.light,
-                          border: Border.all(
-                              color: imageSelected
-                                  ? Colors.transparent
-                                  : TColors.primary),
-                          width: 80,
-                          isNetworkImage: true,
-                          padding: const EdgeInsets.all(TSizes.sm),
-                        );
-                      },
-                    ),
-                    separatorBuilder: (_, __) => const SizedBox(
-                      width: TSizes.spaceBtWItems,
+                  height: 5,
+                  child: Center(
+                    child: ListView.separated(
+                      itemCount: images.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemBuilder: (_, index) => Obx(
+                        () {
+                          //
+                          final imageSelected =
+                              controller.selectedProductImage.value ==
+                                  images[index];
+                          if (kDebugMode) {
+                            print(images[index]);
+                          }
+                          return TCirculerContainer(
+                            width: imageSelected ? 20 : 8,
+                            height: 8,
+                            // margin: const EdgeInsets.only(right: 2, left: 2),
+                            backgroundColor:
+                                imageSelected ? TColors.primary : TColors.grey,
+                          );
+                        },
+                      ),
+                      separatorBuilder: (_, __) => const SizedBox(
+                        width: TSizes.spaceBtWItems,
+                      ),
                     ),
                   ),
-                )),
-            TAppBar(
-              showBackArrow: true,
-              actions: [
-                TFavoriteIcon(
-                  productId: product.id,
-                )
-              ],
-            )
-          ],
-        ),
+                ),
+              ),
+
+              ///image slider for the small images
+
+              TAppBar(
+                showBackArrow: true,
+                actions: [
+                  Row(
+                    children: [
+                      TFavoriteIcon(
+                        productId: product.id,
+                      ),
+                      const SizedBox(
+                        width: TSizes.spaceBtWItems,
+                      ),
+                      TCircularIcon(
+                        onPressed: () => Get.to(() => const CartScreen()),
+                        icon: Iconsax.shopping_bag,
+                      ),
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+          // SizedBox(
+          //   height: 55,
+          //   child: ListView.separated(
+          //     itemCount: images.length,
+          //     shrinkWrap: true,
+          //     scrollDirection: Axis.horizontal,
+          //     physics: const AlwaysScrollableScrollPhysics(),
+          //     itemBuilder: (_, index) => Obx(
+          //       () {
+          //         //
+          //         final imageSelected =
+          //             controller.selectedProductImage.value != images[index];
+          //         if (kDebugMode) {
+          //           print(images[index]);
+          //         }
+          //         return TRoundedImage(
+          //           onPressed: () {
+          //             controller.selectedProductImage.value = images[index];
+          //             controller.carouselController.jumpToPage(index);
+          //           },
+          //           imageUrl: images[index],
+          //           backgroundColor: dark ? TColors.dark : TColors.light,
+          //           border: Border.all(
+          //               color: imageSelected
+          //                   ? Colors.transparent
+          //                   : TColors.primary),
+          //           width: 55,
+          //           isNetworkImage: true,
+          //           padding: const EdgeInsets.all(TSizes.sm),
+          //         );
+          //       },
+          //     ),
+          //     separatorBuilder: (_, __) => const SizedBox(
+          //       width: TSizes.spaceBtWItems,
+          //     ),
+          //   ),
+          // ),
+          const SizedBox(
+            height: TSizes.defaultSpace,
+          ),
+        ],
       ),
     );
   }
