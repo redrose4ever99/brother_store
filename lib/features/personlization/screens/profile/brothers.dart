@@ -1,16 +1,16 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:brother_store/common/widgets/list_tiles/setting_menu_tile.dart';
 import 'package:brother_store/features/general/controllers/brother_controller.dart';
 import 'package:brother_store/features/personlization/screens/settings/terms.dart';
-import 'package:brother_store/utils/constants/color.dart';
+import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+
 import 'widgets/social_media_widget.dart';
 
 class BrotherScreen extends StatelessWidget {
@@ -40,11 +40,14 @@ class BrotherScreen extends StatelessWidget {
                       centerTitle: true,
                       title: Row(
                         children: [
-                          Text(AppLocalizations.of(context)!.brotherCreative,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .apply(color: TColors.white)),
+                          Image(
+                            image: AssetImage(Get.locale?.languageCode == 'en'
+                                ? TImages.wordWhite
+                                : TImages.arWord),
+                            width: 125,
+                            height: 50,
+                            //color: TColors.primary,
+                          ),
                         ],
                       ),
                     ),
@@ -141,43 +144,39 @@ class BrotherScreen extends StatelessWidget {
                       title: AppLocalizations.of(context)!.aboutUs,
                       subTitle: AppLocalizations.of(context)!.aboutUs,
                     ),
-                    TRoundedContainer(
-                      showBorder: true,
-                      padding: const EdgeInsets.all(TSizes.md),
-                      backgroundColor: dark ? TColors.dark : TColors.light,
-                      child: ListTile(
-                          onTap: () {},
-                          leading: Icon(
-                            Icons.call,
-                            size: 35,
-                            color: controller.color,
-                          ),
-                          title: Text(
-                            AppLocalizations.of(context)!.phoneNumber,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          subtitle: SizedBox(
-                            child: ListView.separated(
-                                separatorBuilder: (_, __) => const Column(
-                                      children: [
-                                        SizedBox(
-                                          height: TSizes.spaceBtWsections / 2,
-                                        ),
-                                      ],
-                                    ),
-                                shrinkWrap: true,
-                                itemCount:
-                                    controller.allData[0].phoneNumbers.length,
-                                itemBuilder: (_, index) {
-                                  final phone =
-                                      controller.allData[0].phoneNumbers[index];
-                                  return GestureDetector(
-                                      onTap: () =>
-                                          launchUrlString("tel://$phone"),
-                                      child: Text(phone));
-                                }),
-                          )),
-                    ),
+                    const Divider(),
+                    ListTile(
+                        onTap: () {},
+                        leading: Icon(
+                          Icons.call,
+                          //size: 35,
+                          color: controller.color,
+                        ),
+                        title: Text(
+                          AppLocalizations.of(context)!.phoneNumber,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        subtitle: SizedBox(
+                          child: ListView.separated(
+                              separatorBuilder: (_, __) => const Column(
+                                    children: [
+                                      SizedBox(
+                                        height: TSizes.spaceBtWsections / 2,
+                                      ),
+                                    ],
+                                  ),
+                              shrinkWrap: true,
+                              itemCount:
+                                  controller.allData[0].phoneNumbers.length,
+                              itemBuilder: (_, index) {
+                                final phone =
+                                    controller.allData[0].phoneNumbers[index];
+                                return GestureDetector(
+                                    onTap: () =>
+                                        launchUrlString("tel://$phone"),
+                                    child: Text(phone));
+                              }),
+                        )),
                     const SizedBox(
                       height: TSizes.spaceBtWItems,
                     ),

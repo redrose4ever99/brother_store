@@ -5,7 +5,6 @@ import 'package:brother_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/personlization/screens/settings/language/language.dart';
-import 'package:brother_store/features/project/screens/prices/add_new_price_request.dart';
 import 'package:brother_store/features/project/screens/prices/prices.dart';
 import 'package:brother_store/features/project/screens/projects/projects.dart';
 import 'package:brother_store/features/shop/screens/cart/cart.dart';
@@ -18,6 +17,7 @@ import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:brother_store/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -71,19 +71,19 @@ class SettingsScreen extends StatelessWidget {
                       height: TSizes.spaceBtWItems,
                     ),
                     TSettingMenuTile(
-                        icon: Iconsax.safe_home,
+                        icon: Iconsax.location,
                         onTap: () => Get.to(() => const UserAdressScreen()),
                         subTitle: AppLocalizations.of(context)!.addressSubtile,
                         title: AppLocalizations.of(context)!.myAddresses),
                     TSettingMenuTile(
                       onTap: () => Get.to(() => const CartScreen()),
-                      icon: Iconsax.shopping_cart,
+                      icon: Iconsax.shopping_bag,
                       title: AppLocalizations.of(context)!.myCart,
                       subTitle: AppLocalizations.of(context)!.cartSubtitle,
                     ),
                     TSettingMenuTile(
                       onTap: () => Get.to(() => const OrderScreen()),
-                      icon: Iconsax.bag_tick,
+                      icon: Iconsax.printer,
                       title: AppLocalizations.of(context)!.myOrders,
                       subTitle: AppLocalizations.of(context)!.ordersSubtitle,
                     ),
@@ -99,15 +99,15 @@ class SettingsScreen extends StatelessWidget {
                             AppLocalizations.of(context)!.wishlistSubTitle),
                     TSettingMenuTile(
                       onTap: () => Get.to(() => const ProjectsScreen()),
-                      icon: Iconsax.component,
+                      icon: Iconsax.buildings_2,
                       title: AppLocalizations.of(context)!.myProjects,
                       subTitle: 'track processing projects ',
                     ),
 
                     TSettingMenuTile(
                         onTap: () => Get.to(() => const TPricesRequestScreen()),
-                        icon: Iconsax.dollar_circle,
-                        title: 'Price Request',
+                        icon: Iconsax.discount_shape,
+                        title: AppLocalizations.of(context)!.priceRequest,
                         subTitle:
                             'you can Request for Price or decoration price'),
                     //  ),
@@ -139,10 +139,21 @@ class SettingsScreen extends StatelessWidget {
                     //   title: AppLocalizations.of(context)!.loadDate,
                     //   subTitle: 'upload data to your account',
                     // ),
+
                     TSettingMenuTile(
-                      onTap: () => Get.to(() => const LanguageScreen()),
+                      onTap: () {
+                        if (Get.locale?.languageCode == 'ar') {
+                          GetStorage().write('en', true);
+                          Get.updateLocale(const Locale('en'));
+                        } else {
+                          GetStorage().write('en', false);
+                          Get.updateLocale(const Locale('ar'));
+                        }
+
+                        Get.reload();
+                      },
                       icon: Icons.language,
-                      title: AppLocalizations.of(context)!.languageSetting,
+                      title: AppLocalizations.of(context)!.changedTo,
                       subTitle:
                           AppLocalizations.of(context)!.chooseYourLanguage,
                     ),

@@ -43,16 +43,17 @@ class ProductModel {
       this.productAtributes,
       this.productVariations});
 
-  toJason() {
+  toJson() {
     return {
-      'SKU': sku,
+      'Id': id,
+      'SKU': sku ?? '',
       'Title': title,
       'ArabicTitle': arabicTitle,
       'Thumbnail': thumbnail,
       'ProductType': productType,
       'IsFeature': isFeature,
-      'Description': description,
-      'ArabicDescription': arabicDescription,
+      'Description': description ?? '',
+      'ArabicDescription': arabicDescription ?? '',
       'Brand': brand!.toJson(),
       'Images': images ?? [],
       'Price': price,

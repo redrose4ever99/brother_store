@@ -2,7 +2,6 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:brother_store/features/project/screens/projects/widgets/payment_screen.dart';
-import 'package:brother_store/features/shop/screens/checkout/widgets/billing_payment_section.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/icons_string.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
@@ -86,7 +85,7 @@ class TSinglePriceRequestScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(10.0),
                               child: SvgPicture.asset(
                                 TIcons.pendingIcon,
-                                color: TColors.primary,
+                                //color: TColors.primary,
                               ),
                             ),
                           ),
@@ -161,8 +160,8 @@ class TSinglePriceRequestScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Row(
                     children: [
-                      Text('Completion rate'),
-                      SizedBox(
+                      const Text('Completion rate'),
+                      const SizedBox(
                         width: TSizes.spaceBtWItems,
                       ),
                       LinearPercentIndicator(
@@ -170,21 +169,20 @@ class TSinglePriceRequestScreen extends StatelessWidget {
                         animation: true,
                         lineHeight: 15.0,
                         animationDuration: 2000,
-                        barRadius: Radius.circular(20),
+                        barRadius: const Radius.circular(20),
                         progressColor: TColors.primary,
                         percent: 0.9,
-                        center: Text(
+                        center: const Text(
                           "90.0%",
-                          style: new TextStyle(fontSize: 12.0),
+                          style: TextStyle(fontSize: 12.0),
                         ),
-                        trailing: Icon(Icons.mood),
-                        linearStrokeCap: LinearStrokeCap.roundAll,
+                        trailing: const Icon(Icons.mood),
                         backgroundColor: Colors.grey,
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtWItems,
                 ),
                 TRoundedContainer(

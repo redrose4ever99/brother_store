@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:brother_store/utils/constants/color.dart';
-import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +26,13 @@ class TAnimationLoaderWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Image(image: AssetImage(animation)),
             // Lottie.network(
             //     'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
-
-            Lottie.asset(TImages.proccessLottie,
+            const SizedBox(
+              height: TSizes.appBarHeight,
+            ),
+            Lottie.asset(animation,
                 width: THelperFunctions.screenwidth() * 0.5),
             const SizedBox(
               height: TSizes.defaultSpace,
@@ -47,17 +47,17 @@ class TAnimationLoaderWidget extends StatelessWidget {
             ),
             showAction
                 ? SizedBox(
-                    width: 250,
+                    width: 270,
                     child: OutlinedButton(
                         onPressed: onActionPressed,
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: TColors.dark),
-                        child: Text(
-                          actionText!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .apply(color: TColors.light),
+                        child: Padding(
+                          padding: const EdgeInsets.all(13.0),
+                          child: Center(
+                            child: Text(
+                              actionText!,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ),
                         )),
                   )
                 : const SizedBox(),

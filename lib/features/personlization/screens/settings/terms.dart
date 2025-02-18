@@ -22,7 +22,6 @@ class TermsScreen extends StatelessWidget {
         appBar: TAppBar(
           title: Text(
             title,
-            style: Theme.of(context).textTheme.headlineMedium,
           ),
           showBackArrow: true,
         ),
@@ -35,9 +34,6 @@ class TermsScreen extends StatelessWidget {
               ),
           child: Stack(
             children: [
-              Container(
-                color: Theme.of(context).primaryColor.withOpacity(.1),
-              ),
               SingleChildScrollView(
                 child: Padding(
                     padding: const EdgeInsets.all(TSizes.defaultSpace),

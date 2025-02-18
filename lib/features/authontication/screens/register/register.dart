@@ -1,3 +1,4 @@
+import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/texts/form_divider.dart';
 import 'package:brother_store/common/widgets/texts/social_buttons.dart';
 import 'package:brother_store/features/authontication/screens/register/widgets/register_form.dart';
@@ -19,7 +20,9 @@ class RegisterScreen extends StatelessWidget {
           ? TextDirection.ltr
           : TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: const TAppBar(
+          showBackArrow: true,
+        ),
         // appBar: TAppBar(
         //   title: Text(AppLocalizations.of(context)!.register),
         //   showBackArrow: true,

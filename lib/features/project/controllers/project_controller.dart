@@ -2,21 +2,27 @@ import 'package:brother_store/data/repositoies/authentication/authentication_rep
 import 'package:brother_store/data/repositoies/project/project_repository.dart';
 import 'package:brother_store/features/authontication/controllers/network_manager.dart';
 import 'package:brother_store/features/project/models/project_model.dart';
+import 'package:brother_store/features/project/screens/projects/projects.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ProjectController extends GetxController {
   static ProjectController get instance => Get.find();
-
+  final format = DateFormat("MM/dd/yyyy");
   final name = TextEditingController();
   final description = TextEditingController();
   final quantity = TextEditingController();
   final city = TextEditingController();
   final country = TextEditingController();
+  final RxList projects = [].obs;
+  //final pickedFile = Rx<PlatformFile>(PlatformFile);
+
+  String? selectedValue;
 
   GlobalKey<FormState> projectFormKey = GlobalKey<FormState>();
 
@@ -28,7 +34,7 @@ class ProjectController extends GetxController {
     try {
       //start loading
       TFullScreenLoader.openloadingDialog(
-          AppLocalizations.of(Get.context!)!.storingAddress,
+          AppLocalizations.of(Get.context!)!.addProject,
           TImages.proccessLottie);
 
       // check the internet connectivity
@@ -63,7 +69,7 @@ class ProjectController extends GetxController {
       TFullScreenLoader.stopLoading();
 
       //show success message
-
+      fetchUserProject();
       TLoader.successSnackBar(
           title: AppLocalizations.of(Get.context!)!.congratulation,
           message: AppLocalizations.of(Get.context!)!.saveProjectMessage);
@@ -74,7 +80,8 @@ class ProjectController extends GetxController {
 
       resetFormField();
       // redirect
-      Navigator.of(Get.context!).pop();
+      Get.to(const ProjectsScreen());
+      //  Na\[-p0oi8u7y6t5r4q1  ` cgator.of(Get.context!).pop();
     } catch (e) {
       TFullScreenLoader.stopLoading();
       TLoader.erroreSnackBar(
@@ -84,13 +91,10 @@ class ProjectController extends GetxController {
     }
   }
 
-  Future selectFile() async {}
-  Future uploadFile() async {}
-
   Future<List<ProjectModel>> fetchUserProject() async {
     try {
-      final userProjects = await projectRepository.fetchUserProjects();
-      return userProjects;
+      final projects = await projectRepository.fetchUserProjects();
+      return projects;
     } catch (e) {
       TLoader.erroreSnackBar(title: 'Oh Snap!', message: e.toString());
       return [];

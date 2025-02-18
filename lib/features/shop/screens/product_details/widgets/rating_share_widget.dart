@@ -1,4 +1,5 @@
 import 'package:brother_store/features/shop/models/product_model.dart';
+import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -19,7 +20,7 @@ class TRatingAndShare extends StatelessWidget {
           children: [
             const Icon(
               Iconsax.star5,
-              color: Colors.amber,
+              color: TColors.secondary,
               size: 24,
             ),
             const SizedBox(

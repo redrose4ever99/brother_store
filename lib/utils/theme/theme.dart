@@ -1,3 +1,4 @@
+import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/theme/custom_themes/bottom_sheet_theme.dart';
 import 'package:brother_store/utils/theme/custom_themes/elevated_button.theme.dart';
 import 'package:brother_store/utils/theme/custom_themes/text_field_theme.dart';
@@ -10,9 +11,13 @@ class TAppTheme {
   TAppTheme._();
   static ThemeData lightTheme = ThemeData(
       useMaterial3: true,
-      fontFamily: 'AvenirArabic',
+      fontFamily: 'Tajawal',
       brightness: Brightness.light,
       primaryColor: const Color(0xFF0099ff),
+      primaryColorLight: const Color(0xFF0099ff),
+      primaryColorDark: const Color(0xFF0099ff),
+
+      // accentColor:Color.yellow,
 
       // primaryColor: TColors.primary,
       scaffoldBackgroundColor: Colors.white,
@@ -23,11 +28,13 @@ class TAppTheme {
       inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationThem);
   static ThemeData darkTheme = ThemeData(
       useMaterial3: true,
-      fontFamily: 'AvenirArabic',
+      fontFamily: 'Tajawal',
       brightness: Brightness.dark,
-      primaryColor: const Color(0xFF0055ff),
+      primaryColor: const Color(0xFF3F50CB),
+      primaryColorLight: const Color(0xFF0099ff),
+      primaryColorDark: const Color(0xFF3F50CB),
       // primaryColor: TColors.primary,
-      scaffoldBackgroundColor: Colors.black,
+      scaffoldBackgroundColor: TColors.containerdarkColor,
       textTheme: TTextTheme.darkTextTheme,
       appBarTheme: TAppBarTheme.darkAppBarTheme,
       bottomSheetTheme: TBottomSheetTheme.darkBottomSheetTheme,

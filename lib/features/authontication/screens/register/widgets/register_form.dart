@@ -9,6 +9,7 @@ import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:brother_store/utils/validators/validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_number_field/flutter_phone_number_field.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:iconsax/iconsax.dart';
@@ -68,13 +69,35 @@ class TRegisterForm extends StatelessWidget {
             const SizedBox(
               height: TSizes.spaceBtwInputFields,
             ),
-            TextFormField(
-              validator: (value) => TValidator.validatePhoneNumber(value),
-              controller: controller.phoneNumber,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Iconsax.call),
-              ),
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: FlutterPhoneNumberField(
+                  controller: controller.phoneNumber,
+                  textAlign: TextAlign.left,
+                  focusNode: FocusNode(),
+                  initialCountryCode: "SA",
+                  pickerDialogStyle: PickerDialogStyle(
+                    countryFlagStyle: const TextStyle(fontSize: 17),
+                  ),
+                  decoration: const InputDecoration(
+                    // prefixIcon: Icon(Icons.phone),
+                    labelText: 'Phone Number',
+                    //alignLabelWithHint: true,
+                    // border: OutlineInputBorder(
+                    //   borderSide: BorderSide(),
+                    // ),
+                  ),
+                  languageCode: Get.locale?.languageCode ?? 'en',
+                  onChanged: (phone) =>
+                      controller.phone = phone.completeNumber),
             ),
+            // TextFormField(
+            //   validator: (value) => TValidator.validatePhoneNumber(value),
+            //   controller: controller.phoneNumber,
+            //   decoration: const InputDecoration(
+            //     prefixIcon: Icon(Iconsax.call),
+            //   ),
+            // ),
             const SizedBox(
               height: TSizes.spaceBtwInputFields,
             ),
@@ -123,7 +146,7 @@ class TRegisterForm extends StatelessWidget {
                             title: AppLocalizations.of(context)!.privacyPolicy,
                           )),
                     text: AppLocalizations.of(context)!.privacyPolicy,
-                    style: Theme.of(context).textTheme.bodySmall!.apply(
+                    style: Theme.of(context).textTheme.bodyMedium!.apply(
                         color: dark ? TColors.white : TColors.primary,
                         decoration: TextDecoration.underline,
                         decorationColor:
@@ -131,7 +154,7 @@ class TRegisterForm extends StatelessWidget {
                   ),
                   TextSpan(
                       text: AppLocalizations.of(context)!.and,
-                      style: Theme.of(context).textTheme.bodySmall),
+                      style: Theme.of(context).textTheme.labelMedium),
                   TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = () => Get.to(() => TermsScreen(
@@ -141,7 +164,7 @@ class TRegisterForm extends StatelessWidget {
                             title: AppLocalizations.of(context)!.termsCondition,
                           )),
                     text: AppLocalizations.of(context)!.termsCondition,
-                    style: Theme.of(context).textTheme.bodySmall!.apply(
+                    style: Theme.of(context).textTheme.bodyMedium!.apply(
                         color: dark ? TColors.white : TColors.primary,
                         decoration: TextDecoration.underline,
                         decorationColor:
@@ -151,10 +174,10 @@ class TRegisterForm extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: TSizes.spaceBtWsections,
+              height: TSizes.spaceBtwInputFields,
             ),
             SizedBox(
-                width: double.infinity,
+                width: THelperFunctions.screenwidth() / 2,
                 child: ElevatedButton(
                     onPressed: () {
                       if (controller.registerFormKey.currentState!.validate()) {
@@ -165,19 +188,23 @@ class TRegisterForm extends StatelessWidget {
                     },
                     child: Text(AppLocalizations.of(context)!.register))),
             const SizedBox(
-              height: TSizes.spaceBtWsections,
+              height: TSizes.spaceBtwInputFields,
             ),
-            SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                    onPressed: () => Get.to(() => const App()),
-                    child: const Text('Continue as gust'))),
+            GestureDetector(
+                onTap: () => Get.to(() => const App()),
+                child: Text(
+                  AppLocalizations.of(context)!.continuAsGuest,
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge!
+                      .apply(color: TColors.primary),
+                )),
             const SizedBox(
               height: TSizes.spaceBtWsections,
             ),
             Text.rich(TextSpan(children: [
               TextSpan(
-                  text: "I have an account ",
+                  text: " ${AppLocalizations.of(context)!.iHaveAcount} ",
                   style: Theme.of(context).textTheme.bodySmall),
               TextSpan(
                 recognizer: TapGestureRecognizer()

@@ -17,7 +17,7 @@ class LoginController extends GetxController {
 
   final email = TextEditingController();
   final password = TextEditingController();
-  GlobalKey<FormState> LoginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
@@ -39,7 +39,7 @@ class LoginController extends GetxController {
         TFullScreenLoader.stopLoading();
         return;
       }
-      if (!LoginFormKey.currentState!.validate()) {
+      if (!loginFormKey.currentState!.validate()) {
         TFullScreenLoader.stopLoading();
         return;
       }
@@ -50,10 +50,13 @@ class LoginController extends GetxController {
       }
       final userCredential = await AuthenticationRepository.instance
           .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
+      if (userCredential != null) {
+        AuthenticationRepository.instance.isGust.value = false;
+      }
       TFullScreenLoader.stopLoading();
 
       AuthenticationRepository.instance.screenRedirect();
-      //TFullScreenLoader.stopLoading();
+      TFullScreenLoader.stopLoading();
     } catch (e) {
       TLoader.erroreSnackBar(title: 'Ohh snap', message: e.toString());
     } finally {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class TCategoryShummer extends StatelessWidget {
   const TCategoryShummer({super.key, this.itemCount = 6});
-  final itemCount;
+  final int itemCount;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

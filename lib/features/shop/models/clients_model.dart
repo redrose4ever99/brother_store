@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ClientModel {
   String? name;
   String? arabicName;
+  String? text;
+  String? arabicText;
   String thumbnail;
   bool isFeature;
   bool showPhoto;
@@ -11,6 +13,8 @@ class ClientModel {
   ClientModel({
     this.name,
     this.arabicName,
+    this.text,
+    this.arabicText,
     required this.thumbnail,
     required this.isFeature,
     required this.showPhoto,
@@ -23,6 +27,8 @@ class ClientModel {
   Map<String, dynamic> toJson() {
     return {
       'Name': name ?? '',
+      'Text': text ?? '',
+      'ArabicText': arabicText ?? '',
       'ArabicName': arabicName ?? '',
       'Thumbnamil': thumbnail,
       'IsFeature': isFeature,
@@ -39,6 +45,8 @@ class ClientModel {
       return ClientModel(
         name: data['Name'] ?? '',
         arabicName: data['ArabicName'] ?? '',
+        text: data['Text'] ?? '',
+        arabicText: data['ArabicText'] ?? '',
         thumbnail: data['Thumbnail'] ?? '',
         isFeature: data['IsFeature'] ?? false,
         showPhoto: data['showPhoto'] ?? false,

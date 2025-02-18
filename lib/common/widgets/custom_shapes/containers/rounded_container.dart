@@ -15,6 +15,7 @@ class TRoundedContainer extends StatelessWidget {
     this.borderColor = TColors.borderPrimary,
     this.padding,
     this.margin,
+    this.enableShadow = false,
     this.backgroundColor = TColors.white,
   }) : super(key: key);
 
@@ -22,7 +23,7 @@ class TRoundedContainer extends StatelessWidget {
   final double? height;
   final double radius;
   final Widget? child;
-
+  final bool enableShadow;
   final bool showBorder;
   final Color borderColor;
   final EdgeInsetsGeometry? padding;
@@ -38,6 +39,16 @@ class TRoundedContainer extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
+          boxShadow: enableShadow
+              ? [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ]
+              : null,
           borderRadius: BorderRadius.circular(radius),
           border: showBorder ? Border.all(color: borderColor) : null,
           color: backgroundColor),

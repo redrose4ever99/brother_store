@@ -28,9 +28,9 @@ class TProjectsListItem extends StatelessWidget {
             future: controller.fetchUserProject(),
             builder: (_, snapshot) {
               final emptyWidget = TAnimationLoaderWidget(
-                text: 'no order yet ',
-                animation: TImages.proccessLottie,
-                showAction: true,
+                text: 'No Project yet ',
+                animation: TImages.cartEmptyLottie,
+                showAction: false,
                 actionText: 'let us request for a new project',
                 onActionPressed: () =>
                     Get.off(() => const AddNewProjectScreen()),
@@ -57,7 +57,7 @@ class TProjectsListItem extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Icon(Iconsax.ship),
+                            const Icon(Iconsax.status),
                             const SizedBox(width: TSizes.spaceBtWItems / 2),
                             Expanded(
                                 child: Column(
@@ -96,7 +96,7 @@ class TProjectsListItem extends StatelessWidget {
                               child: Row(
                                 //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Icon(Iconsax.tag),
+                                  const Icon(Icons.build_outlined),
                                   const SizedBox(
                                       width: TSizes.spaceBtWItems / 2),
                                   Expanded(
@@ -121,39 +121,13 @@ class TProjectsListItem extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            // Expanded(
-                            //   child: Row(
-                            //     //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //     children: [
-                            //       const Icon(Iconsax.tag),
-                            //       const SizedBox(width: TSizes.spaceBtWItems / 2),
-                            //       Expanded(
-                            //           child: Column(
-                            //         crossAxisAlignment: CrossAxisAlignment.start,
-                            //         mainAxisSize: MainAxisSize.min,
-                            //         children: [
-                            //           Text(
-                            //             'Deliverd Date',
-                            //             style: Theme.of(context)
-                            //                 .textTheme
-                            //                 .labelMedium!
-                            //                 .apply(fontWeightDelta: 1),
-                            //           ),
-                            //           Text('25 Oct 2024',
-                            //               style: Theme.of(context)
-                            //                   .textTheme
-                            //                   .titleMedium),
-                            //         ],
-                            //       )),
-                            //     ],
-                            //   ),
-                            // ),
                           ],
                         ),
                       ]),
                     )),
               );
-            })
+            },
+          )
         : const WellcomeWidget();
   }
 }

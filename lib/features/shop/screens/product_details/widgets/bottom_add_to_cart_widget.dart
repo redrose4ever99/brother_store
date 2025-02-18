@@ -2,7 +2,6 @@
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/state_manager.dart';
 import 'package:iconsax/iconsax.dart';
 

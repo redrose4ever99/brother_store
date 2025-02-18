@@ -4,9 +4,15 @@ class TColors {
   TColors._();
 
   //App basic colors
-  static const Color primary = Color(0xFF0055ff);
+  static const Color primary = Color(0xFF0099ff);
   static const Color secondary = Color(0xFFFFE24B);
   static const Color accent = Color(0xFFb0c7ff);
+  static const Color red = Color.fromARGB(255, 183, 66, 66);
+  //static const Color containerdarkColor = Color.fromARGB(255, 10, 13, 21);
+  static const Color containerdarkColor = Color(0xFF202634);
+//202634
+//3F50CB
+//0A0C11//
   // static const prm = primary ?? Color(0xFF0055ff);
   //Grandient colors
   static const Gradient linerGradient = LinearGradient(
@@ -20,7 +26,7 @@ class TColors {
   static const Color textWhite = Colors.white;
 
   //Background colors
-  static const Color dark = Color(0xFF272727);
+  static const Color dark = Color(0xFF3D4761);
   static const Color light = Color(0xFFf6f6f6);
 
   static const Color primaryBackground = Color(0xFFf3f5ff);
@@ -42,7 +48,7 @@ class TColors {
   static const Color info = Color(0xFF1976d2);
 
   //Neutral Shdes Colors
-  static const Color black = Color(0xFF232323);
+  static const Color black = Color(0xFF1F222B);
   static const Color darkerGray = Color(0xFF4F4F4F);
   static const Color darkGrey = Color(0xFF939393);
   static const Color grey = Color(0xFFE0E0E0);

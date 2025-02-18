@@ -1,13 +1,17 @@
-import 'package:brother_store/common/widgets/layout/grid_layout.dart';
-import 'package:brother_store/common/widgets/shimmers/calient_shimmer%20.dart';
+import 'dart:async';
+
+import 'package:brother_store/common/widgets/shimmers/client_shimmer.dart';
+import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
 import 'package:brother_store/features/shop/controllers/clients_controller.dart';
 import 'package:brother_store/features/shop/models/clients_model.dart';
 import 'package:brother_store/features/shop/screens/client_page.dart';
+import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class THomeClient extends StatelessWidget {
   const THomeClient({
@@ -20,51 +24,104 @@ class THomeClient extends StatelessWidget {
 
     final List<ClientModel> featureClients = [];
     return Padding(
-      padding: const EdgeInsets.only(
-          left: TSizes.defaultSpace, right: TSizes.defaultSpace),
-      child: Obx(() {
-        featureClients.assignAll(
-            controller.allClients.where((p0) => p0.isFeature).take(8));
-        if (controller.isLoading.value) return const TClientShummer();
-        if (featureClients.isEmpty) {
-          return Center(
-            child: Text(
-              AppLocalizations.of(context)!.noData,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          );
-        }
+        padding: const EdgeInsets.only(
+            left: TSizes.defaultSpace, right: TSizes.defaultSpace),
+        child: Obx(() {
+          featureClients.assignAll(
+              controller.allClients.where((p0) => p0.isFeature).take(8));
+          if (controller.isLoading.value) return const TClientShimmer();
+          if (featureClients.isEmpty) {
+            return Center(
+              child: Text(
+                AppLocalizations.of(context)!.noData,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            );
+          }
 
-        // featureCategories.assignAll(allCategories
-        //     .where((cat) => cat.isFeature && cat.parentId.isEmpty)
-        //     .take(8)
-        //     .toList());
-        return TGridLayout(
-            itemCount: featureClients.length,
-            crossColumn: 4,
-            maxAxisExtent: 50,
-            itemBuilder: (_, index) {
-              return GestureDetector(
-                onTap: () => featureClients[index].showPhoto
-                    ? Get.to(() => ClientScreen(client: featureClients[index]))
-                    : {},
-                child: Center(
-                    child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: CachedNetworkImage(
-                          imageUrl: featureClients[index].thumbnail,
-                          placeholder: (context, url) => Container(
-                              alignment: Alignment.center,
-                              child: const CircularProgressIndicator()),
-                          // progressIndicatorBuilder: (_, __, DownloadProgress) =>
-                          //     CircularProgressIndicator(
-                          //         // value: DownloadProgress.progress,
-                          //         // color: TColors.primary,
-                          //         )),
-                        ))),
-              );
-            });
-      }),
-    );
+          // featureCategories.assignAll(allCategories
+          //     .where((cat) => cat.isFeature && cat.parentId.isEmpty)
+          //     .take(8)
+          //     .toList());
+          return SizedBox(
+              height: 130,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: featureClients.length,
+                  itemBuilder: (_, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Timer(Duration(milliseconds: 3), () async {
+                          await Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ClientScreen(
+                                          client: featureClients[index])));
+                        });
+
+                        // Navigator.push(
+                        //     context,
+                        //     PageRouteBuilder(
+                        //         transitionDuration:
+                        //             Duration(milliseconds: 30),
+                        //         pageBuilder: (_, __, ___) => ClientScreen(
+                        //             client: featureClients[index])));
+                      },
+
+                      //ClientScreen(client: featureClients[index])),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: TColors.light,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                color: THelperFunctions.isDarkMode(context)
+                                    ? TColors.darkerGray
+                                    : TColors.grey),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Hero(
+                              tag: 's',
+                              child: ClipRect(
+                                child: CachedNetworkImage(
+                                    // fit: BoxFit.contain,
+                                    width: THelperFunctions.screenwidth() / 3,
+                                    imageUrl: featureClients[index].thumbnail,
+                                    imageBuilder: (context, imageProvider) =>
+                                        Container(
+                                          // width: 400,
+                                          //height: THelperFunctions.screenwidth() / 1.7,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.contain),
+                                          ),
+                                        ),
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(40),
+                                                child: TShimmerEffect(
+                                                    width: THelperFunctions
+                                                            .screenwidth() /
+                                                        3,
+                                                    height: 130)),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(
+                                          Icons.error,
+                                          size: 50,
+                                        )),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }));
+        }));
   }
 }

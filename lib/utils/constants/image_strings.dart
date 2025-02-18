@@ -28,6 +28,9 @@ class TImages {
   //payment methode
   static const String stripLogo = "assets/images/stripe.png";
   static const String paypalLogo = "assets/images/paypal.png";
+  static const String masterLogo = "assets/images/master.png";
+  static const String visaLogo = "assets/images/visa.png";
+  static const String paySuccess = "assets/images/success.png";
 
   static const String truePaymentblack = "assets/images/true.gif";
   static const String truePaymentwhite = "assets/images/white.gif";
@@ -40,6 +43,7 @@ class TImages {
   static const String wordBlack = "assets/logos/4.png";
   static const String wordWhite = "assets/logos/3.png";
   static const String arWord = "assets/logos/ar1.png";
+  static const String shopCover = "assets/images/cover.jpg";
 //email verification
   static const String verifyIcon = "assets/images/Email-receive.png";
 
@@ -48,6 +52,10 @@ class TImages {
 
   static const String successfullLottie = "assets/images/lottie/success.json";
   static const String proccessLottie = "assets/images/lottie/processing.json";
+  static const String cartEmptyLottie = "assets/images/lottie/cart-empty.json";
+//assets\images\cover.jpg
+  static const String cartEmptyLottie2 =
+      "assets/images/lottie/cart_empty2.json";
 
 //social media
 

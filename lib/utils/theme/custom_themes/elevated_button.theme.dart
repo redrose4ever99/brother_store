@@ -6,11 +6,11 @@ class TElevatedButtonTheme {
       style: ElevatedButton.styleFrom(
           elevation: 0,
           foregroundColor: Colors.white,
-          backgroundColor: const Color(0xFF0055ff),
+          backgroundColor: const Color(0xFF0099ff),
           disabledBackgroundColor: Colors.grey,
           disabledForegroundColor: Colors.grey,
           side: const BorderSide(
-            color: Color(0xFF0055ff),
+            color: Color(0xFF0099ff),
           ),
           padding: const EdgeInsets.symmetric(vertical: 18),
           textStyle: const TextStyle(

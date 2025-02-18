@@ -29,6 +29,7 @@ class TBrandUpPage extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
+                    opacity: 0.7,
                     image: NetworkImage(
                       brand.cover,
                     ))),

@@ -3,7 +3,7 @@ import 'package:brother_store/common/widgets/images/circular_image.dart';
 import 'package:brother_store/common/widgets/texts/brand_title_with_verified_icon.dart';
 import 'package:brother_store/common/widgets/texts/product_price_text.dart';
 import 'package:brother_store/common/widgets/texts/product_title_text.dart';
-import 'package:brother_store/features/shop/controllers/product/productController.dart';
+import 'package:brother_store/features/shop/controllers/product/product_controller.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
@@ -53,7 +53,7 @@ class TProductMetaData extends StatelessWidget {
                   price: '${product.price}',
                   isLarg: false,
                   linethrough: true,
-                  color: Colors.red),
+                  color: TColors.red),
             // Text(
             //   'SAR ${product.price}',
             //   style: Theme.of(context).textTheme.titleSmall!.apply(
@@ -71,7 +71,6 @@ class TProductMetaData extends StatelessWidget {
 
         ///title
         TProductTitleText(
-          smalSize: true,
           title: Get.locale?.languageCode == 'en'
               ? product.title
               : product.arabicTitle,
@@ -82,13 +81,16 @@ class TProductMetaData extends StatelessWidget {
 
         Row(
           children: [
-            const TProductTitleText(title: 'Status'),
+            const TProductTitleText(
+              title: 'Status',
+              smalSize: true,
+            ),
             const SizedBox(
               width: TSizes.spaceBtWItems,
             ),
             Text(
               controller.getProductStockStatus(product.stock),
-              style: Theme.of(context).textTheme.bodySmall,
+              // style: Theme.of(context).textTheme.bodySmall,
             )
           ],
         ),
@@ -110,6 +112,9 @@ class TProductMetaData extends StatelessWidget {
                   isNetworkImage: product.brand!.image != '' ? true : false,
                   width: 32,
                   height: 32,
+                ),
+                const SizedBox(
+                  width: TSizes.spaceBtWItems / 1.5,
                 ),
                 TBrandTitleWithVerifiedIcon(
                     title: product.brand != null ? product.brand!.name : ''),

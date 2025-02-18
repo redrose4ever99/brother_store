@@ -30,7 +30,7 @@ class NotificationScreen extends StatelessWidget {
           onbackPress: () => Get.to(() => const NavigationMenu()),
           title: Text(
             AppLocalizations.of(context)!.notifications,
-            style: Theme.of(context).textTheme.headlineMedium,
+            //style: Theme.of(context).textTheme.headlineMedium,
           ),
           showBackArrow: true,
         ),

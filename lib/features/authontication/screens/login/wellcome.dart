@@ -44,14 +44,14 @@ class WellcomScreen extends StatelessWidget {
                         height: TSizes.spaceBtWItems,
                       ),
                       Text(
-                        'Wellcom to Brother Creative',
+                        AppLocalizations.of(context)!.welcomeToBro,
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       const SizedBox(
                         height: TSizes.spaceBtWsections,
                       ),
                       Text(
-                        'if you want to add orders or request for project you have to Register and join our family to injoy with our services , or if you hav an account you can simply login ',
+                        AppLocalizations.of(context)!.welcomeMessage,
                         textAlign: TextAlign.justify,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
@@ -65,7 +65,8 @@ class WellcomScreen extends StatelessWidget {
                                 Get.to(const LoginScreen(),
                                     binding: GeneralBindings());
                               },
-                              child: const Text('login'))),
+                              child:
+                                  Text(AppLocalizations.of(context)!.login))),
                       const SizedBox(
                         height: TSizes.spaceBtWsections,
                       ),
@@ -82,7 +83,7 @@ class WellcomScreen extends StatelessWidget {
                       GestureDetector(
                           onTap: () => Get.to(() => const App()),
                           child: Text(
-                            "continue as gust",
+                            AppLocalizations.of(context)!.continuAsGuest,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!

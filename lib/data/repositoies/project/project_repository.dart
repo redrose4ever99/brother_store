@@ -1,6 +1,7 @@
 import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/project/models/project_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ProjectRepository extends GetxController {
@@ -15,7 +16,7 @@ class ProjectRepository extends GetxController {
 
       return 'added succesfully';
     } catch (e) {
-      throw 'Some thing wrong while saving address';
+      throw 'Some thing wrong while saving project';
     }
   }
 
@@ -32,7 +33,10 @@ class ProjectRepository extends GetxController {
           .get();
       return snapshot.docs.map((e) => ProjectModel.fromSnapshot(e)).toList();
     } catch (e) {
-      throw 'Something wrong while fetch order data';
+      if (kDebugMode) {
+        print(e);
+      }
+      throw 'Something wrong while get Project data';
     }
   }
 }

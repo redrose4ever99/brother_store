@@ -1,10 +1,8 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
-import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/personlization/controllers/user_controller.dart';
 import 'package:brother_store/features/personlization/screens/profile/widgets/info_screen.dart';
-import 'package:brother_store/features/shop/controllers/product/images_controller.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';

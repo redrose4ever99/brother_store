@@ -1,38 +1,66 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:brother_store/features/shop/screens/checkout/widgets/billing_payment_section.dart';
+import 'package:brother_store/features/project/models/project_model.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/icons_string.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
+import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:chart_sparkline/chart_sparkline.dart';
-import 'package:brother_store/features/project/models/project_model.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:easy_stepper/easy_stepper.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'payment_screen.dart';
 
 class TSingleProjectScreen extends StatelessWidget {
-  TSingleProjectScreen({
+  const TSingleProjectScreen({
     Key? key,
     required this.project,
   }) : super(key: key);
   final ProjectModel project;
+
   @override
   Widget build(BuildContext context) {
-    //final controller = BrandController.instance;
-    final dark = THelperFunctions.isDarkMode(context);
     RxInt activeStep = 0.obs;
+    double completionRate = 0;
+    final dark = THelperFunctions.isDarkMode(context);
+    final isEg = Get.locale?.languageCode == 'en';
+    double? payRate = 0;
+    if (project.cost != null && project.cost != 0) {
+      payRate = ((project.currentPaied! / project.cost!) * 100);
+    }
+    String inString = payRate.toStringAsFixed(2); // '2.35'
+    payRate = double.parse(inString);
+
+    // payRate = num.parse(payRate.toStringAsFixed(2)) as double?;
+
+    switch (project.currentStage) {
+      case ('Pending'):
+        activeStep.value = 0;
+
+        break;
+      case ('Planing'):
+        activeStep.value = 1;
+        completionRate = 25 / 100;
+        break;
+      case ('Processing'):
+        activeStep.value = 2;
+        completionRate = 5 / 10;
+        break;
+      case ('Finishing'):
+        activeStep.value = 3;
+        completionRate = 75 / 100;
+        break;
+    }
+
     return Directionality(
-      textDirection: Get.locale?.languageCode == 'en'
-          ? TextDirection.ltr
-          : TextDirection.rtl,
+      textDirection: isEg ? TextDirection.ltr : TextDirection.rtl,
       child: Scaffold(
         appBar: TAppBar(
           title: Text(
@@ -44,16 +72,7 @@ class TSingleProjectScreen extends StatelessWidget {
           ),
           showBackArrow: true,
         ),
-        body:
-            //  Stepper(
-            //   type: StepperType.vertical,
-            //   steps: getSteps(),
-            //   currentStep: currentStep.value,
-            //   onStepCancel: null,
-            //   onStepContinue: null,
-            // ),
-
-            SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(TSizes.defaultSpace),
             child: Column(
@@ -67,6 +86,7 @@ class TSingleProjectScreen extends StatelessWidget {
                         defaultLineColor: TColors.darkGrey,
                         finishedLineColor: Colors.orange),
                     activeStep: activeStep.value,
+                    enableStepTapping: false,
                     stepShape: StepShape.rRectangle,
                     stepBorderRadius: 15,
                     borderThickness: 2,
@@ -162,8 +182,8 @@ class TSingleProjectScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Row(
                     children: [
-                      Text('Completion rate'),
-                      SizedBox(
+                      const Text('Completion rate'),
+                      const SizedBox(
                         width: TSizes.spaceBtWItems,
                       ),
                       LinearPercentIndicator(
@@ -171,52 +191,73 @@ class TSingleProjectScreen extends StatelessWidget {
                         animation: true,
                         lineHeight: 15.0,
                         animationDuration: 2000,
-                        barRadius: Radius.circular(20),
+                        barRadius: const Radius.circular(20),
                         progressColor: TColors.primary,
-                        percent: 0.9,
-                        center: Text(
-                          "90.0%",
-                          style: new TextStyle(fontSize: 12.0),
+                        percent: completionRate,
+                        trailing: Text(
+                          "$completionRate%",
+                          style: TextStyle(fontSize: 12.0),
                         ),
-                        trailing: Icon(Icons.mood),
                         linearStrokeCap: LinearStrokeCap.roundAll,
                         backgroundColor: Colors.grey,
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtWItems,
                 ),
-                TRoundedContainer(
-                  showBorder: true,
-                  padding: const EdgeInsets.all(TSizes.md),
-                  backgroundColor: dark ? TColors.dark : TColors.light,
-                  child: Column(
-                    children: [
-                      Row(
+                Stack(
+                  children: [
+                    TRoundedContainer(
+                      showBorder: true,
+                      padding: const EdgeInsets.all(TSizes.md),
+                      backgroundColor: dark ? TColors.dark : TColors.light,
+                      child: Column(
                         children: [
-                          Text(
-                            AppLocalizations.of(context)!.projectTitle,
-                            style: Theme.of(context).textTheme.labelLarge,
+                          Row(
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!.projectTitle,
+                                style: Theme.of(context).textTheme.labelLarge,
+                              ),
+                              Text(
+                                project.name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .apply(color: TColors.primary),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: TSizes.spaceBtWItems,
                           ),
                           Text(
-                            project.name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .apply(color: TColors.primary),
+                            project.description,
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: TSizes.spaceBtWItems,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: isEg ? 4 : null,
+                      left: isEg ? null : 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: IconButton(
+                          icon: const Icon(Iconsax.copy),
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(
+                                text: project.description.toString()));
+                            Get.snackbar('Copied!',
+                                'project description copied to clipboard',
+                                snackPosition: SnackPosition.BOTTOM);
+                          },
+                        ),
                       ),
-                      Text(
-                        project.description,
-                      ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtWItems,
@@ -236,9 +277,13 @@ class TSingleProjectScreen extends StatelessWidget {
                             animation: true,
                             animationDuration: 2000,
                             lineWidth: 10.0,
-                            percent: 0.90,
-                            center: const Text("90%"),
-                            progressColor: Colors.green,
+                            percent: payRate / 100,
+                            center: Text('$payRate '),
+                            progressColor: payRate < 50
+                                ? Colors.red
+                                : payRate < 75
+                                    ? Colors.yellow
+                                    : Colors.green,
                           ),
                           const SizedBox(
                             height: TSizes.spaceBtWItems,
@@ -275,38 +320,44 @@ class TSingleProjectScreen extends StatelessWidget {
                 const SizedBox(
                   height: TSizes.spaceBtWItems,
                 ),
-                TRoundedContainer(
-                  showBorder: true,
-                  padding: const EdgeInsets.all(TSizes.md),
-                  backgroundColor: dark ? TColors.dark : TColors.light,
-                  child: Column(
-                    children: [
-                      const Text('Here the time process'),
-                      SizedBox(
-                          width: 530,
-                          height: 220,
-                          child: SfCartesianChart(
-                              title: ChartTitle(text: project.state.toString()),
-                              primaryXAxis: CategoryAxis(),
-                              series: <ChartSeries>[
-                                // Initialize line series
-                                LineSeries<ChartData, String>(
-                                    color: TColors.primary,
-                                    width: 5,
-                                    dataSource: [
-                                      // Bind data source
-                                      ChartData(1, 'Pending'),
-                                      ChartData(2, 'planing'),
-                                      ChartData(2.5, 'Processing'),
-                                      ChartData(2, 'finishing'),
-                                    ],
-                                    xValueMapper: (ChartData data, _) => data.y,
-                                    yValueMapper: (ChartData data, _) => data.x)
-                              ])
-                          //     //////////////
+                Visibility(
+                  visible: false,
+                  child: TRoundedContainer(
+                    showBorder: true,
+                    padding: const EdgeInsets.all(TSizes.md),
+                    backgroundColor: dark ? TColors.dark : TColors.light,
+                    child: Column(
+                      children: [
+                        const Text('Here the time process'),
+                        SizedBox(
+                            width: 530,
+                            height: 220,
+                            child: SfCartesianChart(
+                                title:
+                                    ChartTitle(text: project.state.toString()),
+                                primaryXAxis: CategoryAxis(),
+                                series: <ChartSeries>[
+                                  // Initialize line series
+                                  LineSeries<ChartData, String>(
+                                      color: TColors.primary,
+                                      width: 5,
+                                      dataSource: [
+                                        // Bind data source
+                                        ChartData(1, 'Pending'),
+                                        ChartData(2, 'planing'),
+                                        ChartData(2.5, 'Processing'),
+                                        ChartData(2, 'finishing'),
+                                      ],
+                                      xValueMapper: (ChartData data, _) =>
+                                          data.y,
+                                      yValueMapper: (ChartData data, _) =>
+                                          data.x)
+                                ])
+                            //     //////////////
 
-                          ),
-                    ],
+                            ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -317,124 +368,9 @@ class TSingleProjectScreen extends StatelessWidget {
     );
   }
 
-  RxInt currentStep = 0.obs;
-  var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
-  List<Step> getSteps() => [
-        Step(
-            isActive: currentStep.value >= 0,
-            content: //
-                SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(TSizes.defaultSpace),
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        project.description,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: TSizes.spaceBtWItems,
-                    ),
-                    SizedBox(
-                      width: 230,
+  //static RxInt currentStep = 0.obs;
 
-                      child: Sparkline(
-                        data: data,
-                      ), //////////////
-                    ),
-                    const SizedBox(
-                      height: TSizes.spaceBtWItems,
-                    ),
-                    SizedBox(
-                        width: 230,
-                        height: 220,
-                        child: SfCartesianChart(
-                            title: ChartTitle(text: project.state.toString()),
-                            primaryXAxis: CategoryAxis(),
-                            series: <ChartSeries>[
-                              // Initialize line series
-                              LineSeries<ChartData, String>(
-                                  color: TColors.primary,
-                                  width: 5,
-                                  dataSource: [
-                                    // Bind data source
-                                    ChartData(1, 'Pending'),
-                                    ChartData(2, 'planing'),
-                                    ChartData(3, 'Processing'),
-                                    ChartData(4, 'finishing'),
-                                  ],
-                                  xValueMapper: (ChartData data, _) => data.y,
-                                  yValueMapper: (ChartData data, _) => data.x)
-                            ])
-                        //     //////////////
-
-                        ),
-                    const SizedBox(
-                      height: TSizes.spaceBtWItems,
-                    ),
-                    // Center(
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(TSizes.md),
-                    //     child: GFProgressBar(
-                    //       percentage: 0.7,
-                    //       width: 100,
-                    //       radius: 100,
-                    //       backgroundColor: Colors.black38,
-                    //       progressBarColor: TColors.primary,
-                    //     ),
-                    //   ),
-                    // )
-                  ],
-                ),
-              ),
-            ),
-            title: Text('Pending',
-                style: Theme.of(Get.context!)
-                    .textTheme
-                    .labelMedium!
-                    .apply(color: TColors.primary))),
-        Step(
-            isActive: currentStep.value >= 1,
-            content: Container(),
-            title: Text('Analizing',
-                style: Theme.of(Get.context!)
-                    .textTheme
-                    .labelMedium!
-                    .apply(color: TColors.primary))),
-        Step(
-            isActive: currentStep.value >= 2,
-            content: Container(),
-            title: Text('Processing',
-                style: Theme.of(Get.context!)
-                    .textTheme
-                    .labelMedium!
-                    .apply(color: TColors.primary))),
-        Step(
-            isActive: currentStep.value >= 3,
-            content: Container(),
-            title: Text('fineshing',
-                style: Theme.of(Get.context!)
-                    .textTheme
-                    .labelMedium!
-                    .apply(color: TColors.primary))),
-        Step(
-            isActive: currentStep.value >= 3,
-            content: Container(),
-            title: Text('fineshing',
-                style: Theme.of(Get.context!)
-                    .textTheme
-                    .labelMedium!
-                    .apply(color: TColors.primary))),
-        Step(
-            isActive: currentStep.value >= 3,
-            content: Container(),
-            title: Text('fineshing',
-                style: Theme.of(Get.context!)
-                    .textTheme
-                    .labelMedium!
-                    .apply(color: TColors.primary)))
-      ];
+  //static var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
 }
 
 class ChartData {

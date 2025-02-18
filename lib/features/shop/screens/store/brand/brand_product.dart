@@ -33,19 +33,18 @@ class BrandProducts extends StatelessWidget {
           child: Column(
             children: [
               TBrandUpPage(showBorder: false, brand: brand),
-              const SizedBox(
-                height: TSizes.spaceBtWItems,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: TSizes.defaultSpace, right: TSizes.defaultSpace),
-                child: TSectionHeading(
-                    title: AppLocalizations.of(context)!.popularCategory),
-              ),
-              BrandCategory(brand: brand),
-              const SizedBox(
-                height: TSizes.spaceBtWItems,
-              ),
+              // const SizedBox(
+              //   height: TSizes.spaceBtWItems,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(
+              //       left: TSizes.defaultSpace, right: TSizes.defaultSpace),
+              //   child: TSectionHeading(title: 'kjhghf'),
+              // ),
+              // BrandCategory(brand: brand),
+              // const SizedBox(
+              //   height: TSizes.spaceBtWItems,
+              // ),
               Padding(
                 padding: const EdgeInsets.all(TSizes.defaultSpace),
                 child: FutureBuilder(

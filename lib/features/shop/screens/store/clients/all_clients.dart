@@ -1,6 +1,6 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/layout/grid_layout.dart';
-import 'package:brother_store/common/widgets/shimmers/calient_shimmer%20.dart';
+import 'package:brother_store/common/widgets/shimmers/client_shimmer.dart';
 import 'package:brother_store/features/shop/controllers/clients_controller.dart';
 import 'package:brother_store/utils/constants/color.dart';
 
@@ -41,7 +41,7 @@ class AllClientsScreen extends StatelessWidget {
                 ),
                 Obx(() {
                   if (controller.isLoading.value) {
-                    return TClientShummer(
+                    return TClientShimmer(
                       itemCount: controller.allClients.length,
                     );
                   }

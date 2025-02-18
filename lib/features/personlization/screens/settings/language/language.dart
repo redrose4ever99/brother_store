@@ -23,7 +23,6 @@ class LanguageScreen extends StatelessWidget {
         appBar: TAppBar(
           title: Text(
             AppLocalizations.of(context)!.chooseLanguage,
-            style: Theme.of(context).textTheme.headlineMedium,
           ),
           showBackArrow: true,
         ),
@@ -56,14 +55,14 @@ class LanguageScreen extends StatelessWidget {
                         image: AssetImage(
                           TImages.arabicFlag,
                         ),
-                        width: 30,
+                        width: 20,
                       ),
                       const SizedBox(
                         width: TSizes.spaceBtWItems,
                       ),
                       Text(
                         'العربية',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: Theme.of(context).textTheme.bodyLarge,
                       )
                     ],
                   ),
@@ -97,14 +96,14 @@ class LanguageScreen extends StatelessWidget {
                         image: AssetImage(
                           TImages.englishFlag,
                         ),
-                        width: 30,
+                        width: 20,
                       ),
                       const SizedBox(
                         width: TSizes.spaceBtWItems,
                       ),
                       Text(
                         'English',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: Theme.of(context).textTheme.bodyLarge,
                       )
                     ],
                   ),

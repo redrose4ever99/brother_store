@@ -12,6 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterController extends GetxController {
   static RegisterController get instance => Get.find();
+  String? phone;
 
   ///variables
   final hidePassword = true.obs;
@@ -26,7 +27,8 @@ class RegisterController extends GetxController {
   Future<void> register() async {
     try {
       TFullScreenLoader.openloadingDialog(
-          AppLocalizations.of(Get.context!)!.processing, TImages.bBlack);
+          AppLocalizations.of(Get.context!)!.processing,
+          TImages.proccessLottie);
 
       // check the internet connectivity
 
@@ -55,7 +57,7 @@ class RegisterController extends GetxController {
           firstName: firstName.text.trim(),
           lastName: lastName.text.trim(),
           email: email.text.trim(),
-          phoneNumber: phoneNumber.text.trim(),
+          phoneNumber: phone,
           profilePicture: '');
 
       final userRepository = Get.put(UserRepository());

@@ -2,6 +2,7 @@ import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/circuler_container.dart';
 import 'package:brother_store/common/widgets/icons/circuler_icon.dart';
 import 'package:brother_store/common/widgets/product.cart/favorite_icon.dart';
+import 'package:brother_store/features/general/screens/gallery_widget.dart';
 import 'package:brother_store/features/shop/controllers/product/images_controller.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/features/shop/screens/cart/cart.dart';
@@ -21,43 +22,58 @@ class TProductImageSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ImagesController());
 
+    // void openGallery() => Navigator.of(context).push(MaterialPageRoute(
+    //     builder: (_) => GalleryWidget(index: ,
+    //           urlImage: product.images!,
+    //         )));
+
     final images = controller.getAllProductImage(product);
-    final dark = THelperFunctions.isDarkMode(context);
+    //final dark = THelperFunctions.isDarkMode(context);
 
     return Container(
       color: Colors.transparent,
       child: Column(
         children: [
-          const SizedBox(
-            height: TSizes.defaultSpace * 2,
-          ),
+          // const SizedBox(
+          //   height: TSizes.defaultSpace,
+          // ),
           Stack(
             children: [
               Column(
                 children: [
-                  const SizedBox(
-                    height: TSizes.defaultSpace,
-                  ),
                   CarouselSlider(
                     carouselController: controller.carouselController,
                     options: CarouselOptions(
                         height: THelperFunctions.screenwidth() * 0.9,
-                        autoPlayCurve: Curves.bounceOut,
+                        autoPlayCurve: Curves.bounceInOut,
                         viewportFraction: 1,
                         onPageChanged: (index, _) => controller
                             .selectedProductImage.value = images[index]),
                     items: images
-                        .map((image) => GestureDetector(
-                              onTap: () {
-                                ImagesController.instance
-                                    .fullScreenImage(image);
-                              },
-                              child: Image(
-                                width: THelperFunctions.screenwidth(),
-                                height: THelperFunctions.screenwidth() * 0.9,
-                                fit: BoxFit.contain,
-                                image: NetworkImage(
-                                  image,
+                        .map((image) => Hero(
+                              transitionOnUserGestures: true,
+                              tag: 'pro1',
+                              child: Material(
+                                child: InkWell(
+                                  onTap: () => Get.to(() => GalleryWidget(
+                                        index: images.indexOf(image),
+                                        urlImage: images,
+                                      )),
+
+                                  //   ImagesController.instance.fullScreenImage(
+                                  //       product.images!.indexOf(image),
+                                  //       image,
+                                  //       product.images!);
+                                  // },,
+
+                                  child: Ink.image(
+                                    width: THelperFunctions.screenwidth(),
+                                    height: 300,
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      image,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ))
@@ -123,19 +139,22 @@ class TProductImageSlider extends StatelessWidget {
               TAppBar(
                 showBackArrow: true,
                 actions: [
-                  Row(
-                    children: [
-                      TFavoriteIcon(
-                        productId: product.id,
-                      ),
-                      const SizedBox(
-                        width: TSizes.spaceBtWItems,
-                      ),
-                      TCircularIcon(
-                        onPressed: () => Get.to(() => const CartScreen()),
-                        icon: Iconsax.shopping_bag,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Row(
+                      children: [
+                        TFavoriteIcon(
+                          productId: product.id,
+                        ),
+                        const SizedBox(
+                          width: TSizes.spaceBtWItems,
+                        ),
+                        TCircularIcon(
+                          onPressed: () => Get.to(() => const CartScreen()),
+                          icon: Iconsax.shopping_bag,
+                        ),
+                      ],
+                    ),
                   )
                 ],
               )

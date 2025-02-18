@@ -6,7 +6,6 @@ import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:string_to_color/string_to_color.dart';
 
 class BrothersController extends GetxController {
   static BrothersController get instance => Get.find();
@@ -15,7 +14,13 @@ class BrothersController extends GetxController {
   Color color = TColors.primary;
   final _brothersRepository = Get.put(BrotherRepository());
   RxList<BrotherModel> allData = <BrotherModel>[].obs;
-
+  // final imageUrl = [
+  //   'https://firebasestorage.googleapis.com/v0/b/brothers-creative.appspot.com/o/Users%2FImages%2FProfile%2Fscaled_1000414330.jpg?alt=media&token=18f991e9-f02d-4922-8deb-883885623893',
+  //   'https://firebasestorage.googleapis.com/v0/b/brothers-creative.appspot.com/o/Users%2FImages%2FProfile%2Fscaled_1000414330.jpg?alt=media&token=18f991e9-f02d-4922-8deb-883885623893',
+  //   'https://firebasestorage.googleapis.com/v0/b/brothers-creative.appspot.com/o/Users%2FImages%2FProfile%2Fscaled_1000414330.jpg?alt=media&token=18f991e9-f02d-4922-8deb-883885623893',
+  //   'https://firebasestorage.googleapis.com/v0/b/brothers-creative.appspot.com/o/Users%2FImages%2FProfile%2Fscaled_1000414330.jpg?alt=media&token=18f991e9-f02d-4922-8deb-883885623893',
+  //   'https://firebasestorage.googleapis.com/v0/b/brothers-creative.appspot.com/o/Users%2FImages%2FProfile%2Fscaled_1000414330.jpg?alt=media&token=18f991e9-f02d-4922-8deb-883885623893'
+  // ];
   @override
   void onInit() {
     fetchAllData();

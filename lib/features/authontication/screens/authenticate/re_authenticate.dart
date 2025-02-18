@@ -15,15 +15,15 @@ class ReAuthenticateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UserController.instance;
-    final dark = THelperFunctions.isDarkMode(context);
+    //final dark = THelperFunctions.isDarkMode(context);
 
     return Directionality(
       textDirection: Get.locale?.languageCode == 'en'
           ? TextDirection.ltr
           : TextDirection.rtl,
       child: Scaffold(
-        appBar: const TAppBar(
-          title: Text('Reauthenticate account'),
+        appBar: TAppBar(
+          title: Text(AppLocalizations.of(context)!.reAuthenticate),
           showBackArrow: true,
         ),
         body: SingleChildScrollView(

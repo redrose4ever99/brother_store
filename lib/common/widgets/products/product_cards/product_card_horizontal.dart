@@ -2,7 +2,7 @@
 import 'package:brother_store/common/widgets/product.cart/favorite_icon.dart';
 import 'package:brother_store/common/widgets/texts/brand_title_with_verified_icon.dart';
 import 'package:brother_store/common/widgets/texts/product_price_text.dart';
-import 'package:brother_store/features/shop/controllers/product/productController.dart';
+import 'package:brother_store/features/shop/controllers/product/product_controller.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:brother_store/features/shop/screens/product_details/product_detail.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
@@ -45,8 +45,8 @@ class TProductCardHorizontal extends StatelessWidget {
             TRoundedContainer(
               height: 120,
               width: 120,
-              padding: const EdgeInsets.all(TSizes.sm),
-              backgroundColor: dark ? TColors.dark : TColors.light,
+              // padding: const EdgeInsets.all(TSizes.sm),
+              //backgroundColor: dark ? TColors.dark : TColors.light,
               child: Stack(
                 children: [
                   TRoundedImage(

@@ -1,5 +1,5 @@
 import 'package:brother_store/common/widgets/shimmers/boxes_shimmer.dart';
-import 'package:brother_store/common/widgets/shimmers/listTile_shimmer.dart';
+import 'package:brother_store/common/widgets/shimmers/listtile_shimmer.dart';
 import 'package:brother_store/features/shop/controllers/brand_controller.dart';
 import 'package:brother_store/features/shop/models/category_model.dart';
 import 'package:brother_store/features/shop/screens/store/brand/brand_show_case.dart';

@@ -1,5 +1,6 @@
 import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ProductRepository extends GetxController {
@@ -26,6 +27,7 @@ class ProductRepository extends GetxController {
           .where('IsFeature', isEqualTo: true)
           // .limit(4)
           .get();
+
       return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
     } on FirebaseException catch (e) {
       throw e.code;
@@ -109,6 +111,23 @@ class ProductRepository extends GetxController {
     }
   }
 
+  Future<bool> addProducts(ProductModel product) async {
+    try {
+      final currentproduct =
+          await _db.collection('Products').add(product.toJson());
+      if (kDebugMode) {
+        print('currentproduct $currentproduct.id');
+      }
+      product.id = currentproduct.id;
+      _db
+          .collection("Products")
+          .doc(currentproduct.id)
+          .update(product.toJson());
+      return true;
+    } catch (e) {
+      throw 'Some thing wrong while saving product';
+    }
+  }
   // getFavoritesProducts(List<String> list) {
 
   //       try {

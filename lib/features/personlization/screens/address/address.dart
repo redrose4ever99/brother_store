@@ -34,7 +34,6 @@ class UserAdressScreen extends StatelessWidget {
           showBackArrow: true,
           title: Text(
             AppLocalizations.of(context)!.myAddresses,
-            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
         body: SingleChildScrollView(

@@ -66,10 +66,10 @@ class AuthenticationRepository extends GetxController {
   Future<UserCredential> registerWithEmailAndPassword(
       String email, String password) async {
     try {
-      var s = await _auth.createUserWithEmailAndPassword(
+      var authUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       isGust.value = false;
-      return s;
+      return authUser;
     } on FirebaseAuthException catch (e) {
       throw (e.code).toString();
     } on FirebaseException catch (e) {
@@ -230,16 +230,28 @@ class AuthenticationRepository extends GetxController {
   Future<UserCredential?> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
+      if (kDebugMode) {
+        print("step 1 google auth");
+      }
+      // Obtain the auth details from the request.
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
+      // Create a new credential.
 
-      final credential = GoogleAuthProvider.credential(
+      if (kDebugMode) {
+        print("step 2 google auth");
+      }
+      final OAuthCredential googleCredential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
+      if (kDebugMode) {
+        print("step 3 google auth");
+      }
+      final UserCredential googleUserCredential =
+          await FirebaseAuth.instance.signInWithCredential(googleCredential);
 
-      return await FirebaseAuth.instance.signInWithCredential(credential);
+      return googleUserCredential;
     } on FirebaseAuthException catch (e) {
       throw (e.code).toString();
     } on FirebaseException catch (e) {

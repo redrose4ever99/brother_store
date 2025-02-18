@@ -1,6 +1,8 @@
 import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/shop/models/cart_item_model.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
+import 'package:brother_store/utils/constants/color.dart';
+import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/storage/storage_utility.dart';
 import 'package:get/get.dart';
@@ -12,7 +14,7 @@ class CartController extends GetxController {
   RxDouble totalOfCartPrice = 0.0.obs;
   RxInt productQuantityinCart = 0.obs;
   RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
-
+  //bool dark = THelperFunctions.isDarkMode(Get.context!);
   CartController() {
     if (!AuthenticationRepository.instance.isGust.value) loadCartItem();
   }
@@ -57,6 +59,9 @@ class CartController extends GetxController {
 
   void removeFromCartDialog(int index) {
     Get.defaultDialog(
+        backgroundColor: THelperFunctions.isDarkMode(Get.context!)
+            ? TColors.dark
+            : TColors.light,
         title: 'Remove Product',
         middleText: 'Are you Sure you want to remove this item?',
         onConfirm: () {

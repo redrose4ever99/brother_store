@@ -20,55 +20,54 @@ class TBillingAddressSection extends StatelessWidget {
             buttonTitle: AppLocalizations.of(context)!.change,
             showActionButton: true,
             onPress: () => addressController.selectNewAddressPopup(context)),
-        addressController.selectedAddress.value != null
-            ? Obx(
-                () => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(addressController.selectedAddress.value.name,
-                        style: Theme.of(context).textTheme.bodyLarge),
-                    const SizedBox(
-                      height: TSizes.spaceBtWItems / 2,
-                    ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.phone,
-                          size: 20,
-                        ),
-                        const SizedBox(
-                          width: TSizes.spaceBtWItems,
-                        ),
-                        Text(
-                            addressController.selectedAddress.value.phoneNumber,
-                            style: Theme.of(context).textTheme.bodyLarge)
-                      ],
-                    ),
-                    const SizedBox(
-                      height: TSizes.spaceBtWItems / 2,
-                    ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_history,
-                          size: 20,
-                        ),
-                        const SizedBox(
-                          width: TSizes.spaceBtWItems,
-                        ),
-                        Expanded(
-                            child: Text(
-                          addressController.selectedAddress.value.details,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          softWrap: true,
-                        ))
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            : Text(AppLocalizations.of(context)!.selectAddress,
-                style: Theme.of(context).textTheme.bodyMedium)
+        //  addressController.selectedAddress.value != null
+        Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(addressController.selectedAddress.value.name,
+                  style: Theme.of(context).textTheme.bodyLarge),
+              const SizedBox(
+                height: TSizes.spaceBtWItems / 2,
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.phone,
+                    size: 20,
+                  ),
+                  const SizedBox(
+                    width: TSizes.spaceBtWItems,
+                  ),
+                  Text(addressController.selectedAddress.value.phoneNumber,
+                      style: Theme.of(context).textTheme.bodyLarge)
+                ],
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtWItems / 2,
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.location_history,
+                    size: 20,
+                  ),
+                  const SizedBox(
+                    width: TSizes.spaceBtWItems,
+                  ),
+                  Expanded(
+                      child: Text(
+                    addressController.selectedAddress.value.details,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    softWrap: true,
+                  ))
+                ],
+              ),
+            ],
+          ),
+        )
+        // : Text(AppLocalizations.of(context)!.selectAddress,
+        //     style: Theme.of(context).textTheme.bodyMedium)
       ],
     );
   }

@@ -49,6 +49,7 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ))
                 : null,
         title: title,
+        titleTextStyle: Theme.of(context).textTheme.headlineSmall,
         centerTitle: centerTitle,
         actions: actions,
       ),

@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:brother_store/common/widgets/custom_shapes/containers/circuler_container.dart';
-import 'package:brother_store/utils/constants/color.dart';
 import 'package:flutter/material.dart';
 
 const double buttonSize = 80;
@@ -58,13 +57,13 @@ class _TCircularFabWidgetState extends State<TCircularFabWidget>
           elevation: 0,
           splashColor: Colors.black,
           child: TCirculerContainer(
-            backgroundColor: TColors.primary,
+            // backgroundColor: TColors.primary,
             width: 30,
             height: 30,
             child: Icon(
               icon,
-              color: Colors.white,
-              size: 45,
+              color: Colors.green,
+              size: 20,
             ),
           ),
         ),

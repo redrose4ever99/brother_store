@@ -3,7 +3,7 @@ import 'package:brother_store/data/repositoies/authentication/authentication_rep
 import 'package:brother_store/data/repositoies/order/order_repository.dart';
 import 'package:brother_store/features/shop/controllers/address_controller.dart';
 import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
-import 'package:brother_store/features/shop/controllers/product/checkoutController.dart';
+import 'package:brother_store/features/shop/controllers/product/checkout_controller.dart';
 import 'package:brother_store/features/shop/models/order_model.dart';
 import 'package:brother_store/navigation_menu.dart';
 import 'package:brother_store/utils/constants/enums.dart';
@@ -41,7 +41,7 @@ class OrderController extends GetxController {
 
   void processOrder(double totalAmount) async {
     TFullScreenLoader.openloadingDialog(
-        'Processing your order', TImages.bBlack);
+        'Processing your order', TImages.proccessLottie);
     //const userId = 'EyTbtgIxRwamzlhsPnSs4lehlcc2';
 
     final userId = AuthenticationRepository.instance.authUser!.uid;
@@ -60,7 +60,7 @@ class OrderController extends GetxController {
     await orderRepository.saveOrder(order, userId);
     cartController.clearCart();
     Get.off(() => SuccessScreen(
-          image: TImages.successfullLottie,
+          image: TImages.paySuccess,
           title: AppLocalizations.of(Get.context!)!.paymentSuccessfull,
           subTitle:
               AppLocalizations.of(Get.context!)!.yourItemWillBeShippingSoon,

@@ -1,7 +1,6 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/appbar/tabbar.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/search_container.dart';
-import 'package:brother_store/common/widgets/product.cart/cart_menu_icon.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
@@ -25,18 +24,19 @@ class TGalleryScreen extends StatelessWidget {
       length: albums.length,
       child: Scaffold(
         appBar: TAppBar(
+          showBackArrow: true,
           title: Text(
             AppLocalizations.of(context)!.gallery,
-            style: Theme.of(context).textTheme.headlineMedium,
+            // style: Theme.of(context).textTheme.headlineSmall,
           ),
-          actions: [
-            TCartCounterIcon(
-              iconColor: THelperFunctions.isDarkMode(context)
-                  ? TColors.white
-                  : TColors.black,
-              onPress: () {},
-            )
-          ],
+          // actions: [
+          //   TCartCounterIcon(
+          //     iconColor: THelperFunctions.isDarkMode(context)
+          //         ? TColors.white
+          //         : TColors.black,
+          //     onPress: () {},
+          //   )
+          // ],
         ),
         body: NestedScrollView(
           headerSliverBuilder: (_, innerBoxIsScrolled) {

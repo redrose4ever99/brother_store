@@ -4,21 +4,23 @@ import 'package:flutter/foundation.dart';
 class AlbumModel {
   String id;
   String name;
+  String? image;
   String arabicName;
   bool isFeature;
   AlbumModel({
     required this.id,
     required this.name,
+    this.image,
     required this.arabicName,
     required this.isFeature,
   });
 
   static AlbumModel empty() =>
-      AlbumModel(id: '', name: '', arabicName: '', isFeature: false);
+      AlbumModel(id: '', name: '', arabicName: '', image: '', isFeature: false);
 
-  Map<String, dynamic> toJson() {
-    return {'Name': name, 'ArabicName': arabicName, 'IsFeature': isFeature};
-  }
+  // Map<String, dynamic> toJson() {
+  //   return {'Name': name, 'ArabicName': arabicName, 'IsFeature': isFeature};
+  // }
 
   factory AlbumModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
@@ -31,6 +33,7 @@ class AlbumModel {
       return AlbumModel(
         id: document.id,
         name: data['Name'] ?? '',
+        image: data['Image'] ?? '',
         arabicName: data['ArabicName'] ?? '',
         isFeature: data['IsFeature'] ?? false,
       );

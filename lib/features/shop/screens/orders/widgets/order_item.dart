@@ -29,7 +29,7 @@ class TOrderListItem extends StatelessWidget {
             builder: (_, snapshot) {
               final emptyWidget = TAnimationLoaderWidget(
                 text: 'no order yet ',
-                animation: TImages.bBlack,
+                animation: TImages.proccessLottie,
                 showAction: true,
                 actionText: 'let us fill it',
                 onActionPressed: () => Get.off(() => const NavigationMenu()),

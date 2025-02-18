@@ -28,18 +28,17 @@ class TPricesRequestScreen extends StatelessWidget {
                 backgroundColor: dark ? TColors.dark : TColors.light,
                 onPressed: () => Get.to(() => const AddNewPriceRequestScreen()),
                 label: Text(
-                  'Add Price Request',
+                  AppLocalizations.of(context)!.addPriceRequest,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 icon: const Icon(
-                  Iconsax.dollar_circle,
+                  Iconsax.discount_shape4,
                   color: TColors.primary,
                 ),
               )
             : null,
         appBar: TAppBar(
-          title: Text(
-              'Prices Requests', //Text(AppLocalizations.of(context)!.myProjects,
+          title: Text(AppLocalizations.of(context)!.priceRequests,
               style: Theme.of(context).textTheme.headlineSmall),
           showBackArrow: true,
         ),

@@ -22,7 +22,7 @@ class OnBoardingPage extends StatelessWidget {
             child: Image(
               width: THelperFunctions.screenwidth() * 0.8,
               height: THelperFunctions.screenHeight() * 0.5,
-              image: Image != ''
+              image: image != ''
                   ? NetworkImage(image) as ImageProvider
                   : const AssetImage(TImages.bBlack),
             ),

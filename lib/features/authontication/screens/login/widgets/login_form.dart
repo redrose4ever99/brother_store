@@ -2,11 +2,12 @@ import 'package:brother_store/app.dart';
 import 'package:brother_store/features/authontication/controllers/login/login_controller.dart';
 import 'package:brother_store/features/authontication/screens/register/forget_password.dart';
 import 'package:brother_store/features/authontication/screens/register/register.dart';
-import 'package:brother_store/features/general/controllers/brother_controller.dart';
+//import 'package:brother_store/features/general/controllers/brother_controller.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:brother_store/utils/validators/validator.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,13 +20,14 @@ class TLoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isEg = Get.locale?.languageCode == 'en';
-    final brotherData = BrothersController.instance.allData;
+    final dark = THelperFunctions.isDarkMode(context);
+    // final isEg = Get.locale?.languageCode == 'en';
+    // final brotherData = BrothersController.instance.allData;
     final controller = Get.put(LoginController());
 
-    final dark = THelperFunctions.isDarkMode(context);
+    // final dark = THelperFunctions.isDarkMode(context);
     return Form(
-        key: controller.LoginFormKey,
+        key: controller.loginFormKey,
         child: Column(
           children: [
             TextFormField(
@@ -78,17 +80,23 @@ class TLoginForm extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () => Get.to(() => const ForgetPassword()),
-                    child: Text(AppLocalizations.of(context)!.forgetPassword))
+                    child: Text(
+                      AppLocalizations.of(context)!.forgetPassword,
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .copyWith(color: TColors.primary),
+                    ))
               ],
             ),
             const SizedBox(
               height: TSizes.spaceBtWItems,
             ),
             SizedBox(
-                width: THelperFunctions.screenwidth() * 0.6,
+                width: THelperFunctions.screenwidth() / 2.5,
                 child: ElevatedButton(
                     onPressed: () {
-                      if (controller.LoginFormKey.currentState!.validate()) {
+                      if (controller.loginFormKey.currentState!.validate()) {
                         controller.emailAndPasswordSignin();
                         // controller.phoneAuthentication(
                         //     controller.phoneNumber.text.trim());
@@ -98,29 +106,37 @@ class TLoginForm extends StatelessWidget {
             const SizedBox(
               height: TSizes.spaceBtWItems,
             ),
+            Text.rich(TextSpan(children: [
+              TextSpan(
+                  text: " ${AppLocalizations.of(context)!.iDontHaveAcount} ",
+                  style: Theme.of(context).textTheme.bodySmall),
+              TextSpan(
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => Get.to(
+                        () => const RegisterScreen(),
+                      ),
+                text: AppLocalizations.of(context)!.register,
+                style: Theme.of(context).textTheme.bodySmall!.apply(
+                    color: dark ? TColors.white : TColors.primary,
+                    decoration: TextDecoration.underline,
+                    decorationColor: dark ? TColors.white : TColors.primary),
+              ),
+            ])),
             // SizedBox(
-            //     width: THelperFunctions.screenwidth() * 0.6,
+            //     width: THelperFunctions.screenwidth() / 2.5,
             //     child: ElevatedButton(
-            //         onPressed: () => Get.to(() => const App()),
-            //         child: const Text('Continue as gust'))),
-            // const SizedBox(
-            //   height: TSizes.spaceBtWsections,
-            // ),
-            SizedBox(
-                width: THelperFunctions.screenwidth() * 0.6,
-                child: ElevatedButton(
-                    onPressed: () => Get.to(() => const RegisterScreen()),
-                    child: Text(AppLocalizations.of(context)!.createAccount))),
+            //         onPressed: () => Get.to(() => const RegisterScreen()),
+            //         child: Text(AppLocalizations.of(context)!.createAccount))),
             const SizedBox(
               height: TSizes.spaceBtWsections,
             ),
             GestureDetector(
                 onTap: () => Get.to(() => const App()),
                 child: Text(
-                  "continue as gust",
+                  AppLocalizations.of(context)!.continuAsGuest,
                   style: Theme.of(context)
                       .textTheme
-                      .headlineSmall!
+                      .labelLarge!
                       .apply(color: TColors.primary),
                 ))
           ],

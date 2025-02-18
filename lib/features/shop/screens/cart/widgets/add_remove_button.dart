@@ -11,7 +11,7 @@ class TProductQuantityWithAddRemoveButtons extends StatelessWidget {
   const TProductQuantityWithAddRemoveButtons(
       {Key? key, required this.quantity, this.remove, this.add})
       : super(key: key);
-  final quantity;
+  final int quantity;
   final VoidCallback? add, remove;
   @override
   Widget build(BuildContext context) {

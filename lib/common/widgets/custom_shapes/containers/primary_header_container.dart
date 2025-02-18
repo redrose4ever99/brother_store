@@ -22,9 +22,8 @@ class TPrimaryHeaderContainer extends StatelessWidget {
     return TCurvedEdgesWidget(
       child: Container(
           color: THelperFunctions.isDarkMode(context)
-              ? TColors.darkerGray
+              ? TColors.dark
               : controller.color,
-          padding: const EdgeInsets.all(0),
           child: SizedBox(
             child: Stack(
               children: [

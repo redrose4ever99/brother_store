@@ -41,7 +41,7 @@ class TBrandTitleWithVerifiedIcon extends StatelessWidget {
         const Icon(
           Iconsax.verify5,
           color: TColors.primary,
-          size: TSizes.iconXs,
+          size: TSizes.iconMd,
         )
       ],
     );

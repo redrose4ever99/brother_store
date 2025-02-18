@@ -1,22 +1,29 @@
 import 'package:brother_store/common/widgets/layout/grid_layout.dart';
 import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
+import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/helper_functions.dart';
 
 import 'package:flutter/material.dart';
 
-class TGalleryPhotoShummer extends StatelessWidget {
-  const TGalleryPhotoShummer({super.key, this.itemCount = 4});
+class TGalleryPhotoShimmer extends StatelessWidget {
+  const TGalleryPhotoShimmer({super.key, this.itemCount = 4});
   final int itemCount;
   @override
   Widget build(BuildContext context) {
     return TGridLayout(
-        maxAxisExtent: 190,
+        maxAxisExtent: 240,
         itemCount: itemCount,
-        itemBuilder: (_, __) => const SizedBox(
-              width: 180,
+        crossColumn: 1,
+        itemBuilder: (_, __) => SizedBox(
+              //width: 180,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TShimmerEffect(width: 180, height: 180),
+                  TShimmerEffect(
+                    width: THelperFunctions.screenwidth() -
+                        TSizes.defaultSpace * 2,
+                    height: THelperFunctions.screenwidth() / 1.7,
+                  ),
                 ],
               ),
             ));

@@ -19,6 +19,8 @@ class TFavoriteIcon extends StatelessWidget {
     final controller = Get.put(FavoriteController());
     return Obx(
       () => TCircularIcon(
+        backgroundColor: Colors.transparent,
+        size: 30,
         icon:
             controller.isFavorites(productId) ? Iconsax.heart5 : Iconsax.heart,
         color: controller.isFavorites(productId) ? TColors.error : null,

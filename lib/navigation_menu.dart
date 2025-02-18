@@ -1,3 +1,5 @@
+import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
+
 import 'package:brother_store/features/gallery/screen/gallery.dart';
 import 'package:brother_store/features/shop/screens/store/store.dart';
 import 'package:brother_store/utils/constants/color.dart';
@@ -24,7 +26,8 @@ class NavigationMenu extends StatelessWidget {
           ? TextDirection.ltr
           : TextDirection.rtl,
       child: Scaffold(
-        //  floatingActionButton: const TCircularFabWidget(),
+        // floatingActionButton: const TCircularFabWidget(),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: WillPopScope(
             onWillPop: showExitDialog,
             child:
@@ -96,6 +99,9 @@ class NavigationMenu extends StatelessWidget {
       return await showDialog(
           context: Get.context!,
           builder: (context) => AlertDialog(
+                backgroundColor: THelperFunctions.isDarkMode(context)
+                    ? TColors.dark
+                    : TColors.light,
                 title: Text(
                   AppLocalizations.of(context)!.exitApp,
                   style: Theme.of(context).textTheme.headlineSmall,
@@ -114,16 +120,23 @@ class NavigationMenu extends StatelessWidget {
                             .headlineSmall!
                             .apply(color: TColors.white),
                       )),
-                  ElevatedButton(
+                  TextButton(
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       },
-                      child: Text(
-                        AppLocalizations.of(context)!.yes,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
-                            .apply(color: TColors.white),
+                      child: TRoundedContainer(
+                        showBorder: true,
+                        borderColor: TColors.primary,
+                        backgroundColor: THelperFunctions.isDarkMode(context)
+                            ? TColors.dark
+                            : TColors.light,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 16),
+                          child: Text(AppLocalizations.of(context)!.yes,
+                              style:
+                                  Theme.of(context).textTheme.headlineSmall!),
+                        ),
                       ))
                 ],
               ));

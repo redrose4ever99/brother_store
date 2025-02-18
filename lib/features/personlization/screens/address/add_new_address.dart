@@ -21,7 +21,7 @@ class AddNewAddressScreen extends StatelessWidget {
         appBar: TAppBar(
           title: Text(
             AppLocalizations.of(context)!.addNewAddress,
-            style: Theme.of(context).textTheme.headlineSmall,
+            //  style: Theme.of(context).textTheme.headlineSmall,
           ),
           showBackArrow: true,
         ),

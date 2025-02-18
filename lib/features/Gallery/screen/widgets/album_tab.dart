@@ -3,8 +3,10 @@ import 'package:brother_store/common/widgets/layout/grid_gallery_layout.dart';
 import 'package:brother_store/common/widgets/shimmers/gallery_photo_shimmer.dart';
 import 'package:brother_store/features/gallery/controller/album_controller.dart';
 import 'package:brother_store/features/gallery/models/album_model.dart';
+import 'package:brother_store/features/general/screens/gallery_widget.dart';
 import 'package:brother_store/features/shop/controllers/product/images_controller.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
@@ -49,7 +51,7 @@ class TTabGalleryView extends StatelessWidget {
                   future: controller.getGalleryAlbum(albumId: album.id),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const TGalleryPhotoShummer(
+                      return const TGalleryPhotoShimmer(
                         itemCount: 4,
                       );
                     }
@@ -84,20 +86,26 @@ class TTabGalleryView extends StatelessWidget {
                     return TGridGalleryLayout(
                         itemCount: photos.length,
                         itemBuilder: (_, index) => GestureDetector(
-                              onTap: () => imageController.showEnLargedImage(
-                                  photos[index].image,
-                                  Get.locale?.languageCode == 'en'
-                                      ? photos[index].name ?? ""
-                                      : photos[index].arabicName ?? "",
-                                  Get.locale?.languageCode == 'en'
-                                      ? photos[index].description ?? ""
-                                      : photos[index].arabicDescription ?? ""),
+                              onTap: () => Get.to(GalleryWidget(
+                                  urlImage: photos.map((e) => e.image).toList(),
+                                  index: index)),
+
+                              //  imageController.showEnLargedImage(
+                              //     photos[index].image,
+                              //     Get.locale?.languageCode == 'en'
+                              //         ? photos[index].name ?? ""
+                              //         : photos[index].arabicName ?? "",
+                              //     Get.locale?.languageCode == 'en'
+                              //         ? photos[index].description ?? ""
+                              //         : photos[index].arabicDescription ?? ""),
                               child: TRoundedImage(
                                 imageUrl: photos[index].image,
-                                width: 100,
+                                // width: 100,
                                 fit: BoxFit.cover,
                                 isNetworkImage: true,
-                                height: 100,
+                                width: THelperFunctions.screenwidth() -
+                                    TSizes.defaultSpace * 2,
+                                height: THelperFunctions.screenwidth() / 1.7,
                               ),
                             ));
                   }),

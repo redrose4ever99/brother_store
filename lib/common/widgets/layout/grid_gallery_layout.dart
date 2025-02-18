@@ -19,7 +19,7 @@ class TGridGalleryLayout extends StatelessWidget {
         padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+            crossAxisCount: 1,
             mainAxisSpacing: TSizes.gridViewSpacing,
             crossAxisSpacing: TSizes.gridViewSpacing,
             mainAxisExtent: maxAxisExtent),

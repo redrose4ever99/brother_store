@@ -39,7 +39,8 @@ class UpdateNameController extends GetxController {
   Future<void> updateUserName() async {
     try {
       TFullScreenLoader.openloadingDialog(
-          AppLocalizations.of(Get.context!)!.weAreUpdating, TImages.bBlack);
+          AppLocalizations.of(Get.context!)!.weAreUpdating,
+          TImages.proccessLottie);
 
       //check connection
       final isConnected = await NetworkManager.instance.isConnected();
