@@ -33,12 +33,6 @@ class TRatingAndShare extends StatelessWidget {
             ])),
           ],
         ),
-        IconButton(
-            onPressed: () => {
-                  Share.share('check out my product ${product.thumbnail}',
-                      subject: 'Look what I like!')
-                },
-            icon: const Icon(Icons.share, size: TSizes.iconMd))
       ],
     );
   }

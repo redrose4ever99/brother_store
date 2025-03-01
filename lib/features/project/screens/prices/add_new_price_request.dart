@@ -68,7 +68,9 @@ class AddNewPriceRequestScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(
                                   children: [
-                                    Text('Personal Info',
+                                    Text(
+                                        AppLocalizations.of(context)!
+                                            .personalInformation,
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!
@@ -88,9 +90,11 @@ class AddNewPriceRequestScreen extends StatelessWidget {
                                             countryFlagStyle:
                                                 const TextStyle(fontSize: 17),
                                           ),
-                                          decoration: const InputDecoration(
+                                          decoration: InputDecoration(
                                             // prefixIcon: Icon(Icons.phone),
-                                            labelText: 'Phone Number',
+                                            labelText:
+                                                AppLocalizations.of(context)!
+                                                    .phoneNumber,
                                             //alignLabelWithHint: true,
                                             // border: OutlineInputBorder(
                                             //   borderSide: BorderSide(),
@@ -106,18 +110,24 @@ class AddNewPriceRequestScreen extends StatelessWidget {
                                     ),
                                     TextFormField(
                                       controller: controller.company,
-                                      decoration: const InputDecoration(
-                                          prefixIcon: Icon(Iconsax.building),
-                                          labelText: 'Your Company'),
+                                      decoration: InputDecoration(
+                                          prefixIcon:
+                                              const Icon(Iconsax.building),
+                                          labelText:
+                                              AppLocalizations.of(context)!
+                                                  .yourCompany),
                                     ),
                                     const SizedBox(
                                       height: TSizes.spaceBtwInputFields,
                                     ),
                                     TextFormField(
                                       controller: controller.address,
-                                      decoration: const InputDecoration(
-                                          prefixIcon: Icon(Iconsax.location),
-                                          labelText: 'Your Address'),
+                                      decoration: InputDecoration(
+                                          prefixIcon:
+                                              const Icon(Iconsax.location),
+                                          labelText:
+                                              AppLocalizations.of(context)!
+                                                  .yourAddress),
                                     ),
                                   ],
                                 ),
@@ -142,7 +152,9 @@ class AddNewPriceRequestScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(16),
                                 child: Column(
                                   children: [
-                                    Text('Project Info',
+                                    Text(
+                                        AppLocalizations.of(context)!
+                                            .projectInfo,
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!

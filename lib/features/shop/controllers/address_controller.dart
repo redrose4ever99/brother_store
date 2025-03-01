@@ -7,6 +7,7 @@ import 'package:brother_store/features/shop/models/address_model.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
+import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
@@ -172,7 +173,7 @@ class AddressController extends GetxController {
                                   ));
                         }),
                     SizedBox(
-                      width: double.infinity,
+                      width: THelperFunctions.screenwidth() * 0.6,
                       child: ElevatedButton(
                           onPressed: () =>
                               Get.to(() => const AddNewAddressScreen()),

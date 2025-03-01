@@ -45,6 +45,7 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   flutter_zoom_drawer: ^2.1.1
   roundcheckbox: 
+  country_picker: ^2.0.21
   flutter_phone_number_field:  
   get: null
   get_storage: ^2.1.1
@@ -62,6 +63,7 @@ dependencies:
   path_provider: ^2.1.2
   readmore: ^2.2.0
   share: ^2.0.4
+  share_plus: ^7.2.2
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.1.0
   string_to_color: ^2.0.0
@@ -76,9 +78,11 @@ dependencies:
   dropdown_button2: ^2.3.9
   datetime_picker_formfield_new: ^2.1.0
   animated_text_kit: ^4.2.3
-  flutter_facebook_auth: '^3.5.0'
+  flutter_paytabs_bridge: any
+  flutter_slidable:
 # Icons
 cupertino_icons: ^1.0.2
+#payment
 
 # State managment
 get_storage: ^2.1.1
@@ -142,7 +146,11 @@ flutter:
       fonts:
         - asset: assets/fonts/GTWalsheimProMedium/GTWalsheimProMedium.ttf
           weight: 500
+          
+    # - family: Latif
+    #   fonts:
+    #     - asset: assets/fonts/latif/LateefRegOT.ttf
 
-
+#assets\fonts\latif\LateefRegOT.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

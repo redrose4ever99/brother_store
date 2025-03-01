@@ -23,126 +23,136 @@ class ProductDetailsScreen extends StatelessWidget {
     final controller = CartController.instance;
 
     //final dark = THelperFunctions.isDarkMode(context);
-    return SafeArea(
-      child: Directionality(
-        textDirection: Get.locale?.languageCode == 'en'
-            ? TextDirection.ltr
-            : TextDirection.rtl,
-        child: Scaffold(
-          // bottomNavigationBar: TBottomAddToCart(
-          //   product: product,
-          // ),
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: TSizes.defaultSpace * 4, vertical: 14),
-            child: Obx(
-              () => controller.totalOfCartPrice.value > 0
-                  ? SizedBox(
-                      width: THelperFunctions.screenwidth() / 2,
-                      height: 60,
-                      child: ElevatedButton(
-                          onPressed: controller.totalOfCartPrice.value > 0
-                              ? () => Get.to(() => const CartScreen())
-                              : () => TLoader.warningSnackBar(
-                                  title:
-                                      AppLocalizations.of(context)!.cartEmpty,
-                                  message: AppLocalizations.of(context)!
-                                      .addItemTotheCartForOrderProcess),
-                          child: Text(
-                            'View Cart',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .apply(color: TColors.white),
-                          )),
-                    )
-                  : const SizedBox(),
+    return Directionality(
+      textDirection: Get.locale?.languageCode == 'en'
+          ? TextDirection.ltr
+          : TextDirection.rtl,
+      child: Container(
+        color:
+            THelperFunctions.isDarkMode(context) ? Colors.black : Colors.white,
+        child: SafeArea(
+          top: true,
+          left: false,
+          right: false,
+          child: Scaffold(
+            // bottomNavigationBar: TBottomAddToCart(
+            //   product: product,
+            // ),
+            bottomNavigationBar: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: TSizes.defaultSpace * 4, vertical: 14),
+              child: Obx(
+                () => controller.totalOfCartPrice.value > 0
+                    ? SizedBox(
+                        width: THelperFunctions.screenwidth() / 2,
+                        height: 60,
+                        child: ElevatedButton(
+                            onPressed: controller.totalOfCartPrice.value > 0
+                                ? () => Get.to(() => const CartScreen())
+                                : () => TLoader.warningSnackBar(
+                                    title:
+                                        AppLocalizations.of(context)!.cartEmpty,
+                                    message: AppLocalizations.of(context)!
+                                        .addItemTotheCartForOrderProcess),
+                            child: Text(
+                              AppLocalizations.of(context)!.viewCart,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .apply(color: TColors.white),
+                            )),
+                      )
+                    : const SizedBox(),
+              ),
             ),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                ///1- product image slider
-                TProductImageSlider(
-                  product: product,
-                ),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ///1- product image slider
+                  TProductImageSlider(
+                    product: product,
+                  ),
 
-                //-- product Details
-                Padding(
-                  padding: const EdgeInsets.all(TSizes.defaultSpace),
-                  child: Column(children: [
-                    ///Rating and share buttons
-                    TRatingAndShare(product: product),
+                  //-- product Details
+                  Padding(
+                    padding: const EdgeInsets.all(TSizes.defaultSpace),
+                    child: Column(children: [
+                      ///Rating and share buttons
+                      Visibility(
+                          visible: false,
+                          child: TRatingAndShare(product: product)),
 
-                    ///price Title,Stack, & brand
-                    TProductMetaData(
-                      product: product,
-                    ),
-
-                    // TBottomAddToCart(
-                    //   product: product,
-                    // ),
-
-                    const SizedBox(
-                      height: TSizes.spaceBtWsections,
-                    ),
-
-                    ///Descriptions
-                    TSectionHeading(
-                      title: AppLocalizations.of(context)!.descriptions,
-                      showActionButton: false,
-                    ),
-                    const SizedBox(
-                      height: TSizes.spaceBtWItems,
-                    ),
-                    ReadMoreText(
-                      Get.locale?.languageCode == 'en'
-                          ? product.description ?? ''
-                          : product.arabicDescription ?? '',
-                      trimLines: 2,
-                      trimMode: TrimMode.Line,
-                      trimCollapsedText: AppLocalizations.of(context)!.showMore,
-                      trimExpandedText: AppLocalizations.of(context)!.less,
-                      moreStyle: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w800),
-                      lessStyle: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w800),
-                    ),
-
-                    ///Reviews
-
-                    //  const Divider(),
-                    // const SizedBox(
-                    //   height: TSizes.spaceBtWItems,
-                    // ),
-
-                    Visibility(
-                      visible: false,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const TSectionHeading(
-                            title: 'Reviews (190)',
-                            showActionButton: false,
-                          ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Get.locale?.languageCode == 'en'
-                                    ? Icons.keyboard_arrow_right
-                                    : Icons.keyboard_arrow_left,
-                              ))
-                        ],
+                      ///price Title,Stack, & brand
+                      TProductMetaData(
+                        product: product,
                       ),
-                    ),
-                    const SizedBox(
-                      height: TSizes.spaceBtWsections / 2,
-                    ),
-                    //
-                    //
-                  ]),
-                ),
-              ],
+
+                      // TBottomAddToCart(
+                      //   product: product,
+                      // ),
+
+                      const SizedBox(
+                        height: TSizes.spaceBtWsections,
+                      ),
+
+                      ///Descriptions
+                      TSectionHeading(
+                        title: AppLocalizations.of(context)!.descriptions,
+                        showActionButton: false,
+                      ),
+                      const SizedBox(
+                        height: TSizes.spaceBtWItems,
+                      ),
+                      ReadMoreText(
+                        Get.locale?.languageCode == 'en'
+                            ? product.description ?? ''
+                            : product.arabicDescription ?? '',
+                        trimLines: 2,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText:
+                            AppLocalizations.of(context)!.showMore,
+                        trimExpandedText: AppLocalizations.of(context)!.less,
+                        moreStyle: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w800),
+                        lessStyle: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w800),
+                      ),
+
+                      ///Reviews
+
+                      //  const Divider(),
+                      // const SizedBox(
+                      //   height: TSizes.spaceBtWItems,
+                      // ),
+
+                      Visibility(
+                        visible: false,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const TSectionHeading(
+                              title: 'Reviews (190)',
+                              showActionButton: false,
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Get.locale?.languageCode == 'en'
+                                      ? Icons.keyboard_arrow_right
+                                      : Icons.keyboard_arrow_left,
+                                ))
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: TSizes.spaceBtWsections / 2,
+                      ),
+                      //
+                      //
+                    ]),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

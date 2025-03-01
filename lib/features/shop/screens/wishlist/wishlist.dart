@@ -27,7 +27,6 @@ class FavoriteScreen extends StatelessWidget {
         appBar: TAppBar(
           title: Text(
             AppLocalizations.of(context)!.wishList,
-            style: Theme.of(context).textTheme.headlineMedium,
           ),
           actions: [
             TCircularIcon(

@@ -4,7 +4,7 @@ import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'blog_item.dart';
 import 'single_blog.dart';
 
@@ -19,7 +19,7 @@ class BlogItems extends StatelessWidget {
         future: controller.fetchUserblogs(),
         builder: (_, snapshot) {
           final emptyWidget = TAnimationLoaderWidget(
-            text: 'No News until now ',
+            text: AppLocalizations.of(context)!.noNewsuntilNow,
             animation: TImages.cartEmptyLottie,
             showAction: false,
             onActionPressed: () {},

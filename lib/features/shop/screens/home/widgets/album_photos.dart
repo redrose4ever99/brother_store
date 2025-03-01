@@ -4,9 +4,7 @@ import 'package:brother_store/common/widgets/shimmers/gallery_photo_shimmer.dart
 import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
 import 'package:brother_store/features/gallery/controller/album_controller.dart';
 import 'package:brother_store/features/gallery/models/album_model.dart';
-import 'package:brother_store/features/gallery/models/gallery_album.dart';
 import 'package:brother_store/features/general/screens/gallery_widget.dart';
-import 'package:brother_store/features/shop/controllers/product/images_controller.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -22,7 +20,7 @@ class TSingleAlbumPhotoView extends StatelessWidget {
   final AlbumModel album;
   @override
   Widget build(BuildContext context) {
-    final imageController = Get.put(ImagesController());
+    // final imageController = Get.put(ImagesController());
     final controller = AlbumController.instance;
     final isEg = Get.locale?.languageCode == 'en';
     return Directionality(

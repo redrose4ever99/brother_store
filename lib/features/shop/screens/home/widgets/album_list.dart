@@ -39,7 +39,7 @@ class TAlbumList extends StatelessWidget {
         }
 
         return SizedBox(
-          width: double.infinity,
+          width: THelperFunctions.screenwidth() - 32,
           child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -85,6 +85,7 @@ class TAlbumList extends StatelessWidget {
                                     size: 50,
                                   )),
                           TRoundedContainer(
+                              radius: BorderRadius.circular(20),
                               width: THelperFunctions.screenwidth() -
                                   TSizes.defaultSpace * 2,
                               backgroundColor: TColors.black.withOpacity(0.3),

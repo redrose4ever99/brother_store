@@ -27,7 +27,6 @@ class AllProducts extends StatelessWidget {
         appBar: TAppBar(
           title: Text(
             title,
-            style: Theme.of(context).textTheme.headlineMedium,
           ),
           showBackArrow: true,
         ),

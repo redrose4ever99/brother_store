@@ -1,18 +1,21 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/personlization/controllers/user_controller.dart';
 import 'package:brother_store/features/personlization/screens/profile/widgets/info_screen.dart';
+import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'widgets/change_name.dart';
 import 'widgets/profile_menu.dart';
-import 'package:full_screen_image/full_screen_image.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -148,8 +151,6 @@ class ProfileScreen extends StatelessWidget {
                   onPress: () {
                     Clipboard.setData(ClipboardData(
                         text: controller.user.value.id.toString()));
-                    Get.snackbar('Copied!', 'UserId copied to clipboard.',
-                        snackPosition: SnackPosition.BOTTOM);
                   },
                 ),
 
@@ -177,15 +178,42 @@ class ProfileScreen extends StatelessWidget {
                   height: TSizes.spaceBtWItems,
                 ),
                 Center(
-                  child: TextButton(
-                      onPressed: () {
-                        controller.deleteAccountWarningPopup();
-                      },
-                      child: Text(
-                        AppLocalizations.of(context)!.closeAccount,
-                        style: const TextStyle(color: Colors.red, fontSize: 15),
-                      )),
+                  child: GestureDetector(
+                    onTap: () => AuthenticationRepository.instance.logOut(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.logout,
+                          color: TColors.primary,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.logout,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
+                  ),
                 )
+                // Center(
+
+                //   child: TSettingMenuTile(
+                //     onTap: () => AuthenticationRepository.instance.logOut(),
+                //     icon: Icons.logout,
+                //     title: AppLocalizations.of(context)!.logout,
+                //     subTitle: '',
+                //   ),
+                // ),
+                // Center(
+                //   child: TextButton(
+                //       onPressed: () {
+                //         controller.deleteAccountWarningPopup();
+                //       },
+                //       child: Text(
+                //         AppLocalizations.of(context)!.closeAccount,
+                //         style: const TextStyle(color: Colors.red, fontSize: 15),
+                //       )),
+                // )
               ],
             ),
           ),

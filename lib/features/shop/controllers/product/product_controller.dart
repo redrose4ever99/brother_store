@@ -1,5 +1,4 @@
 import 'package:brother_store/data/repositoies/product/product_repository.dart';
-import 'package:brother_store/features/shop/models/brand_model.dart';
 import 'package:brother_store/features/shop/models/product_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';

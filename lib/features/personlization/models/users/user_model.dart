@@ -6,6 +6,7 @@ class UserModel {
   String? email;
   String? id;
   String? phoneNumber;
+  String? userName;
   String profilePicture;
 
   UserModel(
@@ -13,6 +14,7 @@ class UserModel {
       this.lastName,
       this.phoneNumber,
       this.email,
+      this.userName,
       this.id,
       this.profilePicture = ''});
 
@@ -33,6 +35,17 @@ class UserModel {
       'ProfilePicture': profilePicture,
       'Email': email
     };
+  }
+
+  static List<String> nameParts(fullName) => fullName.split(" ");
+
+  static String generateUsername(fullName) {
+    List<String> nameParts = fullName.split(" ");
+    String firstName = nameParts[0].toLowerCase();
+    String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : "";
+    String camelCaseUsername = "$firstName$lastName";
+    String usernameWithPrefix = "bro_$camelCaseUsername";
+    return usernameWithPrefix;
   }
 
   factory UserModel.fromSnapshot(

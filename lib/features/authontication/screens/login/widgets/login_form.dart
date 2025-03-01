@@ -94,6 +94,7 @@ class TLoginForm extends StatelessWidget {
             ),
             SizedBox(
                 width: THelperFunctions.screenwidth() / 2.5,
+                height: 60,
                 child: ElevatedButton(
                     onPressed: () {
                       if (controller.loginFormKey.currentState!.validate()) {

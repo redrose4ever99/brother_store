@@ -81,10 +81,9 @@ class ImagesController extends GetxController {
       String image, String? title, String? description) async {
     TLoader.warningSnackBar(title: 'in progress Now...');
     //return;
-    var myFile = await file(image);
+    // var myFile = await file(image);
     Get.to(fullscreenDialog: true, OrientationBuilder(
       builder: (BuildContext context, Orientation orientation) {
-        print(orientation);
         return Dialog.fullscreen(
             child: SingleChildScrollView(
           child: Column(
@@ -115,6 +114,7 @@ class ImagesController extends GetxController {
                               turns: turns.value,
                               duration: const Duration(seconds: 1),
                               child: TRoundedImage(
+                                borderRaduis: BorderRadius.circular(20),
                                 backgroundColor: Colors.transparent,
                                 width: THelperFunctions.screenwidth(),
                                 height: THelperFunctions.screenHeight() * 0.6,

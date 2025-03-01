@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class BannerController extends GetxController {
+  static BannerController get instance => Get.find();
   final carousalCurrentIndex = 0.obs;
   final isLoading = false.obs;
   final RxList<BannerModel> banners = <BannerModel>[].obs;

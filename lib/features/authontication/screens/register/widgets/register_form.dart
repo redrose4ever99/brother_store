@@ -177,7 +177,8 @@ class TRegisterForm extends StatelessWidget {
               height: TSizes.spaceBtwInputFields,
             ),
             SizedBox(
-                width: THelperFunctions.screenwidth() / 2,
+                width: THelperFunctions.screenwidth() * .6,
+                height: 60,
                 child: ElevatedButton(
                     onPressed: () {
                       if (controller.registerFormKey.currentState!.validate()) {

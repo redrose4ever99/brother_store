@@ -5,7 +5,6 @@ import 'package:brother_store/features/general/controllers/brother_controller.da
 import 'package:brother_store/features/personlization/screens/settings/terms.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
-import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
@@ -18,7 +17,7 @@ class BrotherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    // final dark = THelperFunctions.isDarkMode(context);
     final isEg = Get.locale?.languageCode == 'en';
     final controller = BrothersController.instance;
     final brotherData = controller.allData;
@@ -30,28 +29,22 @@ class BrotherScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              TPrimaryHeaderContainer(
+              const TPrimaryHeaderContainer(
                 child: Column(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: TSizes.spaceBtWsections,
                     ),
                     TAppBar(
                       centerTitle: true,
-                      title: Row(
-                        children: [
-                          Image(
-                            image: AssetImage(Get.locale?.languageCode == 'en'
-                                ? TImages.wordWhite
-                                : TImages.arWord),
-                            width: 125,
-                            height: 50,
-                            //color: TColors.primary,
-                          ),
-                        ],
+                      title: Image(
+                        image: AssetImage(TImages.wordWhite),
+                        width: 125,
+                        height: 50,
+                        //color: TColors.primary,
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: TSizes.spaceBtWsections,
                     )
                   ],

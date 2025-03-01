@@ -1,11 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-
 import 'package:brother_store/common/widgets/icons/circuler_icon.dart';
 import 'package:brother_store/features/shop/controllers/product/favorites_controller.dart';
 import 'package:brother_store/utils/constants/color.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TFavoriteIcon extends StatelessWidget {
   const TFavoriteIcon({
@@ -17,15 +15,15 @@ class TFavoriteIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(FavoriteController());
-    return Obx(
-      () => TCircularIcon(
-        backgroundColor: Colors.transparent,
-        size: 30,
-        icon:
-            controller.isFavorites(productId) ? Iconsax.heart5 : Iconsax.heart,
-        color: controller.isFavorites(productId) ? TColors.error : null,
-        onPressed: () => controller.toggleFavoriteProduct(productId),
-      ),
-    );
+    return Obx(() => TCircularIcon(
+          backgroundColor: Colors.transparent,
+          size: 35,
+          icon: controller.isFavorites(productId)
+              ? Icons.favorite
+              : Icons.favorite_border_rounded,
+          color:
+              controller.isFavorites(productId) ? TColors.error : Colors.black,
+          onPressed: () => controller.toggleFavoriteProduct(productId),
+        ));
   }
 }

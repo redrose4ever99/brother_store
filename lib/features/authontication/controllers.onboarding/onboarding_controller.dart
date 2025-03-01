@@ -1,5 +1,7 @@
 import 'package:brother_store/app.dart';
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/data/repositoies/brothers/onboarding_repository.dart';
+import 'package:brother_store/features/authontication/screens/login/login.dart';
 import 'package:brother_store/features/general/models/onboarding_model.dart';
 import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/logging/logger.dart';
@@ -54,7 +56,11 @@ class OnBoardingController extends GetxController {
     if (currentPageIndex.value == allData.length - 1) {
       GetStorage().write('isTheFirstTime', false);
 
-      Get.to(const App());
+      if (AuthenticationRepository.instance.authUser != null) {
+        Get.to(const App());
+      } else {
+        Get.to(const LoginScreen());
+      }
     } else {
       int page = currentPageIndex.value + 1;
       pageController.jumpToPage(page);
@@ -63,6 +69,10 @@ class OnBoardingController extends GetxController {
 
   void skipPage() {
     GetStorage().write('isTheFirstTime', false);
-    Get.to(const App());
+    if (AuthenticationRepository.instance.authUser != null) {
+      Get.to(const App());
+    } else {
+      Get.to(const LoginScreen());
+    }
   }
 }

@@ -10,7 +10,6 @@ import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -54,8 +53,9 @@ class CartScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(TSizes.defaultSpace),
                   child: Column(
                     children: [
-                      Lottie.asset(TImages.cartEmptyLottie,
-                          width: THelperFunctions.screenwidth() * 0.5),
+                      Image(
+                          image: const AssetImage(TImages.cartEmpty),
+                          width: THelperFunctions.screenwidth() / 2),
                       const SizedBox(
                         height: TSizes.spaceBtWItems,
                       ),
@@ -74,7 +74,7 @@ class CartScreen extends StatelessWidget {
                               onPressed: () {
                                 NavigationController
                                     .instance.selectedIndex.value = 1;
-                                Get.off(() => const NavigationMenu());
+                                Get.to(() => const NavigationMenu());
                               },
                               child: Text(
                                 AppLocalizations.of(context)!.letsFillIt,

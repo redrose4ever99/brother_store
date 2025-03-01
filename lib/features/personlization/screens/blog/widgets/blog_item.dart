@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:get/get.dart';
 
 class TBlogItem extends StatelessWidget {
   const TBlogItem({Key? key, required this.blog, required this.onTap})
@@ -16,15 +17,18 @@ class TBlogItem extends StatelessWidget {
   final BlogModel blog;
   @override
   Widget build(BuildContext context) {
+    final isEg = Get.locale?.languageCode == 'en';
+    final image = blog.images![1];
     return GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(
             left: TSizes.defaultSpace, right: TSizes.defaultSpace),
         child: TRoundedContainer(
+          radius: BorderRadius.circular(20),
           padding: const EdgeInsets.all(TSizes.md),
           width: double.infinity,
-          showBorder: true,
+          enableShadow: true,
           backgroundColor: Colors.transparent,
           borderColor: THelperFunctions.isDarkMode(context)
               ? TColors.darkerGray
@@ -44,13 +48,12 @@ class TBlogItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     // border:
                     //     Border.all(color: TColors.grey.withOpacity(0.4)),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                         image: imageProvider, fit: BoxFit.contain),
                   ),
                 ),
-                imageUrl:
-                    'https://firebasestorage.googleapis.com/v0/b/brothers-creative.appspot.com/o/gallery%2FAlbum2%2F4.PNG?alt=media&token=27fe4375-423a-4f85-bab6-2c0ce3ba7c63',
+                imageUrl: image,
                 placeholder: (context, url) => Container(
                     alignment: Alignment.center,
                     child: const CircularProgressIndicator()),
@@ -59,7 +62,7 @@ class TBlogItem extends StatelessWidget {
                 height: TSizes.sm * 2,
               ),
               Text(
-                blog.title,
+                isEg ? blog.title : blog.arabicTitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.headlineSmall,
@@ -68,7 +71,7 @@ class TBlogItem extends StatelessWidget {
                 height: TSizes.sm / 2,
               ),
               TProductTitleText(
-                title: blog.auther,
+                title: isEg ? blog.auther : blog.arabicAuther,
                 smalSize: true,
                 maxLines: 2,
               ),
@@ -76,7 +79,7 @@ class TBlogItem extends StatelessWidget {
                 height: TSizes.sm / 2,
               ),
               Text(
-                blog.details,
+                isEg ? blog.details : blog.arabicDetails,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 softWrap: true,

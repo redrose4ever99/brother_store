@@ -2,7 +2,6 @@ import 'package:brother_store/features/authontication/controllers.onboarding/onb
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/devices/device_utility.dart';
-import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -22,10 +21,7 @@ class OnBoardingDotNavigation extends StatelessWidget {
             controller: controller.pageController,
             onDotClicked: controller.dotNavigationClick,
             count: count,
-            effect: ExpandingDotsEffect(
-                activeDotColor: THelperFunctions.isDarkMode(context)
-                    ? TColors.light
-                    : TColors.dark,
-                dotHeight: 6)));
+            effect: const ExpandingDotsEffect(
+                activeDotColor: TColors.primary, dotHeight: 6)));
   }
 }

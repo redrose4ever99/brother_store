@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
+import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:brother_store/common/widgets/images/rounded_image.dart';
 import 'package:brother_store/common/widgets/layout/grid_gallery_layout.dart';
 import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
@@ -44,70 +45,51 @@ class ClientScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          // width: THelperFunctions.screenwidth() ,
-                          //height: THelperFunctions.screenwidth() / 1.7,
-                          // color: TColors.darkGrey.withOpacity(0.1),
-                          imageUrl: client.thumbnail,
-                          imageBuilder: (context, imageProvider) =>
-                              GestureDetector(
-                                onTap: () {},
-                                child: Hero(
-                                  tag: 's',
-                                  child: Container(
-                                    width: THelperFunctions.screenwidth(),
-                                    height: 220,
-                                    decoration: BoxDecoration(
-                                      color: TColors.light,
-                                      borderRadius: BorderRadius.circular(20),
-                                      image: DecorationImage(
-                                          image: imageProvider,
-                                          fit: BoxFit.contain),
+                      TRoundedContainer(
+                        backgroundColor: TColors.light,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: CachedNetworkImage(
+                              fit: BoxFit.fill,
+                              // width: THelperFunctions.screenwidth() ,
+                              //height: THelperFunctions.screenwidth() / 1.7,
+                              // color: TColors.darkGrey.withOpacity(0.1),
+                              imageUrl: client.thumbnail,
+                              imageBuilder: (context, imageProvider) =>
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Hero(
+                                      tag: 's',
+                                      child: Container(
+                                        width: THelperFunctions.screenwidth(),
+                                        height: 220,
+                                        decoration: BoxDecoration(
+                                          color: TColors.light,
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.contain),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) => ClipRRect(
-                                  //  borderRadius: BorderRadius.circular(0),
-                                  child: TShimmerEffect(
-                                      raduis: 0,
-                                      width: THelperFunctions.screenwidth(),
-                                      height: 200)),
-                          errorWidget: (context, url, error) => const Icon(
-                                Icons.error,
-                                size: 50,
-                              )),
-
-                      // client.thumbnail == ''
-                      //     ? TShimmerEffect(
-                      //         width: THelperFunctions.screenwidth() - 16,
-                      //         height: THelperFunctions.screenwidth() * 0.7)
-                      //     : TRoundedImage(
-                      //         imageUrl: client.thumbnail,
-                      //         padding:
-                      //             const EdgeInsets.all(TSizes.defaultSpace),
-                      //         fit: BoxFit.cover,
-                      //         isNetworkImage: true,
-                      //       ),
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => ClipRRect(
+                                      //  borderRadius: BorderRadius.circular(0),
+                                      child: TShimmerEffect(
+                                          raduis: 0,
+                                          width: THelperFunctions.screenwidth(),
+                                          height: 200)),
+                              errorWidget: (context, url, error) => const Icon(
+                                    Icons.error,
+                                    size: 50,
+                                  )),
+                        ),
+                      ),
                       const SizedBox(
                         height: TSizes.spaceBtWItems,
                       ),
-                      // Row(
-                      //   children: [
-                      //     Text(AppLocalizations.of(context)!.name,
-                      //         style: Theme.of(context).textTheme.headlineSmall),
-                      //     Text(': ',
-                      //         style: Theme.of(context).textTheme.headlineSmall),
-                      //     Text(isEg
-                      //         ? client.name ?? ''
-                      //         : client.arabicName ?? ''),
-                      //   ],
-                      // ),
-                      // const SizedBox(
-                      //   height: TSizes.spaceBtWItems / 4,
-                      // ),
                       Wrap(
                         children: [
                           Text(AppLocalizations.of(context)!.about,
@@ -120,7 +102,6 @@ class ClientScreen extends StatelessWidget {
                       const SizedBox(
                         height: TSizes.spaceBtWItems / 4,
                       ),
-
                       Visibility(
                         visible: false,
                         child: Text(AppLocalizations.of(context)!.someOfOurWork,

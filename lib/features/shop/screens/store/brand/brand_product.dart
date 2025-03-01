@@ -1,14 +1,12 @@
 import 'package:brother_store/common/widgets/products/sortable/sortable_products.dart';
 import 'package:brother_store/common/widgets/shimmers/vertical_product_shimmer.dart';
-import 'package:brother_store/common/widgets/texts/section_heading.dart';
 import 'package:brother_store/features/shop/controllers/brand_controller.dart';
 import 'package:brother_store/features/shop/models/brand_model.dart';
-import 'package:brother_store/features/shop/screens/store/brand/brand_category.dart';
 import 'package:brother_store/features/shop/screens/store/brand/brand_up_page.dart';
-import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 class BrandProducts extends StatelessWidget {

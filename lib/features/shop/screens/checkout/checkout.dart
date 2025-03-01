@@ -3,17 +3,18 @@ import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_co
 import 'package:brother_store/common/widgets/texts/product_price_text.dart';
 import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
-import 'package:brother_store/features/shop/controllers/product/order_controller.dart';
 import 'package:brother_store/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:brother_store/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:brother_store/features/shop/screens/checkout/widgets/billing_amount_section.dart';
+import 'package:brother_store/features/shop/screens/checkout/widgets/transactions.dart';
 import 'package:brother_store/features/shop/screens/wellcome_widget.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
+
 import 'widgets/billing_payment_section.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -24,7 +25,7 @@ class CheckoutScreen extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
     final cartController = CartController.instance;
     final subtotal = cartController.totalOfCartPrice.value;
-    final orderController = Get.put(OrderController());
+    //final orderController = Get.put(OrderController());
     return Directionality(
       textDirection: Get.locale?.languageCode == 'en'
           ? TextDirection.ltr
@@ -88,7 +89,9 @@ class CheckoutScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(TSizes.defaultSpace),
                   child: ElevatedButton(
                       onPressed: subtotal > 0
-                          ? () => orderController.processOrder(subtotal)
+                          ? () => Get.to(() => Transaction())
+
+                          //orderController.processOrder(subtotal)
                           : () => Get.snackbar(
                               AppLocalizations.of(context)!.cartEmpty,
                               AppLocalizations.of(context)!

@@ -75,7 +75,7 @@ class PhoneVerificationScreen extends StatelessWidget {
                       height: TSizes.spaceBtWsections,
                     ),
                     SizedBox(
-                        width: double.infinity,
+                        width: THelperFunctions.screenwidth() * 0.6,
                         child: ElevatedButton(
                             onPressed: () => otpController.verifyOtp(otp),
                             child: const Text('Continue')))

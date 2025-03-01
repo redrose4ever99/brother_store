@@ -46,6 +46,7 @@ class TImages {
   static const String shopCover = "assets/images/cover.jpg";
 //email verification
   static const String verifyIcon = "assets/images/Email-receive.png";
+  static const String cartEmpty = "assets/images/cart_empty.png";
 
   //Email-receive
   //lottie

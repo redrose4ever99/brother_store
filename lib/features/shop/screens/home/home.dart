@@ -1,32 +1,36 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:brother_store/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:brother_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:brother_store/common/widgets/layout/grid_layout.dart';
 import 'package:brother_store/common/widgets/list_tiles/setting_menu_tile.dart';
 import 'package:brother_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:brother_store/common/widgets/texts/section_heading.dart';
+import 'package:brother_store/data/repositoies/authentication/authentication_repository.dart';
 import 'package:brother_store/features/gallery/screen/gallery.dart';
 import 'package:brother_store/features/personlization/screens/blog/blog.dart';
 import 'package:brother_store/features/personlization/screens/profile/brothers.dart';
 import 'package:brother_store/features/project/screens/prices/add_new_price_request.dart';
 import 'package:brother_store/features/project/screens/projects/add_new_project.dart';
+import 'package:brother_store/features/shop/controllers/banner_controller.dart';
 import 'package:brother_store/features/shop/controllers/product/product_controller.dart';
 import 'package:brother_store/features/shop/screens/all_products/all_products.dart';
 import 'package:brother_store/features/shop/screens/home/widgets/album_list.dart';
-import 'package:brother_store/features/shop/screens/home/widgets/gallery_slider%20.dart';
+import 'package:brother_store/features/shop/screens/home/widgets/gallery_slider.dart';
 import 'package:brother_store/features/shop/screens/sale_product/sale_product.dart';
 import 'package:brother_store/features/shop/screens/store/clients/all_clients.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
-import 'package:brother_store/utils/loader/loaders.dart';
+import 'package:brother_store/utils/theme/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
-
 import 'widgets/home_appbar.dart';
 import 'widgets/home_categories.dart';
 import 'widgets/home_clients.dart';
@@ -39,13 +43,41 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ProductController());
     //Get.updateLocale(const Locale('en'));
-    Color iconColor =
-        THelperFunctions.isDarkMode(context) ? TColors.light : TColors.dark;
+
+    final dark = THelperFunctions.isDarkMode(context);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarIconBrightness: dark ? Brightness.light : Brightness.dark,
+      statusBarColor: dark ? TColors.black : TColors.white, // status bar color
+    ));
+    Color iconColor = dark ? TColors.white : TColors.black;
     return SafeArea(
+      top: true,
       child: Scaffold(
+        // appBar: AppBar(
+        //     systemOverlayStyle: SystemUiOverlayStyle(
+        //   statusBarIconBrightness:
+        //       Brightness.dark, // For Android (dark icons)
+        //   statusBarBrightness: Brightness.light,
+        //   // Status bar color
+        //   statusBarColor: Colors.red,
+        // )),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
         endDrawer: TDrawer(iconColor: iconColor),
         drawer: TDrawer(iconColor: iconColor),
-        // floatingActionButton: const TCircularFabWidget(),
+        floatingActionButton: GestureDetector(
+          onTap: () => selectAddMethode(context),
+          child: TRoundedContainer(
+            width: 45,
+            height: 45,
+            radius: BorderRadius.circular(40),
+            child: const Icon(
+              Iconsax.add_circle,
+              color: TColors.primary,
+              fill: 1,
+              size: 40,
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
             child: Column(
           children: [
@@ -60,7 +92,10 @@ class HomeScreen extends StatelessWidget {
                   height: TSizes.spaceBtWsections / 2,
                 ),
                 //   Text(Get.locale!.languageCode),
-                const TPromoSlider(),
+                TPromoSlider(
+                    images: BannerController.instance.banners
+                        .map((e) => e.image)
+                        .toList()),
                 // TSearchContainer(
                 //   text: 'Whats in your mind',
                 //   icon: Iconsax.information,
@@ -144,6 +179,7 @@ class HomeScreen extends StatelessWidget {
                       );
                     }
                     return TGridLayout(
+                      maxAxisExtent: 300,
                       itemCount: controller.featuredProducts.length,
                       itemBuilder: (_, index) => TProductCardVertical(
                         product: controller.featuredProducts[index],
@@ -185,6 +221,38 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+Future<dynamic> selectAddMethode(BuildContext context) {
+  Color iconColor =
+      THelperFunctions.isDarkMode(context) ? TColors.white : TColors.black;
+  return showModalBottomSheet(
+      context: context,
+      builder: (_) => SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(TSizes.lg),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TSettingMenuTile(
+                      onTap: () => Get.to(() => const AddNewProjectScreen()),
+                      icon: Iconsax.element_plus,
+                      iconColor: iconColor,
+                      title: AppLocalizations.of(context)!.addProject,
+                      subTitle:
+                          AppLocalizations.of(context)!.addProjectMessage),
+                  TSettingMenuTile(
+                      onTap: () =>
+                          Get.to(() => const AddNewPriceRequestScreen()),
+                      icon: Iconsax.discount_shape4,
+                      iconColor: iconColor,
+                      title: AppLocalizations.of(context)!.priceRequest,
+                      subTitle:
+                          AppLocalizations.of(context)!.priceRequestMessage),
+                ],
+              ),
+            ),
+          ));
+}
+
 class TDrawer extends StatelessWidget {
   const TDrawer({
     super.key,
@@ -198,12 +266,13 @@ class TDrawer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 0.0),
       child: Drawer(
+        width: THelperFunctions.screenwidth() / 1.3,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
-                height: TSizes.appBarHeight,
+                height: TSizes.appBarHeight / 2,
               ),
               GestureDetector(
                 onTap: () => Get.to(() => const BrotherScreen()),
@@ -214,43 +283,25 @@ class TDrawer extends StatelessWidget {
                   color: TColors.primary,
                 ),
               ),
-              // Image(
-              //   image: AssetImage(Get.locale?.languageCode == 'en'
-              //       ? TImages.wordWhite
-              //       : TImages.arWord),
-              //   width: 100,
-              //   height: 50,
-              //   color: TColors.primary,
-              // ),
               Padding(
-                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                padding: const EdgeInsets.all(TSizes.defaultSpace / 2),
                 child: Column(
                   children: [
-                    TSettingMenuTile(
-                        onTap: () => Get.to(() => const AddNewProjectScreen()),
-                        icon: Iconsax.element_plus,
-                        iconColor: iconColor,
-                        title: AppLocalizations.of(context)!.addProject,
-                        subTitle:
-                            'you can Request for new Project or decoration'),
-                    TSettingMenuTile(
-                        onTap: () =>
-                            Get.to(() => const AddNewPriceRequestScreen()),
-                        icon: Iconsax.discount_shape4,
-                        iconColor: iconColor,
-                        title: AppLocalizations.of(context)!.priceRequest,
-                        subTitle: 'sunt laboris commodo in.'),
-                    Visibility(
-                      visible: false,
-                      child: TSettingMenuTile(
-                          onTap: () =>
-                              TLoader.warningSnackBar(title: 'comming soon'),
-                          icon: Iconsax.video,
-                          iconColor: iconColor,
-                          title: AppLocalizations.of(context)!.interviewRequest,
-                          subTitle:
-                              'Officia adipisicing culpa nulla magna incididunt velit consectetur irure.'),
-                    ),
+                    // TSettingMenuTile(
+                    //     onTap: () => Get.to(() => const AddNewProjectScreen()),
+                    //     icon: Iconsax.element_plus,
+                    //     iconColor: iconColor,
+                    //     title: AppLocalizations.of(context)!.addProject,
+                    //     subTitle:
+                    //         AppLocalizations.of(context)!.addProjectMessage),
+                    // TSettingMenuTile(
+                    //     onTap: () =>
+                    //         Get.to(() => const AddNewPriceRequestScreen()),
+                    //     icon: Iconsax.discount_shape4,
+                    //     iconColor: iconColor,
+                    //     title: AppLocalizations.of(context)!.priceRequest,
+                    //     subTitle:
+                    //         AppLocalizations.of(context)!.priceRequestMessage),
                     TSettingMenuTile(
                         onTap:
                             () => // TLoader.warningSnackBar(title: 'comming soon'),
@@ -258,14 +309,68 @@ class TDrawer extends StatelessWidget {
                         icon: Icons.menu_book_outlined,
                         iconColor: iconColor,
                         title: AppLocalizations.of(context)!.lookNews,
-                        subTitle: 'sunt laboris commodo in.'),
+                        subTitle: AppLocalizations.of(context)!.blogMessage),
                     TSettingMenuTile(
                         onTap: () => Get.to(const SaleProducts()),
                         icon: Icons.discount_outlined,
                         iconColor: iconColor,
                         title: AppLocalizations.of(context)!.offersChick,
-                        subTitle:
-                            'Officia adipisicing culpa nulla magna incididunt velit consectetur irure.'),
+                        subTitle: AppLocalizations.of(context)!.offersMessage),
+
+                    TSettingMenuTile(
+                      icon: Iconsax.moon5,
+                      iconColor: iconColor,
+                      title: AppLocalizations.of(context)!.darkMode,
+                      subTitle:
+                          AppLocalizations.of(context)!.chooseYourPrightness,
+                      trailing: Switch(
+                          activeColor: TColors.primary,
+                          value: THelperFunctions.isDarkMode(context),
+                          onChanged: (value) {
+                            if (!value) {
+                              Get.changeTheme(Get.locale?.languageCode == 'en'
+                                  ? TAppTheme.lightThemeEg
+                                  : TAppTheme.lightThemeArabic);
+                            } else {
+                              Get.changeTheme(Get.locale?.languageCode == 'en'
+                                  ? TAppTheme.darkThemeEg
+                                  : TAppTheme.darkThemeAr);
+                            }
+                          }),
+                    ),
+                    TSettingMenuTile(
+                      onTap: () {
+                        if (Get.locale?.languageCode == 'ar') {
+                          GetStorage().write('en', true);
+                          Get.updateLocale(const Locale('en'));
+                          THelperFunctions.isDarkMode(context)
+                              ? Get.changeTheme(TAppTheme.darkThemeEg)
+                              : Get.changeTheme(TAppTheme.lightThemeEg);
+                          Navigator.of(context).pop();
+                        } else {
+                          GetStorage().write('en', false);
+                          Get.updateLocale(const Locale('ar'));
+                          THelperFunctions.isDarkMode(context)
+                              ? Get.changeTheme(TAppTheme.darkThemeAr)
+                              : Get.changeTheme(TAppTheme.lightThemeArabic);
+                          Navigator.of(context).pop();
+                        }
+
+                        Get.reload();
+                      },
+                      icon: Icons.language,
+                      iconColor: iconColor,
+                      title: AppLocalizations.of(context)!.changedTo,
+                      subTitle:
+                          AppLocalizations.of(context)!.chooseYourLanguage,
+                    ),
+                    TSettingMenuTile(
+                      onTap: () => AuthenticationRepository.instance.logOut(),
+                      icon: Icons.logout,
+                      iconColor: iconColor,
+                      title: AppLocalizations.of(context)!.logout,
+                      subTitle: AppLocalizations.of(context)!.logout,
+                    ),
                   ],
                 ),
               ),

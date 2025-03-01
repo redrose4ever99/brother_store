@@ -1,15 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:brother_store/utils/constants/sizes.dart';
-import 'package:flutter/material.dart';
-
 import 'package:brother_store/utils/constants/color.dart';
+import 'package:flutter/material.dart';
 
 class TRoundedContainer extends StatelessWidget {
   const TRoundedContainer({
     Key? key,
     this.width,
     this.height,
-    this.radius = TSizes.cardRadiusLg,
+    this.radius,
     this.child,
     this.showBorder = false,
     this.borderColor = TColors.borderPrimary,
@@ -21,7 +19,7 @@ class TRoundedContainer extends StatelessWidget {
 
   final double? width;
   final double? height;
-  final double radius;
+  final BorderRadius? radius;
   final Widget? child;
   final bool enableShadow;
   final bool showBorder;
@@ -43,13 +41,14 @@ class TRoundedContainer extends StatelessWidget {
               ? [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
+                    spreadRadius: 0,
+                    blurStyle: BlurStyle.outer,
                     blurRadius: 10,
                     offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ]
               : null,
-          borderRadius: BorderRadius.circular(radius),
+          borderRadius: radius,
           border: showBorder ? Border.all(color: borderColor) : null,
           color: backgroundColor),
       child: child,

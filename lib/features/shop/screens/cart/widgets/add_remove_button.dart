@@ -20,9 +20,9 @@ class TProductQuantityWithAddRemoveButtons extends StatelessWidget {
       children: [
         TCircularIcon(
           icon: Iconsax.minus,
-          width: 32,
-          height: 32,
-          size: TSizes.md,
+          width: 35,
+          height: 35,
+          size: 20,
           onPressed: remove,
           color: THelperFunctions.isDarkMode(context)
               ? TColors.white
@@ -43,11 +43,13 @@ class TProductQuantityWithAddRemoveButtons extends StatelessWidget {
         ),
         TCircularIcon(
           icon: Iconsax.add,
-          width: 32,
-          height: 32,
-          size: TSizes.md,
+          width: 35,
+          height: 35,
+          size: 20,
           color: TColors.white,
-          backgroundColor: TColors.primary,
+          backgroundColor: THelperFunctions.isDarkMode(context)
+              ? TColors.white
+              : TColors.black,
           onPressed: add,
         ),
       ],

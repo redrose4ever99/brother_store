@@ -12,6 +12,7 @@ class ProjectModel {
   final double? cost;
   final double? currentPaied;
   final DateTime? deadLineDate;
+
   String? state;
   String? currentStage;
 
@@ -74,6 +75,7 @@ class ProjectModel {
         uId: data['UId'] ?? '',
         state: data['State'] ?? '',
         currentStage: data['CurrentStage'] ?? '',
+
         name: data['Name'] ?? '',
         description: data['Description'] ?? '',
         quantity: data['Quantity'] ?? '',
@@ -90,22 +92,22 @@ class ProjectModel {
     return ProjectModel.empty();
   }
 
-  factory ProjectModel.fromMap(Map<String, dynamic> data) {
-    return ProjectModel(
-      id: data['Id'] as String,
-      uId: data['UId'] as String,
-      state: data['State'] as String,
-      name: data['Name'] as String,
-      description: data['Description'] as String,
-      quantity: data['Quantity'] as String,
-      city: data['City'] as String,
-      // cost: data['Cost'] as double,
-      //currentPaied: data['CurrentPaied'] as double,
-      country: data['Country'] as String,
-      dateTime: (data['DateTime'] as Timestamp).toDate(),
-      deadLineDate: (data['DeadLineDate'] as Timestamp).toDate(),
-    );
-  }
+  // factory ProjectModel.fromMap(Map<String, dynamic> data) {
+  //   return ProjectModel(
+  //     id: data['Id'] as String,
+  //     uId: data['UId'] as String,
+  //     state: data['State'] as String,
+  //     name: data['Name'] as String,
+  //     description: data['Description'] as String,
+  //     quantity: data['Quantity'] as String,
+  //     city: data['City'] as String,
+  //     // cost: data['Cost'] as double,
+  //     //currentPaied: data['CurrentPaied'] as double,
+  //     country: data['Country'] as String,
+  //     dateTime: (data['DateTime'] as Timestamp).toDate(),
+  //     deadLineDate: (data['DeadLineDate'] as Timestamp).toDate(),
+  //   );
+  // }
 
   factory ProjectModel.fromDocumentSnapShot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
@@ -114,6 +116,7 @@ class ProjectModel {
       uId: data['UId'] ?? '',
       state: data['State'] ?? '',
       currentStage: data['CurrentStage'] ?? '',
+
       name: data['Name'] ?? '',
       description: data['Description'] ?? '',
       quantity: data['Quantity'] ?? '',

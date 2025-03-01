@@ -70,7 +70,9 @@ class NotificationScreen extends StatelessWidget {
                       height: TSizes.spaceBtwInputFields,
                     ),
                     TRoundedImage(
-                        imageUrl: message.image, isNetworkImage: true),
+                        borderRaduis: BorderRadius.circular(20),
+                        imageUrl: message.image,
+                        isNetworkImage: true),
                     const SizedBox(
                       height: TSizes.spaceBtwInputFields,
                     ),

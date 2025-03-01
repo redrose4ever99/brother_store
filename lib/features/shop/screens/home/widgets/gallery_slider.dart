@@ -45,7 +45,7 @@ class TGallerySlider extends StatelessWidget {
                     controller.updatePageIndicator(index)),
             items: controller.banners
                 .map((banner) => TRoundedImage(
-                      borderRaduis: 0,
+                      borderRaduis: BorderRadius.circular(20),
                       fit: BoxFit.fill,
                       width: THelperFunctions.screenwidth(),
                       imageUrl:

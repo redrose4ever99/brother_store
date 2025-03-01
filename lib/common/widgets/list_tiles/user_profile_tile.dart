@@ -30,9 +30,12 @@ class TUserProfileTile extends StatelessWidget {
                       raduis: 80,
                     )
                   : networkImage.isNotEmpty
-                      ? CircleAvatar(
-                          backgroundImage: NetworkImage(image),
-                          radius: MediaQuery.of(context).size.height * 0.05,
+                      ? GestureDetector(
+                          onTap: () => Get.to(() => const ProfileScreen()),
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(image),
+                            radius: MediaQuery.of(context).size.height * 0.05,
+                          ),
                         )
                       : CircleAvatar(
                           backgroundImage: AssetImage(image),

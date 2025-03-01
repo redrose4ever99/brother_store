@@ -8,6 +8,7 @@ import 'package:brother_store/utils/constants/image_strings.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/popups/full_screen_loader.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -45,6 +46,32 @@ class UserController extends GetxController {
     }
   }
 
+  Future<void> saveUserRecord(UserCredential? userCredentials) async {
+    try {
+      if (userCredentials != null) {
+        final nameParts =
+            UserModel.nameParts(userCredentials.user!.displayName ?? '');
+        final username =
+            UserModel.generateUsername(userCredentials.user!.displayName ?? '');
+        final user = UserModel(
+          id: userCredentials.user!.uid,
+          firstName: nameParts[0],
+          lastName: nameParts[1],
+          userName: username,
+          email: userCredentials.user!.email ?? '',
+          phoneNumber: userCredentials.user!.phoneNumber ?? '',
+          profilePicture: userCredentials.user!.photoURL ?? '',
+        );
+        await userRepository.saveUserRecord(user);
+      }
+    } catch (e) {
+      TLoader.warningSnackBar(
+          title: 'Data not Saved',
+          message:
+              'Something went wrong while save your information , please try again');
+    }
+  }
+
   uploadUserProfilePicture() async {
     try {
       final image = await ImagePicker().pickImage(
@@ -61,8 +88,8 @@ class UserController extends GetxController {
         user.value.profilePicture = imageUrl;
         user.refresh();
 
-        TLoader.successSnackBar(
-            title: 'Success', message: 'profile photo change successfully');
+        // TLoader.successSnackBar(
+        //     title: 'Success', message: 'profile photo change successfully');
       }
     } catch (e) {
       TLoader.erroreSnackBar(title: 'ohSnap', message: 'Something went wrong!');
@@ -87,8 +114,8 @@ class UserController extends GetxController {
         user.value.profilePicture = imageUrl;
         user.refresh();
 
-        TLoader.successSnackBar(
-            title: 'Success', message: 'profile photo change successfully');
+        // TLoader.successSnackBar(
+        //   title: 'Success', message: 'profile photo change successfully');
       }
     } catch (e) {
       TLoader.erroreSnackBar(title: 'ohSnap', message: 'Something went wrong!');

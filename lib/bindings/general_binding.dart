@@ -4,12 +4,15 @@ import 'package:brother_store/features/blog/controller/blog_controller.dart';
 import 'package:brother_store/features/gallery/controller/album_controller.dart';
 import 'package:brother_store/features/gallery/controller/gallery_controller.dart';
 import 'package:brother_store/features/general/controllers/brother_controller.dart';
+import 'package:brother_store/features/general/controllers/paytabs_controller.dart';
 import 'package:brother_store/features/project/controllers/ask_price_controller.dart';
 import 'package:brother_store/features/project/controllers/project_controller.dart';
 import 'package:brother_store/features/shop/controllers/address_controller.dart';
+import 'package:brother_store/features/shop/controllers/banner_controller.dart';
 import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
 import 'package:brother_store/features/shop/controllers/product/checkout_controller.dart';
 import 'package:brother_store/features/shop/controllers/product/images_controller.dart';
+import 'package:brother_store/features/shop/controllers/product/later_list_controller.dart';
 import 'package:get/get.dart';
 
 class GeneralBindings extends Bindings {
@@ -26,7 +29,10 @@ class GeneralBindings extends Bindings {
     Get.put(ImagesController());
     Get.put(ProjectController());
     Get.put(AskPriceController());
-    Get.lazyPut(() => BlogController());
+    Get.put(BlogController());
+    Get.put(BannerController());
+    Get.put(LaterListController());
+    Get.put(PayTabsController());
   }
   //ProjectController
 }

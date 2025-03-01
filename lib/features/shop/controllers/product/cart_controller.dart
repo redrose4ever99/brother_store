@@ -6,7 +6,6 @@ import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/storage/storage_utility.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CartController extends GetxController {
   static CartController get instance => Get.find();
@@ -28,6 +27,19 @@ class CartController extends GetxController {
         price: price,
         image: product.thumbnail,
         brandName: product.brand != null ? product.brand!.name : '');
+  }
+
+  ProductModel convertToProductModel(CartItemModel item, int quantity) {
+    // ProductController.instance.get
+    return ProductModel(
+      id: item.productId,
+      title: item.title,
+      price: item.price,
+      thumbnail: item.image ?? '',
+      arabicTitle: '',
+      productType: '',
+      stock: 10, //need to bring from database
+    );
   }
 
   void addOneToCart(CartItemModel item) {
@@ -68,10 +80,10 @@ class CartController extends GetxController {
           cartItems.removeAt(index);
           updateCart();
           Get.back();
-          TLoader.successSnackBar(
-              title: AppLocalizations.of(Get.context!)!.info,
-              message: AppLocalizations.of(Get.context!)!
-                  .productHasBeenRemovedFromCart);
+          // TLoader.successSnackBar(
+          //     title: AppLocalizations.of(Get.context!)!.info,
+          //     message: AppLocalizations.of(Get.context!)!
+          //         .productHasBeenRemovedFromCart);
         },
         onCancel: () => Get.back());
   }

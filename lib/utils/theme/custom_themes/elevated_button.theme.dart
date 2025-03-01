@@ -14,7 +14,10 @@ class TElevatedButtonTheme {
           ),
           padding: const EdgeInsets.symmetric(vertical: 18),
           textStyle: const TextStyle(
-              fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.white),
+              fontSize: 16.0,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.w600,
+              color: Colors.white),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))));
   static final darkElevatedButtonTheme = ElevatedButtonThemeData(
@@ -29,7 +32,10 @@ class TElevatedButtonTheme {
           ),
           padding: const EdgeInsets.symmetric(vertical: 18),
           textStyle: const TextStyle(
-              fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.white),
+              fontSize: 16.0,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'Tajawal',
+              color: Colors.white),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))));
 }

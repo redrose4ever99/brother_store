@@ -4,7 +4,7 @@ import 'package:brother_store/common/widgets/shimmers/client_shimmer.dart';
 import 'package:brother_store/common/widgets/shimmers/shimmer.dart';
 import 'package:brother_store/features/shop/controllers/clients_controller.dart';
 import 'package:brother_store/features/shop/models/clients_model.dart';
-import 'package:brother_store/features/shop/screens/client_page.dart';
+import 'package:brother_store/features/shop/screens/home/clients_slider.dart';
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
@@ -52,12 +52,15 @@ class THomeClient extends StatelessWidget {
                   itemBuilder: (_, index) {
                     return GestureDetector(
                       onTap: () {
-                        Timer(Duration(milliseconds: 3), () async {
-                          await Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      ClientScreen(
-                                          client: featureClients[index])));
+                        Timer(const Duration(milliseconds: 3), () async {
+                          await Get.to(() => TClientSlider(
+                                items: featureClients,
+                                currentClient: index,
+                              ));
+
+                          //  Navigator.of(context).push(MaterialPageRoute(
+                          //     builder: (BuildContext context) =>
+                          //         ClientScreen(client: featureClients[index]))
                         });
 
                         // Navigator.push(

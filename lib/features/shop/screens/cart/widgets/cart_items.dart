@@ -1,10 +1,12 @@
-import 'package:brother_store/common/widgets/texts/product_price_text.dart';
 import 'package:brother_store/features/shop/controllers/product/cart_controller.dart';
+import 'package:brother_store/features/shop/controllers/product/later_list_controller.dart';
+import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/state_manager.dart';
 
-import 'add_remove_button.dart';
 import 'cart_item_widget.dart';
 
 class TCartItems extends StatelessWidget {
@@ -16,14 +18,15 @@ class TCartItems extends StatelessWidget {
     return Obx(
       () => ListView.separated(
         shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         separatorBuilder: (_, __) => const Column(
           children: [
             SizedBox(
-              height: TSizes.spaceBtWsections / 2,
+              height: TSizes.sm,
             ),
             Divider(),
             SizedBox(
-              height: TSizes.spaceBtWsections / 2,
+              height: TSizes.sm,
             ),
           ],
         ),
@@ -32,32 +35,55 @@ class TCartItems extends StatelessWidget {
           final item = cartController.cartItems[index];
           return Column(
             children: [
-              TCartItem(cartItem: item),
-              if (showAddRemoveButtons)
-                const SizedBox(
-                  height: TSizes.spaceBtWItems,
-                ),
-              //--add & remove buttons
-              if (showAddRemoveButtons)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Slidable(
+                // Specify a key if the Slidable is dismissible.
+                key: const ValueKey(0),
+                endActionPane: ActionPane(
+                  extentRatio: .6,
+                  motion: const ScrollMotion(),
                   children: [
-                    Row(
-                      children: [
-                        //
-                        // // ),
-                        TProductQuantityWithAddRemoveButtons(
-                          quantity: item.quantity,
-                          add: () => cartController.addOneToCart(item),
-                          remove: () => cartController.removeOneFromCart(item),
-                        ),
-                      ],
+                    SlidableAction(
+                      // An action can be bigger than the others.
+
+                      onPressed: (context) {
+                        LaterListController.instance
+                            .toggleLaterShopingProduct(item.productId);
+                        CartController.instance.cartItems.removeAt(index);
+                        CartController.instance.updateCart();
+                      },
+                      flex: 2,
+                      borderRadius: BorderRadius.circular(10),
+                      autoClose: true,
+                      // backgroundColor: TColors.primary.withOpacity(.2),
+                      foregroundColor: TColors.primary,
+                      padding: const EdgeInsets.all(10),
+                      spacing: 2,
+                      icon: Icons.archive,
+                      label: AppLocalizations.of(context)!.saveForLater,
                     ),
-                    TProductPriceText(
-                        isLarg: true,
-                        price: (item.price * item.quantity).toStringAsFixed(1))
+                    SlidableAction(
+                      onPressed: (context) {
+                        CartController.instance.cartItems.removeAt(index);
+                        CartController.instance.updateCart();
+                      },
+                      //backgroundColor: TColors.red.withOpacity(.3),
+                      foregroundColor: Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                      padding: const EdgeInsets.all(3),
+                      autoClose: true,
+                      icon: Icons.delete,
+                      label: AppLocalizations.of(context)?.delete,
+                    ),
                   ],
                 ),
+
+                child: TCartItem(
+                  cartItem: item,
+                  showAddRemoveButtons: showAddRemoveButtons,
+                ),
+              ),
+
+              //--add & remove buttons
             ],
           );
         }),

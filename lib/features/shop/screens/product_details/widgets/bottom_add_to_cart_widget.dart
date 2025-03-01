@@ -26,6 +26,8 @@ class TBottomAddToCart extends StatelessWidget {
 
     return Obx(
       () => TRoundedContainer(
+        radius: BorderRadius.circular(20),
+        showBorder: true,
         backgroundColor: THelperFunctions.isDarkMode(context)
             ? TColors.black.withOpacity(0.9)
             : TColors.light.withOpacity(0.9),

@@ -4,7 +4,6 @@ import 'package:brother_store/common/widgets/shimmers/gallery_photo_shimmer.dart
 import 'package:brother_store/features/gallery/controller/album_controller.dart';
 import 'package:brother_store/features/gallery/models/album_model.dart';
 import 'package:brother_store/features/general/screens/gallery_widget.dart';
-import 'package:brother_store/features/shop/controllers/product/images_controller.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,7 @@ class TTabGalleryView extends StatelessWidget {
   final AlbumModel album;
   @override
   Widget build(BuildContext context) {
-    final imageController = Get.put(ImagesController());
+    //final imageController = Get.put(ImagesController());
     final controller = AlbumController.instance;
     return ListView(
       shrinkWrap: true,
@@ -99,6 +98,7 @@ class TTabGalleryView extends StatelessWidget {
                               //         ? photos[index].description ?? ""
                               //         : photos[index].arabicDescription ?? ""),
                               child: TRoundedImage(
+                                borderRaduis: BorderRadius.circular(20),
                                 imageUrl: photos[index].image,
                                 // width: 100,
                                 fit: BoxFit.cover,

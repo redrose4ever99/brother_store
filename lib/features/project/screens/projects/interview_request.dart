@@ -1,5 +1,6 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -56,7 +57,7 @@ class InterviewRequestScreen extends StatelessWidget {
                   height: TSizes.spaceBtwInputFields,
                 ),
                 SizedBox(
-                  width: double.infinity,
+                  width: THelperFunctions.screenwidth() * 0.6,
                   child: ElevatedButton(
                       onPressed: () {}, child: const Text('Load Files')),
                 ),
@@ -64,7 +65,7 @@ class InterviewRequestScreen extends StatelessWidget {
                   height: TSizes.spaceBtwInputFields,
                 ),
                 SizedBox(
-                  width: double.infinity,
+                  width: THelperFunctions.screenwidth() * 0.6,
                   child: ElevatedButton(
                       onPressed: () {}, child: const Text('Send')),
                 )

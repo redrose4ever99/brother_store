@@ -8,36 +8,29 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:brother_store/common/widgets/custom_shapes/containers/circuler_container.dart';
 
 import 'package:brother_store/utils/constants/color.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
 
 class TPromoSlider extends StatelessWidget {
-  const TPromoSlider({
-    Key? key,
-    this.autoPlay = true,
-  }) : super(key: key);
-
+  const TPromoSlider({Key? key, this.autoPlay = true, required this.images})
+      : super(key: key);
+  final List<String> images;
   final bool autoPlay;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(BannerController());
-    List<String> images = controller.banners.value.map((e) => e.image).toList();
-
-    ;
+    // List<String> images = controller.banners.map((e) => e.image).toList();
     return Obx(() {
       if (controller.isLoading.value) {
         return const TShimmerEffect(width: double.infinity, height: 200);
       }
-      if (controller.banners.isEmpty) {
+      if (images.isEmpty) {
         return Center(
-          child: Text(
-            AppLocalizations.of(context)!.noData,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-        );
+            child: TShimmerEffect(
+                raduis: 0, width: THelperFunctions.screenwidth(), height: 200));
       }
       return Column(
         children: [
@@ -48,18 +41,17 @@ class TPromoSlider extends StatelessWidget {
                 viewportFraction: 1,
                 onPageChanged: (index, _) =>
                     controller.updatePageIndicator(index)),
-            items: controller.banners
-                .map((banner) => CachedNetworkImage(
+            items: images
+                .map((item) => CachedNetworkImage(
                     fit: BoxFit.fill,
                     // width: THelperFunctions.screenwidth() ,
                     //height: THelperFunctions.screenwidth() / 1.7,
                     // color: TColors.darkGrey.withOpacity(0.1),
-                    imageUrl: banner.image,
+                    imageUrl: item,
                     imageBuilder: (context, imageProvider) => GestureDetector(
                           onTap: () {
                             Get.to(GalleryWidget(
-                                urlImage: images,
-                                index: images.indexOf(banner.image)));
+                                urlImage: images, index: images.indexOf(item)));
                           },
                           child: Container(
                             width: THelperFunctions.screenwidth(),
@@ -91,7 +83,7 @@ class TPromoSlider extends StatelessWidget {
             () => Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                for (int i = 0; i < controller.banners.length; i++)
+                for (int i = 0; i < images.length; i++)
                   TCirculerContainer(
                     width: 20,
                     height: 5,

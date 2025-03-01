@@ -1,19 +1,20 @@
 import 'dart:io';
-import 'package:brother_store/features/authontication/screens/login/login.dart';
-import 'package:brother_store/utils/loader/loaders.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:brother_store/app.dart';
 import 'package:brother_store/data/repositoies/user/user_repository.dart';
+import 'package:brother_store/features/authontication/screens/login/login.dart';
 import 'package:brother_store/features/authontication/screens/login/phone_verification.dart';
 import 'package:brother_store/features/authontication/screens/onboarding/onboarding.dart';
 import 'package:brother_store/features/authontication/screens/register/verify_email.dart';
 import 'package:brother_store/features/personlization/models/users/user_model.dart';
+import 'package:brother_store/utils/loader/loaders.dart';
 import 'package:brother_store/utils/storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -41,7 +42,7 @@ class AuthenticationRepository extends GetxController {
       if (user.emailVerified) {
         isGust.value = false;
         await TLocalStorage.init(_auth.currentUser!.uid);
-        Get.offAll(const App());
+        Get.offAll(() => const App());
       } else {
         Get.offAll(() => VerifyEmailScreen(
               email: _auth.currentUser?.email,
@@ -54,9 +55,8 @@ class AuthenticationRepository extends GetxController {
       isGust.value = true;
       deviceStorage.writeIfNull('isTheFirstTime', true);
       deviceStorage.writeIfNull('en', true);
-
       deviceStorage.read('isTheFirstTime') != true
-          ? Get.offAll(() => const App())
+          ? Get.offAll(() => const LoginScreen())
           : Get.offAll(() => const OnBoardingScreen());
     }
   }
@@ -107,8 +107,8 @@ class AuthenticationRepository extends GetxController {
         if (kDebugMode) {
           print(credential.verificationId.toString());
         }
-        TLoader.successSnackBar(
-            title: 'sussess', message: credential.verificationId.toString());
+        // TLoader.successSnackBar(
+        //     title: 'sussess', message: credential.verificationId.toString());
         TLoader.successSnackBar(
             title: 'sussess', message: 'complite verification please');
         Get.to(const PhoneVerificationScreen());
@@ -149,8 +149,8 @@ class AuthenticationRepository extends GetxController {
           UserModel(id: uid, phoneNumber: credentials.user!.phoneNumber);
       final userRepository = Get.put(UserRepository());
       userRepository.saveUserRecord(user);
-      TLoader.successSnackBar(
-          title: "sussess", message: "your Account created sussessfully");
+      //   TLoader.successSnackBar(
+      //       title: "sussess", message: "your Account created sussessfully");
     }
 
     return credentials.user != null ? true : false;
@@ -158,8 +158,13 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> logOut() async {
     try {
+      await GoogleSignIn().currentUser?.clearAuthCache();
+      await GoogleSignIn().disconnect();
       await FirebaseAuth.instance.signOut();
-      Get.offAll(() => const LoginScreen());
+      Get.offAll(const LoginScreen());
+      // Navigator.pushAndRemoveUntil(
+      //     Get.context!, GetPageRoute(), (route) => false);
+      // var user = FirebaseAuth.instance.currentUser;
     } on FirebaseAuthException catch (e) {
       throw (e.code).toString();
     } on FirebaseException catch (e) {
@@ -229,29 +234,26 @@ class AuthenticationRepository extends GetxController {
 
   Future<UserCredential?> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
       if (kDebugMode) {
         print("step 1 google auth");
       }
       // Obtain the auth details from the request.
       final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+          await userAccount?.authentication;
       // Create a new credential.
 
       if (kDebugMode) {
         print("step 2 google auth");
       }
-      final OAuthCredential googleCredential = GoogleAuthProvider.credential(
+      final credentials = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
       if (kDebugMode) {
         print("step 3 google auth");
       }
-      final UserCredential googleUserCredential =
-          await FirebaseAuth.instance.signInWithCredential(googleCredential);
-
-      return googleUserCredential;
+      return await _auth.signInWithCredential(credentials);
     } on FirebaseAuthException catch (e) {
       throw (e.code).toString();
     } on FirebaseException catch (e) {
@@ -265,6 +267,18 @@ class AuthenticationRepository extends GetxController {
       //throw 'Something wrong';
     }
   }
+
+  // Future<UserCredential> signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  //   // Create a credential from the access token
+  //   final OAuthCredential facebookAuthCredential =
+  //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  //   // Once signed in, return the UserCredential
+  //   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  // }
 
   Future<void> deleteAccount() async {
     try {

@@ -43,6 +43,7 @@ class TProductCardHorizontal extends StatelessWidget {
         child: Row(
           children: [
             TRoundedContainer(
+              radius: BorderRadius.circular(20),
               height: 120,
               width: 120,
               // padding: const EdgeInsets.all(TSizes.sm),
@@ -50,10 +51,11 @@ class TProductCardHorizontal extends StatelessWidget {
               child: Stack(
                 children: [
                   TRoundedImage(
+                    applyImageRaduis: true,
+                    borderRaduis: BorderRadius.circular(16),
                     imageUrl: product.thumbnail == ''
                         ? TImages.bBlack
                         : product.thumbnail,
-                    applyImageRaduis: true,
                     isNetworkImage: product.thumbnail == '' ? false : true,
                   ),
 
@@ -61,7 +63,7 @@ class TProductCardHorizontal extends StatelessWidget {
                     top: 12,
                     left: 0,
                     child: TRoundedContainer(
-                      radius: TSizes.sm,
+                      radius: BorderRadius.circular(TSizes.sm),
                       backgroundColor: TColors.secondary.withOpacity(0.8),
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.sm, vertical: TSizes.xs),

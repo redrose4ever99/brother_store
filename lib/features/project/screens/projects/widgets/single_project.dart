@@ -64,7 +64,7 @@ class TSingleProjectScreen extends StatelessWidget {
       child: Scaffold(
         appBar: TAppBar(
           title: Text(
-            'Project ',
+            AppLocalizations.of(context)!.project,
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall!
@@ -107,7 +107,8 @@ class TSingleProjectScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(10.0),
                               child: SvgPicture.asset(
                                 TIcons.pendingIcon,
-                                color: TColors.primary,
+                                colorFilter: const ColorFilter.mode(
+                                    TColors.primary, BlendMode.srcIn),
                               ),
                             ),
                           ),
@@ -126,7 +127,8 @@ class TSingleProjectScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(10.0),
                               child: SvgPicture.asset(
                                 TIcons.planIcon,
-                                color: TColors.primary,
+                                colorFilter: const ColorFilter.mode(
+                                    TColors.primary, BlendMode.srcIn),
                               ),
                             ),
                           ),
@@ -145,7 +147,8 @@ class TSingleProjectScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(10.0),
                               child: SvgPicture.asset(
                                 TIcons.procesIcon,
-                                color: TColors.primary,
+                                colorFilter: const ColorFilter.mode(
+                                    TColors.primary, BlendMode.srcIn),
                               ),
                             ),
                           ),
@@ -164,7 +167,8 @@ class TSingleProjectScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(10.0),
                               child: SvgPicture.asset(
                                 TIcons.finishIcon,
-                                color: TColors.primary,
+                                colorFilter: const ColorFilter.mode(
+                                    TColors.primary, BlendMode.srcIn),
                               ),
                             ),
                           ),
@@ -182,7 +186,7 @@ class TSingleProjectScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Row(
                     children: [
-                      const Text('Completion rate'),
+                      Text(AppLocalizations.of(context)!.complationRate),
                       const SizedBox(
                         width: TSizes.spaceBtWItems,
                       ),
@@ -196,9 +200,9 @@ class TSingleProjectScreen extends StatelessWidget {
                         percent: completionRate,
                         trailing: Text(
                           "$completionRate%",
-                          style: TextStyle(fontSize: 12.0),
+                          style: const TextStyle(fontSize: 12.0),
                         ),
-                        linearStrokeCap: LinearStrokeCap.roundAll,
+                        // linearStrokeCap: LinearStrokeCap.roundAll,
                         backgroundColor: Colors.grey,
                       ),
                     ],
@@ -250,9 +254,9 @@ class TSingleProjectScreen extends StatelessWidget {
                           onPressed: () {
                             Clipboard.setData(ClipboardData(
                                 text: project.description.toString()));
-                            Get.snackbar('Copied!',
-                                'project description copied to clipboard',
-                                snackPosition: SnackPosition.BOTTOM);
+                            // Get.snackbar('Copied!',
+                            //     'project description copied to clipboard',
+                            //     snackPosition: SnackPosition.BOTTOM);
                           },
                         ),
                       ),
@@ -288,17 +292,18 @@ class TSingleProjectScreen extends StatelessWidget {
                           const SizedBox(
                             height: TSizes.spaceBtWItems,
                           ),
-                          const Center(
-                            child: Text('Payment rate'),
+                          Center(
+                            child:
+                                Text(AppLocalizations.of(context)!.paymentRate),
                           )
                         ],
                       ),
                       const SizedBox(
                         height: TSizes.spaceBtWItems,
                       ),
-                      const Center(
-                          child: Text(
-                              'You almost will finish the payment amounts')),
+                      Center(
+                          child: Text(AppLocalizations.of(context)!
+                              .youAlmostWillFinishThePaymentAmounts)),
                       // TbillingPaymentSection(),
                       const SizedBox(
                         height: TSizes.spaceBtWItems,
@@ -311,7 +316,7 @@ class TSingleProjectScreen extends StatelessWidget {
                                     Get.to(() => const TPaymentScreen()),
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Text('Add pay amount '),
+                                  child: Text('Add pay amount'),
                                 ))),
                       ),
                     ],

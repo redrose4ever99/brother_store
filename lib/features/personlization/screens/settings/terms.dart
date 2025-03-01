@@ -25,26 +25,19 @@ class TermsScreen extends StatelessWidget {
           ),
           showBackArrow: true,
         ),
-        body: Container(
-          decoration: const BoxDecoration(
-              // image: DecorationImage(
-              //   image: AssetImage(TImages.arWord),
-              //   fit: BoxFit.cover,
-              // ),
-              ),
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Padding(
-                    padding: const EdgeInsets.all(TSizes.defaultSpace),
-                    child: Text(
-                      data,
-                      maxLines: 200,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    )),
-              ),
-            ],
-          ),
+        body: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              child: Align(
+                alignment: Get.locale?.languageCode == 'en'
+                    ? Alignment.topLeft
+                    : Alignment.topRight,
+                child: Text(
+                  data,
+                  maxLines: 200,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              )),
         ),
       ),
     );

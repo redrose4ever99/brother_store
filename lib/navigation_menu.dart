@@ -46,12 +46,10 @@ class NavigationMenu extends StatelessWidget {
               destinations: [
                 NavigationDestination(
                   selectedIcon: const Icon(
-                    Iconsax.home,
+                    Iconsax.home_1,
                     color: TColors.primary,
                   ),
-                  icon: const Icon(
-                    Iconsax.home,
-                  ),
+                  icon: const Icon(Iconsax.home_1),
                   label: AppLocalizations.of(context)!.mainpage,
                 ),
                 NavigationDestination(
@@ -78,13 +76,13 @@ class NavigationMenu extends StatelessWidget {
                     ),
                     icon: const Icon(Iconsax.shopping_bag),
                     label: AppLocalizations.of(context)!.myCart),
-                const NavigationDestination(
-                    selectedIcon: Icon(
-                      Iconsax.menu,
+                NavigationDestination(
+                    selectedIcon: const Icon(
+                      Iconsax.setting_2,
                       color: TColors.primary,
                     ),
-                    icon: Icon(Iconsax.menu),
-                    label: 'more'),
+                    icon: const Icon(Iconsax.setting_2),
+                    label: AppLocalizations.of(context)!.setting),
               ]),
         ),
       ),

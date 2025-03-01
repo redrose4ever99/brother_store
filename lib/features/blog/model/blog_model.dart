@@ -51,7 +51,7 @@ class BlogModel {
       map['details'] as String,
       map['arabicDetails'] as String,
       map['Active'] as bool,
-      map['Images'] != null ? List<String>.from(map['Images']) : [],
+      map['images'] != null ? List<String>.from(map['images']) : [],
       map['DeliveryDate'] == null
           ? null
           : (map['DeliveryDate'] as Timestamp).toDate(),

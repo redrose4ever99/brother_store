@@ -29,17 +29,17 @@ class SocialMediaVertical extends StatelessWidget {
           SvgPicture.asset(
             TIcons.xIcon,
             width: width,
-            color: iconColor,
+            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
           ),
           SvgPicture.asset(
             TIcons.tiktokIcon,
             width: width,
-            color: iconColor,
+            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
           ),
           SvgPicture.asset(
             TIcons.instagramIcon,
             width: width + 5,
-            color: iconColor,
+            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
           ),
           GestureDetector(
             onTap: () {
@@ -49,7 +49,7 @@ class SocialMediaVertical extends StatelessWidget {
             child: SvgPicture.asset(
               TIcons.whatsupIcon,
               width: width,
-              color: iconColor,
+              colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
             ),
           )
         ],

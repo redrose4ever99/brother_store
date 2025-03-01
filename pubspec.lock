@@ -185,6 +185,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  country_picker:
+    dependency: "direct main"
+    description:
+      name: country_picker
+      sha256: e440350c2f6397955499d5a647cc90599ba3048651c6858370483f55c346b525
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.21"
   coverage:
     dependency: transitive
     description:
@@ -422,30 +430,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.1"
-  flutter_facebook_auth:
-    dependency: "direct main"
-    description:
-      name: flutter_facebook_auth
-      sha256: "779215296119c156975d4f596a7434a1fa35c0ef304f2ead3c17c1546499c6c5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.5.7"
-  flutter_facebook_auth_platform_interface:
-    dependency: transitive
-    description:
-      name: flutter_facebook_auth_platform_interface
-      sha256: "06b27d024cff8093e0ed6f8067d43f9451610ca23845d1ad5ddf12f7e43904e3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.7.1"
-  flutter_facebook_auth_web:
-    dependency: transitive
-    description:
-      name: flutter_facebook_auth_web
-      sha256: "7845becbe9631400caa9a86557382431cef72e5530f2b809cfbc69587c0d119d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.0+2"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -499,6 +483,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  flutter_paytabs_bridge:
+    dependency: "direct main"
+    description:
+      name: flutter_paytabs_bridge
+      sha256: d3cbd98e5820e1f78ad921e2540aca55029e4bf05eaef4d647183e15ddcade5a
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.14"
   flutter_phone_number_field:
     dependency: "direct main"
     description:
@@ -515,6 +507,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
+  flutter_slidable:
+    dependency: "direct main"
+    description:
+      name: flutter_slidable
+      sha256: a857de7ea701f276fd6a6c4c67ae885b60729a3449e42766bb0e655171042801
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -1037,6 +1037,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.4"
+  share_plus:
+    dependency: "direct main"
+    description:
+      name: share_plus
+      sha256: "3ef39599b00059db0990ca2e30fca0a29d8b37aae924d60063f8e0184cf20900"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.2"
+  share_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: share_plus_platform_interface
+      sha256: "251eb156a8b5fa9ce033747d73535bf53911071f8d3b6f4f0b578505ce0d4496"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.0"
   shelf:
     dependency: transitive
     description:

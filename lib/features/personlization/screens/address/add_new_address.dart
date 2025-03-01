@@ -1,6 +1,7 @@
 import 'package:brother_store/common/widgets/appbar/appbar.dart';
 import 'package:brother_store/features/shop/controllers/address_controller.dart';
 import 'package:brother_store/utils/constants/sizes.dart';
+import 'package:brother_store/utils/helpers/helper_functions.dart';
 import 'package:brother_store/utils/validators/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -129,7 +130,7 @@ class AddNewAddressScreen extends StatelessWidget {
                       height: TSizes.spaceBtwInputFields,
                     ),
                     SizedBox(
-                      width: double.infinity,
+                      width: THelperFunctions.screenwidth() * 0.6,
                       child: ElevatedButton(
                           onPressed: () => controller.addNewAddress(),
                           child: Text(AppLocalizations.of(context)!.save)),

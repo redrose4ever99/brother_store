@@ -18,6 +18,7 @@ import 'package:iconsax/iconsax.dart';
 class TProductImageSlider extends StatelessWidget {
   const TProductImageSlider({super.key, required this.product});
   final ProductModel product;
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ImagesController());
